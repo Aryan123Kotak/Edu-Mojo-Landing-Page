@@ -1,0 +1,6 @@
+{
+  "name": "Edu-Mojo - Next-Gen School Management Platform",
+  "description": "Empowering educational excellence with Edu-Mojo. Premium all-in-one school ERP and management solution with automated scheduling, fee management, AI analytics, and seamless communication.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

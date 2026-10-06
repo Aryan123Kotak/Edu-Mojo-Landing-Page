@@ -1,0 +1,815 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  ArrowRight,
+  Layers,
+  Workflow,
+  Sparkles,
+  Award,
+  Target,
+  Eye,
+  CheckCircle2,
+  Users2
+} from 'lucide-react';
+import { CLIENT_LOGOS, SchoolLogoDisplay } from '../components/ClientLogos';
+import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
+import { ScrollReveal } from '../components/ScrollReveal';
+import { GlowCard } from '../components/GlowCard';
+import { TeamPhotoCard } from '../components/TeamPhotoCard';
+import { PageRoute } from '../components/Navbar';
+
+interface AboutUsPageProps {
+  onNavigate: (page: PageRoute) => void;
+  onRequestCallBack?: () => void;
+}
+
+export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [hasCounted, setHasCounted] = useState(false);
+
+  // Numbers Strip Count-Up State
+  const [stats, setStats] = useState({
+    schools: 0,
+    students: 0,
+    modules: 0,
+    countries: 0,
+  });
+
+  // Dynamic Head SEO/AEO Tags & Canonical URL
+  useEffect(() => {
+    document.title = 'About EduMojo – School ERP by Webmagiks, Pune';
+
+    // Meta Description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute(
+      'content',
+      'Learn about EduMojo, the AI-powered school ERP built by Webmagiks in Pune and used by 15+ schools, colleges and institutes in India and Dubai.'
+    );
+
+    // Canonical link
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', 'https://www.edu-mojo.com/about-us');
+
+    // OpenGraph
+    const setMeta = (property: string, content: string) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    };
+
+    setMeta('og:type', 'website');
+    setMeta('og:site_name', 'EduMojo');
+    setMeta('og:title', 'About EduMojo – School ERP by Webmagiks');
+    setMeta('og:description', 'Learn about EduMojo, the AI-powered school ERP built by Webmagiks in Pune and used by 15+ schools, colleges and institutes in India and Dubai.');
+    setMeta('og:url', 'https://www.edu-mojo.com/about-us');
+    setMeta('og:image', 'https://www.edu-mojo.com/og-image.png');
+
+    let twitterCard = document.querySelector('meta[name="twitter:card"]');
+    if (!twitterCard) {
+      twitterCard = document.createElement('meta');
+      twitterCard.setAttribute('name', 'twitter:card');
+      document.head.appendChild(twitterCard);
+    }
+    twitterCard.setAttribute('content', 'summary_large_image');
+  }, []);
+
+  // Numbers Strip Count-Up Animation (triggers once when scrolled into view)
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasCounted) {
+          setHasCounted(true);
+          observer.unobserve(el);
+
+          const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (reduceMotion) {
+            setStats({ schools: 15, students: 20000, modules: 24, countries: 2 });
+            return;
+          }
+
+          const duration = 1500;
+          const steps = 30;
+          const intervalTime = duration / steps;
+          let step = 0;
+
+          const timer = setInterval(() => {
+            step++;
+            const progress = step / steps;
+            setStats({
+              schools: Math.round(15 * progress),
+              students: Math.round(20000 * progress),
+              modules: Math.round(24 * progress),
+              countries: Math.round(2 * progress),
+            });
+
+            if (step >= steps) {
+              clearInterval(timer);
+            }
+          }, intervalTime);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasCounted]);
+
+  const handleBookDemo = () => {
+    onNavigate('contact');
+    window.location.hash = 'form';
+  };
+
+  // Structured Data Schema matching visible text word-for-word
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://www.edu-mojo.com/about-us#page",
+        "url": "https://www.edu-mojo.com/about-us",
+        "name": "About EduMojo",
+        "headline": "Helping schools focus on what truly matters: education",
+        "description": "Learn about EduMojo, the AI-powered school ERP built by Webmagiks in Pune and used by 15+ schools, colleges and institutes in India and Dubai.",
+        "about": {
+          "@type": "SoftwareApplication",
+          "name": "EduMojo",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Web, Android, iOS",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "creator": {
+            "@type": "Organization",
+            "name": "Webmagiks",
+            "url": "https://www.webmagiks.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Pune",
+              "addressRegion": "Maharashtra",
+              "addressCountry": "IN"
+            }
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.edu-mojo.com/about-us#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who makes EduMojo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EduMojo is built by Webmagiks, a technology company based in Pune, Maharashtra, India. Webmagiks designs, implements and supports EduMojo for schools, colleges and institutes in India and Dubai."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many institutions use EduMojo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EduMojo is used by 15+ schools, colleges and institutes across India and Dubai, and has impacted more than 20,000 students and teachers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What makes EduMojo different from other school ERPs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EduMojo combines four things in one product: a single unified platform for every department, deep school workflows from admission to alumni, AI built into daily work, and hands-on implementation, training and support."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does EduMojo work for colleges and institutes, not just schools?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. EduMojo is built for schools, colleges and institutes. Its clients include K-12 schools, a preschool and colleges such as Arihant College in Pune and Sangamner College."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.edu-mojo.com/about-us#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.edu-mojo.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About Us",
+            "item": "https://www.edu-mojo.com/about-us"
+          }
+        ]
+      }
+    ]
+  };
+
+  return (
+    <div className="w-full bg-[#ffffff] text-[#0b1f14] font-sans overflow-x-hidden selection:bg-[#2eca8b]/30 selection:text-[#0b1f14]">
+      
+      {/* ==================================================
+          1. HERO (short lava gradient, centred, headline words slide up on load)
+          ================================================== */}
+      <div className="lava text-center">
+        <div className="lava-blobs" aria-hidden="true">
+          <div className="blob b1" />
+          <div className="blob b2" />
+          <div className="blob b3" />
+          <div className="blob b4" />
+          <div className="blob b5" />
+          <div className="blob b6" />
+        </div>
+
+        <section className="pt-28 pb-10 sm:pt-32 sm:pb-12">
+          <div className="page-container space-y-4">
+            
+            {/* Kicker */}
+            <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
+              About EduMojo
+            </p>
+
+            {/* Breadcrumb: Home › About Us */}
+            <nav aria-label="Breadcrumb" className="inline-flex items-center text-xs text-[#6b7a72] font-medium">
+              <button
+                type="button"
+                onClick={() => onNavigate('home')}
+                className="hover:text-[#16a34a] transition-colors cursor-pointer"
+              >
+                Home
+              </button>
+              <span className="mx-2 text-[#6b7a72]/60">›</span>
+              <span className="text-[#16a34a] font-semibold">About Us</span>
+            </nav>
+
+            {/* Exactly ONE <h1>: Headline with words slide up on load */}
+            <h1 className="font-black text-[#0b1f14] tracking-[-0.035em] text-3xl sm:text-5xl lg:text-6xl leading-[1.12]">
+              Helping schools focus on what truly matters: <span className="text-[#15803d]">education</span>
+            </h1>
+
+            {/* Subtext */}
+            <p className="text-base sm:text-lg text-[#3f4b45] max-w-2xl mx-auto leading-relaxed">
+              EduMojo is an AI-powered school ERP built by Webmagiks. We bring admissions, academics, communication, finance and operations into one platform, so the people who run schools spend less time on paperwork and more time on students.
+            </p>
+
+            {/* Primary & Secondary Buttons */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3.5">
+              <button
+                type="button"
+                onClick={handleBookDemo}
+                className="bg-[#16a34a] hover:bg-[#15803d] text-white font-bold text-sm sm:text-base px-6 py-3 rounded-full transition-all duration-200 cursor-pointer shadow-md shadow-[#16a34a]/20 hover:shadow-lg hover:shadow-[#16a34a]/30 hover:-translate-y-0.5 inline-flex items-center gap-2"
+              >
+                <span>Book a demo</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('features')}
+                className="bg-white/90 hover:bg-white text-[#0b1f14] border border-[rgba(11,31,20,0.12)] font-semibold text-sm sm:text-base px-6 py-3 rounded-full transition-all duration-200 cursor-pointer shadow-sm hover:border-[#16a34a]/40 hover:-translate-y-0.5 inline-flex items-center"
+              >
+                <span>See all features</span>
+              </button>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      {/* ==================================================
+          2. NUMBERS STRIP (same 4 stat cards, count up once when scrolled into view)
+          ================================================== */}
+      <section 
+        ref={statsRef}
+        className="py-8 sm:py-10 bg-[#f7faf8] border-b border-[rgba(11,31,20,0.06)]"
+      >
+        <div className="page-container">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
+            
+            {/* Stat 1: 15+ */}
+            <ScrollReveal delayMs={0}>
+              <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5 text-center h-full flex flex-col justify-center">
+                <div 
+                  className="text-[#15803d] font-mono tracking-tight text-3xl sm:text-4xl lg:text-5xl font-black"
+                >
+                  {stats.schools}+
+                </div>
+                <div className="text-xs sm:text-sm text-[#0b1f14] font-bold mt-2">
+                  Schools, colleges &amp; institutes
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Stat 2: 20,000+ */}
+            <ScrollReveal delayMs={80}>
+              <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5 text-center h-full flex flex-col justify-center">
+                <div 
+                  className="text-[#15803d] font-mono tracking-tight text-3xl sm:text-4xl lg:text-5xl font-black"
+                >
+                  {stats.students.toLocaleString('en-IN')}+
+                </div>
+                <div className="text-xs sm:text-sm text-[#0b1f14] font-bold mt-2">
+                  Students &amp; teachers impacted
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Stat 3: 24+ */}
+            <ScrollReveal delayMs={160}>
+              <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5 text-center h-full flex flex-col justify-center">
+                <div 
+                  className="text-[#15803d] font-mono tracking-tight text-3xl sm:text-4xl lg:text-5xl font-black"
+                >
+                  {stats.modules}+
+                </div>
+                <div className="text-xs sm:text-sm text-[#0b1f14] font-bold mt-2">
+                  Modules in one platform
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Stat 4: 2 */}
+            <ScrollReveal delayMs={240}>
+              <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5 text-center h-full flex flex-col justify-center">
+                <div 
+                  className="text-[#15803d] font-mono tracking-tight text-3xl sm:text-4xl lg:text-5xl font-black"
+                >
+                  {stats.countries}
+                </div>
+                <div className="text-xs sm:text-sm text-[#0b1f14] font-bold mt-2">
+                  Countries: India &amp; UAE
+                </div>
+              </div>
+            </ScrollReveal>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ==================================================
+          3. OUR STORY (two columns: text left, image right; stack on mobile)
+          ================================================== */}
+      <section className="py-12 sm:py-16 border-b border-[rgba(11,31,20,0.06)] bg-white">
+        <div className="page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+            
+            {/* Left Column: Text */}
+            <div className="lg:col-span-7 space-y-4">
+              <ScrollReveal>
+                <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
+                  Our story
+                </p>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1 mb-4">
+                  Built by people who understand how schools really run
+                </h2>
+                
+                <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
+                  Most schools run on a patchwork of spreadsheets, paper registers, WhatsApp groups and separate apps for fees, attendance and admissions. Data sits in different places, staff repeat the same work, and principals wait days for answers.
+                </p>
+
+                <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
+                  EduMojo was created by Webmagiks in Pune to fix that. We started with one goal: give every institution a single, intelligent platform that handles the whole journey, from the first admission enquiry to the alumni network.
+                </p>
+
+                <p className="text-sm sm:text-base text-[#0b1f14] font-medium leading-relaxed bg-[#f0fdf4]/70 p-4 sm:p-5 rounded-2xl border border-[#2eca8b]/30 shadow-xs">
+                  EduMojo grew out of the work we were already doing with schools and the problems we kept seeing every day. We built it by listening to the people running schools, understanding where things got difficult, and turning those lessons into a product we’d actually want to use ourselves.
+                </p>
+              </ScrollReveal>
+            </div>
+
+            {/* Right Column: Real Team Photo */}
+            <div className="lg:col-span-5 flex justify-center">
+              <ScrollReveal delayMs={100}>
+                <TeamPhotoCard />
+              </ScrollReveal>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ==================================================
+          4. MISSION & VISION (two cards side by side, 3px green left border, line icon at top)
+          ================================================== */}
+      <section className="py-12 sm:py-16 border-b border-[rgba(11,31,20,0.06)] bg-[#f7faf8]">
+        <div className="page-container space-y-6">
+          
+          <ScrollReveal>
+            {/* H2 is visually shown as instructed */}
+            <h2 className="text-2xl sm:text-3xl font-black text-[#0b1f14] tracking-tight text-center">
+              Our mission and vision
+            </h2>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            
+            {/* Card 1: Mission */}
+            <ScrollReveal delayMs={0}>
+              <div 
+                className="bg-white rounded-[18px] p-6 sm:p-8 border border-[rgba(11,31,20,0.09)] border-l-[3px] border-l-[#16a34a] shadow-[0_4px_20px_rgba(11,31,20,0.04)] h-full flex flex-col justify-start"
+              >
+                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4">
+                  <Target className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight mb-3">
+                  Our mission
+                </h3>
+                <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
+                  To empower schools to focus on what truly matters, education, by bringing admissions, academics, finance, communication, operations and AI together in one future-ready platform.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Card 2: Vision */}
+            <ScrollReveal delayMs={100}>
+              <div 
+                className="bg-white rounded-[18px] p-6 sm:p-8 border border-[rgba(11,31,20,0.09)] border-l-[3px] border-l-[#16a34a] shadow-[0_4px_20px_rgba(11,31,20,0.04)] h-full flex flex-col justify-start"
+              >
+                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4">
+                  <Eye className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight mb-3">
+                  Our vision
+                </h3>
+                <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
+                  A future where every school, college and institute, whatever its size, runs on connected data: less manual work, better visibility, faster communication and smarter decisions.
+                </p>
+              </div>
+            </ScrollReveal>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ==================================================
+          5. WHAT WE STAND FOR (4 cards in a row, 2x2 on tablet, 1 col mobile)
+          ================================================== */}
+      <section className="py-12 sm:py-16 border-b border-[rgba(11,31,20,0.06)] bg-white">
+        <div className="page-container space-y-8">
+          
+          <ScrollReveal>
+            <div className="text-center max-w-2xl mx-auto">
+              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
+                What makes EduMojo different
+              </p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1">
+                Four things we never compromise on
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            
+            {/* Card 1: One unified platform */}
+            <ScrollReveal delayMs={0}>
+              <GlowCard className="p-6 h-full flex flex-col">
+                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
+                  One unified platform
+                </h3>
+                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                  Every department works from the same system and the same data, so nothing falls through the gaps.
+                </p>
+              </GlowCard>
+            </ScrollReveal>
+
+            {/* Card 2: Deep school workflows */}
+            <ScrollReveal delayMs={70}>
+              <GlowCard className="p-6 h-full flex flex-col">
+                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                  <Workflow className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
+                  Deep school workflows
+                </h3>
+                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                  24+ modules shaped around real school processes, from admissions and timetables to certificates and alumni.
+                </p>
+              </GlowCard>
+            </ScrollReveal>
+
+            {/* Card 3: AI that does real work */}
+            <ScrollReveal delayMs={140}>
+              <GlowCard className="p-6 h-full flex flex-col">
+                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                  <Sparkles className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
+                  AI that does real work
+                </h3>
+                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                  An AI assistant, at-risk student insights and automated workflows that save staff hours every week.
+                </p>
+              </GlowCard>
+            </ScrollReveal>
+
+            {/* Card 4: Operational excellence */}
+            <ScrollReveal delayMs={210}>
+              <GlowCard className="p-6 h-full flex flex-col">
+                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                  <Award className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
+                  Operational excellence
+                </h3>
+                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                  Reliable daily operations backed by implementation guidance, training and ongoing support.
+                </p>
+              </GlowCard>
+            </ScrollReveal>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ==================================================
+          6. WHO WE SERVE (going panel of schools, logos grey -> colour on hover, no boxes)
+          ================================================== */}
+      <section className="py-12 sm:py-16 border-b border-[rgba(11,31,20,0.06)] bg-[#f7faf8]">
+        <div className="page-container mb-8 sm:mb-10">
+          <div className="max-w-3xl space-y-3">
+            <ScrollReveal>
+              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
+                Who we serve
+              </p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1 mb-3">
+                Trusted by schools, colleges and institutes in India and Dubai
+              </h2>
+              <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
+                From preschools to colleges, institutions use EduMojo to run admissions, academics, fees and communication from one place. Our clients include Dhruv Global School in Pune and Dubai, Blue Ridge Public School, Arihant College, 2Sigma Education Academy, Dhruv Pre-School and Stock Paper Scissors (SPS).
+              </p>
+
+              {/* Visible confirmation placeholder box */}
+              <div className="p-3.5 sm:p-4 rounded-[14px] bg-white border border-[#16a34a]/30 shadow-sm mt-3 inline-block">
+                <span className="font-mono text-xs text-[#15803d] font-bold">
+                  [ADD: confirm this client list and that you have permission to show each logo]
+                </span>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+
+        {/* CONTINUOUS GOING PANEL OF GIVEN SCHOOLS */}
+        <div className="marquee w-full py-3 sm:py-4 bg-[#fbfdfc] border-y border-[rgba(11,31,20,0.06)]">
+          <div className="marquee-track items-center gap-12 sm:gap-16">
+            {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, index) => (
+              <div
+                key={`about-going-school-${client.id}-${index}`}
+                className="marquee-item shrink-0 px-4 sm:px-6 py-1 transition-all duration-300 hover:scale-105 cursor-pointer flex items-center justify-center bg-transparent"
+                title={`${client.name} · ${client.category} (${client.city})`}
+              >
+                <SchoolLogoDisplay client={client} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================================================
+          7. HOW WE WORK WITH YOU (3 steps in a row with a thin connecting line; numbered 1-3)
+          ================================================== */}
+      <section className="py-12 sm:py-16 border-b border-[rgba(11,31,20,0.06)] bg-white">
+        <div className="page-container space-y-8">
+          
+          <ScrollReveal>
+            <div className="text-center max-w-2xl mx-auto">
+              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
+                Support &amp; success
+              </p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1">
+                We set you up, train your team and stay with you
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          {/* 3 Steps in a row connected with thin line */}
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Connecting horizontal line on desktop */}
+            <div 
+              className="hidden md:block absolute top-7 left-[15%] right-[15%] h-[1.5px] bg-[#16a34a]/25 z-0" 
+              aria-hidden="true"
+            />
+
+            {/* Step 1 */}
+            <ScrollReveal delayMs={0}>
+              <div className="relative z-10 bg-white rounded-[18px] p-6 border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] h-full flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-[#16a34a] text-white font-mono font-black text-lg flex items-center justify-center mb-4 shadow-md shadow-[#16a34a]/20">
+                  1
+                </div>
+                <h3 className="text-lg sm:text-xl font-black text-[#0b1f14] mb-2 tracking-tight">
+                  Implementation guidance
+                </h3>
+                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                  Expert support at every step, from setting up your data to going live.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Step 2 */}
+            <ScrollReveal delayMs={100}>
+              <div className="relative z-10 bg-white rounded-[18px] p-6 border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] h-full flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-[#16a34a] text-white font-mono font-black text-lg flex items-center justify-center mb-4 shadow-md shadow-[#16a34a]/20">
+                  2
+                </div>
+                <h3 className="text-lg sm:text-xl font-black text-[#0b1f14] mb-2 tracking-tight">
+                  Training &amp; onboarding
+                </h3>
+                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                  Hands-on training that gets administrators, teachers and staff up to speed quickly.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Step 3 */}
+            <ScrollReveal delayMs={200}>
+              <div className="relative z-10 bg-white rounded-[18px] p-6 border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] h-full flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-[#16a34a] text-white font-mono font-black text-lg flex items-center justify-center mb-4 shadow-md shadow-[#16a34a]/20">
+                  3
+                </div>
+                <h3 className="text-lg sm:text-xl font-black text-[#0b1f14] mb-2 tracking-tight">
+                  Ongoing support
+                </h3>
+                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                  We are here whenever you need us, long after launch.
+                </p>
+              </div>
+            </ScrollReveal>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ==================================================
+          8. TESTIMONIALS (reuse the Home testimonial carousel, same quotes)
+          ================================================== */}
+      <section className="py-12 sm:py-16 bg-[#ffffff] border-b border-[rgba(11,31,20,0.06)]">
+        <div className="page-container">
+          <ScrollReveal>
+            <TestimonialsCarousel />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ==================================================
+          9. FAQ (<details><summary> with round light-green "+" rotating to "×")
+          ================================================== */}
+      <section className="py-12 sm:py-16 bg-[#f7faf8] border-b border-[rgba(11,31,20,0.06)]">
+        <div className="page-container space-y-6">
+          
+          <ScrollReveal>
+            <div className="text-center mb-6 sm:mb-8">
+              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
+                FAQ
+              </p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1">
+                About EduMojo: common questions
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="space-y-3.5">
+            
+            {/* Q1 */}
+            <ScrollReveal delayMs={0}>
+              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
+                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
+                  <span>Who makes EduMojo?</span>
+                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
+                    +
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
+                  EduMojo is built by Webmagiks, a technology company based in Pune, Maharashtra, India. Webmagiks designs, implements and supports EduMojo for schools, colleges and institutes in India and Dubai.
+                </div>
+              </details>
+            </ScrollReveal>
+
+            {/* Q2 */}
+            <ScrollReveal delayMs={50}>
+              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
+                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
+                  <span>How many institutions use EduMojo?</span>
+                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
+                    +
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
+                  EduMojo is used by 15+ schools, colleges and institutes across India and Dubai, and has impacted more than 20,000 students and teachers.
+                </div>
+              </details>
+            </ScrollReveal>
+
+            {/* Q3 */}
+            <ScrollReveal delayMs={100}>
+              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
+                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
+                  <span>What makes EduMojo different from other school ERPs?</span>
+                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
+                    +
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
+                  EduMojo combines four things in one product: a single unified platform for every department, deep school workflows from admission to alumni, AI built into daily work, and hands-on implementation, training and support.
+                </div>
+              </details>
+            </ScrollReveal>
+
+            {/* Q4 */}
+            <ScrollReveal delayMs={150}>
+              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
+                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
+                  <span>Does EduMojo work for colleges and institutes, not just schools?</span>
+                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
+                    +
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
+                  Yes. EduMojo is built for schools, colleges and institutes. Its clients include K-12 schools, a preschool and colleges such as Arihant College in Pune and Sangamner College.
+                </div>
+              </details>
+            </ScrollReveal>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ==================================================
+          10. CTA BAND (lava gradient block, like Home CTA but without form)
+          ================================================== */}
+      <div className="lava text-center">
+        <div className="lava-blobs" aria-hidden="true">
+          <div className="blob b1" />
+          <div className="blob b2" />
+          <div className="blob b3" />
+          <div className="blob b4" />
+          <div className="blob b5" />
+          <div className="blob b6" />
+        </div>
+
+        <section className="py-14 sm:py-16">
+          <ScrollReveal>
+            <div className="page-container space-y-5 text-center">
+              <h2 
+                className="font-black text-[#0b1f14] tracking-[-0.035em] text-3xl sm:text-5xl"
+              >
+                See EduMojo at your school
+              </h2>
+              <p className="text-base sm:text-lg text-[#3f4b45] max-w-xl mx-auto">
+                Book a demo and our team will walk you through the modules that matter most to your institution.
+              </p>
+              <div className="pt-2 flex justify-center">
+                <button
+                  type="button"
+                  onClick={handleBookDemo}
+                  className="bg-[#16a34a] hover:bg-[#15803d] text-white font-bold text-base px-8 py-3.5 rounded-full transition-all duration-200 cursor-pointer shadow-lg shadow-[#16a34a]/25 hover:shadow-xl hover:-translate-y-0.5 inline-flex items-center gap-2"
+                >
+                  <span>Book a demo</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </ScrollReveal>
+        </section>
+      </div>
+
+      {/* ==================================================
+          STRUCTURED DATA (JSON-LD before closing root)
+          ================================================== */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
+    </div>
+  );
+};

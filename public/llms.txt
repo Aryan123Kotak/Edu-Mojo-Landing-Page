@@ -1,0 +1,34 @@
+# EduMojo
+
+EduMojo is a simple, affordable school ERP (school management software) built by Webmagiks. It cuts teachers' day-to-day work by up to 40% by handling attendance, homework, report cards, parent updates and timetables in one easy app, with admissions, fees, transport, library and hostel for the office. It is used by 15+ schools, colleges and institutes in India and Dubai. Tagline: 'Up to 40% less work for teachers, every day.'
+
+## Three Brand Pillars
+1. Saves teachers' time
+2. Simple to use
+3. Affordable for every school
+
+## Modules
+- Attendance & Parent Alerts
+- Homework & E-Learning
+- Marks & Report Cards
+- Timetable & Substitutions
+- Fees & Payment Links
+- Smart Assistant & Automation
+- Admissions & CRM
+- Parent / School App
+- Transport & GPS Tracking
+- Library Management
+- Certificates & Documents
+- Staff & Payroll
+- Examination Management
+- Inventory & Assets
+- Student & Staff ID Cards
+- Visitor & Gate Pass
+- Hostel & Boarding
+- Alumni Network
+- Academic Reports
+- Online Fee Collection
+- Daily Academic Updates
+- Student 360 Profiles
+- Multi-Branch Institute Management
+- Custom Form Builder
