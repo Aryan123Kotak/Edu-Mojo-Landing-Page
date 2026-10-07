@@ -5,12 +5,8 @@ import {
   Quote, 
   Star, 
   CheckCircle2, 
-  Pause, 
-  Play, 
   MapPin, 
   Building2, 
-  Camera, 
-  Upload, 
   Check, 
   Sparkles 
 } from 'lucide-react';
@@ -197,48 +193,22 @@ export const matchPrincipalIdByFileName = (fileName: string): string | null => {
   return null;
 };
 
-// Principal Portrait: Renders authentic photo if available, or stylized artwork with photo upload trigger
+// Principal Portrait: Renders authentic photo if available, or stylized artwork
 const PrincipalPortrait: React.FC<{ 
   item: Testimonial; 
   photoUrl?: string; 
-  onPhotoUploaded: (id: string, dataUrl: string, fileName?: string) => void;
   sizeClassName?: string;
-}> = ({ item, photoUrl, onPhotoUploaded, sizeClassName = 'w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48' }) => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
+}> = ({ item, photoUrl, sizeClassName = 'w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48' }) => {
   const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     setImgError(false);
   }, [photoUrl, item.id]);
 
-  const handleSingleFile = (file: File) => {
-    if (!file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const dataUrl = e.target?.result as string;
-      if (dataUrl) {
-        onPhotoUploaded(item.id, dataUrl, file.name);
-      }
-    };
-    reader.readAsDataURL(file);
-  };
-
   const hasPhoto = Boolean(photoUrl && !imgError);
 
   return (
     <div className={`relative ${sizeClassName} rounded-3xl overflow-hidden shadow-[0_20px_45px_rgba(11,31,20,0.14)] ring-4 ring-[#2eca8b]/30 ring-offset-4 ring-offset-white shrink-0 group`}>
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={(e) => {
-          if (e.target.files && e.target.files[0]) {
-            handleSingleFile(e.target.files[0]);
-          }
-        }}
-        accept="image/*"
-        className="hidden"
-      />
-
       {hasPhoto ? (
         /* Real Authentic Principal Photograph */
         <div className="w-full h-full relative">
@@ -249,23 +219,12 @@ const PrincipalPortrait: React.FC<{
             referrerPolicy="no-referrer"
             onError={() => setImgError(true)}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-60 pointer-events-none" />
 
           {/* Verified Leader Check Badge Overlay */}
           <div className="absolute bottom-2.5 right-2.5 flex items-center justify-center w-7 h-7 rounded-full bg-[#15803d] text-white shadow-md ring-2 ring-white z-10 pointer-events-none">
             <Check className="w-4 h-4 stroke-[3]" />
           </div>
-
-          {/* Change Photo Overlay Button */}
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            className="absolute inset-0 bg-black/50 backdrop-blur-2xs opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-200 cursor-pointer text-xs font-bold gap-1.5 z-20"
-            title={`Replace photograph for ${item.name}`}
-          >
-            <Camera className="w-5 h-5" />
-            <span>Change Photo</span>
-          </button>
         </div>
       ) : (
         /* Stylized Distinguished Portrait Artwork Fallback */
@@ -332,17 +291,6 @@ const PrincipalPortrait: React.FC<{
               </text>
             </g>
           </svg>
-
-          {/* Quick upload button trigger */}
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            className="absolute inset-0 bg-black/40 backdrop-blur-2xs opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-200 cursor-pointer text-xs font-bold gap-1.5 z-20"
-            title={`Upload photograph for ${item.name}`}
-          >
-            <Camera className="w-5 h-5" />
-            <span>Upload Photo</span>
-          </button>
         </div>
       )}
     </div>
@@ -354,12 +302,9 @@ export const TestimonialsCarousel: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
   const [photos, setPhotos] = useState<Record<string, string>>({});
-  const [isDragging, setIsDragging] = useState(false);
-  const [uploadToast, setUploadToast] = useState<string | null>(null);
-  
+
   const timerRef = useRef<number | null>(null);
   const progressIntervalRef = useRef<number | null>(null);
-  const bulkInputRef = useRef<HTMLInputElement>(null);
 
   const SLIDE_DURATION = 6500; // 6.5s per slide
 
@@ -396,80 +341,6 @@ export const TestimonialsCarousel: React.FC = () => {
 
     setPhotos((prev) => ({ ...prev, ...loadedPhotos }));
   }, []);
-
-  const savePhoto = (id: string, dataUrl: string, fileName?: string) => {
-    localStorage.setItem(`edumojo_principal_${id}`, dataUrl);
-    setPhotos((prev) => ({ ...prev, [id]: dataUrl }));
-
-    // Send to dev server endpoint to save to disk if available
-    try {
-      fetch('/api/upload-principal-photo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, filename: fileName, dataUrl }),
-      }).catch(() => {
-        // ignore if server endpoint unavailable
-      });
-    } catch {
-      // ignore
-    }
-  };
-
-  const handleBulkFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    let matchedCount = 0;
-    Array.from(files).forEach((file) => {
-      if (!file.type.startsWith('image/')) return;
-      const matchedId = matchPrincipalIdByFileName(file.name);
-      if (matchedId) {
-        matchedCount++;
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const dataUrl = event.target?.result as string;
-          if (dataUrl) {
-            savePhoto(matchedId, dataUrl, file.name);
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    if (matchedCount > 0) {
-      setUploadToast(`Applied ${matchedCount} principal photograph${matchedCount > 1 ? 's' : ''}!`);
-      setTimeout(() => setUploadToast(null), 4000);
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const files = e.dataTransfer.files;
-    if (!files || files.length === 0) return;
-
-    let matchedCount = 0;
-    Array.from(files).forEach((file) => {
-      if (!file.type.startsWith('image/')) return;
-      const matchedId = matchPrincipalIdByFileName(file.name) || TESTIMONIALS[currentIndex].id;
-      if (matchedId) {
-        matchedCount++;
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const dataUrl = event.target?.result as string;
-          if (dataUrl) {
-            savePhoto(matchedId, dataUrl, file.name);
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    if (matchedCount > 0) {
-      setUploadToast(`Applied ${matchedCount} principal photograph${matchedCount > 1 ? 's' : ''}!`);
-      setTimeout(() => setUploadToast(null), 4000);
-    }
-  };
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
@@ -519,28 +390,12 @@ export const TestimonialsCarousel: React.FC = () => {
   const matchedClient = CLIENT_LOGOS.find((c) => c.id === current.clientId);
   const currentPhoto = photos[current.id];
 
-  const totalPhotosLoaded = Object.keys(photos).length;
-
   return (
     <div
       className="w-full mx-auto font-sans"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      onDragOver={(e) => {
-        e.preventDefault();
-        setIsDragging(true);
-      }}
-      onDragLeave={() => setIsDragging(false)}
-      onDrop={handleDrop}
     >
-      <input
-        type="file"
-        ref={bulkInputRef}
-        onChange={handleBulkFiles}
-        multiple
-        accept="image/*"
-        className="hidden"
-      />
 
       {/* Section Header */}
       <div className="text-center mb-8 sm:mb-10">
@@ -558,11 +413,7 @@ export const TestimonialsCarousel: React.FC = () => {
 
       {/* Main Sleek & Modern Testimonial Card */}
       <div
-        className={`relative bg-gradient-to-br from-white via-[#fafdfb] to-[#f0fdf4]/50 rounded-[28px] sm:rounded-[32px] border transition-all duration-300 overflow-hidden shadow-[0_20px_60px_-15px_rgba(11,31,20,0.08)] ${
-          isDragging
-            ? 'border-[#16a34a] ring-4 ring-[#2eca8b]/30'
-            : 'border-[#2eca8b]/30 hover:shadow-[0_25px_70px_-12px_rgba(46,202,139,0.16)]'
-        }`}
+        className="relative bg-gradient-to-br from-white via-[#fafdfb] to-[#f0fdf4]/50 rounded-[28px] sm:rounded-[32px] border border-[#2eca8b]/30 hover:shadow-[0_25px_70px_-12px_rgba(46,202,139,0.16)] transition-all duration-300 overflow-hidden shadow-[0_20px_60px_-15px_rgba(11,31,20,0.08)]"
       >
         {/* Timed Slider Progress Bar (Pauses on Hover) */}
         <div className="w-full h-1.5 bg-[#e2e8f0]/80 relative overflow-hidden">
@@ -575,20 +426,9 @@ export const TestimonialsCarousel: React.FC = () => {
         {/* Floating Ambient Glow in Top Right Corner */}
         <div className="pointer-events-none absolute -top-24 -right-24 w-80 h-80 bg-gradient-to-br from-[#2eca8b]/15 to-[#16a34a]/5 rounded-full blur-3xl" />
 
-        {/* Drag-and-drop indicator overlay */}
-        {isDragging && (
-          <div className="absolute inset-0 z-40 bg-[#0b1f14]/85 backdrop-blur-xs flex flex-col items-center justify-center text-white border-4 border-dashed border-[#2eca8b] m-3 rounded-2xl">
-            <Upload className="w-12 h-12 text-[#2eca8b] animate-bounce mb-3" />
-            <p className="font-extrabold text-lg">Drop Principal Photographs Here</p>
-            <p className="text-xs text-white/80 mt-1">
-              Supports Dr. Arun Gaikwad, Ms. Pranati Mazumder, Mr. Mangesh Takpire, Ms. Vaidehi Moghe, Ms. Sangeeta Rautji
-            </p>
-          </div>
-        )}
-
         <div className="p-6 sm:p-10 lg:p-12 relative z-10 space-y-8">
           
-          {/* Card Top Utility Bar: Rating Stars + Institutional Verification + Upload Action */}
+          {/* Card Top Utility Bar: Rating Stars + Institutional Verification */}
           <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-[rgba(11,31,20,0.06)]">
             <div className="flex items-center gap-3">
               {/* 5 Golden Stars */}
@@ -601,62 +441,17 @@ export const TestimonialsCarousel: React.FC = () => {
                 5.0 · Verified Institutional Partner
               </span>
             </div>
-
-            {/* Quick Action & Status Controls */}
-            <div className="flex items-center gap-2.5">
-              {/* Photo Upload Trigger Button */}
-              <button
-                type="button"
-                onClick={() => bulkInputRef.current?.click()}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-[#15803d] bg-[#f0fdf4] hover:bg-[#dcfce7] border border-[#2eca8b]/40 shadow-2xs transition-all cursor-pointer"
-                title="Select all 5 downloaded principal photos (Dr. Arun Gaikwad, Ms. Pranati Mazumder, etc.)"
-              >
-                <Camera className="w-3.5 h-3.5" />
-                <span>
-                  {totalPhotosLoaded >= 5 ? 'Update Photos' : 'Upload Principal Photos'}
-                </span>
-                {totalPhotosLoaded > 0 && (
-                  <span className="w-4 h-4 rounded-full bg-[#16a34a] text-white text-[10px] font-black flex items-center justify-center ml-0.5">
-                    {totalPhotosLoaded}
-                  </span>
-                )}
-              </button>
-
-              {/* Slider Pause Status Pill Indicator */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all duration-200">
-                {isPaused ? (
-                  <span className="inline-flex items-center gap-1.5 text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full shadow-2xs">
-                    <Pause className="w-3.5 h-3.5 fill-current" />
-                    <span>Paused on hover</span>
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 text-[#15803d] bg-[#f0fdf4] border border-[#2eca8b]/30 px-3 py-1 rounded-full">
-                    <Play className="w-3 h-3 fill-current" />
-                    <span>Auto-slider</span>
-                  </span>
-                )}
-              </div>
-            </div>
           </div>
-
-          {/* Toast Alert */}
-          {uploadToast && (
-            <div className="p-3 bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-md animate-in fade-in slide-in-from-top-2 duration-300">
-              <Check className="w-4 h-4 shrink-0" />
-              <span>{uploadToast}</span>
-            </div>
-          )}
 
           {/* Main Content Layout: Photo + Prominent Details + Quote */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Left Column: Big Principal Photo + Prominent Name & School Name */}
             <div className="lg:col-span-4 flex flex-col items-center text-center lg:items-start lg:text-left space-y-4">
-              {/* BIG Principal Photo with Instant Photo Loader */}
+              {/* BIG Principal Photo */}
               <PrincipalPortrait 
                 item={current} 
                 photoUrl={currentPhoto}
-                onPhotoUploaded={savePhoto}
               />
 
               {/* Prominent Name & Credentials */}
@@ -731,41 +526,24 @@ export const TestimonialsCarousel: React.FC = () => {
 
           </div>
 
-          {/* Bottom Interactive Navigation & Principal Thumbnails Bar */}
-          <div className="pt-6 border-t border-[rgba(11,31,20,0.06)] flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Bottom Interactive Navigation */}
+          <div className="pt-6 border-t border-[rgba(11,31,20,0.06)] flex items-center justify-between gap-4">
             
-            {/* Quick-Select Principal Thumbnails with Photo Preview */}
-            <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto py-1 max-w-full">
-              <span className="text-xs font-bold text-[#6b7a72] mr-1 hidden md:inline">
-                Principals:
-              </span>
-              {TESTIMONIALS.map((t, idx) => {
-                const thumbPhoto = photos[t.id];
-                return (
-                  <button
-                    key={t.id}
-                    type="button"
-                    onClick={() => selectTestimonial(idx)}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all duration-200 cursor-pointer ${
-                      idx === currentIndex
-                        ? 'bg-[#15803d] text-white border-[#15803d] shadow-sm scale-105'
-                        : 'bg-white hover:bg-slate-50 text-[#3f4b45] border-[rgba(11,31,20,0.09)]'
-                    }`}
-                    aria-label={`Select testimonial from ${t.name}`}
-                  >
-                    {thumbPhoto ? (
-                      <span className="w-5 h-5 rounded-full overflow-hidden shrink-0 ring-1 ring-white/70">
-                        <img src={thumbPhoto} alt="" className="w-full h-full object-cover object-top" />
-                      </span>
-                    ) : (
-                      <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-black">
-                        {t.initials}
-                      </span>
-                    )}
-                    <span className="whitespace-nowrap">{t.name.split(' ')[1] || t.name}</span>
-                  </button>
-                );
-              })}
+            {/* Slide Pagination Dots */}
+            <div className="flex items-center gap-2">
+              {TESTIMONIALS.map((t, idx) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => selectTestimonial(idx)}
+                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    idx === currentIndex
+                      ? 'w-8 bg-[#16a34a]'
+                      : 'w-2.5 bg-slate-200 hover:bg-slate-300'
+                  }`}
+                  aria-label={`Go to testimonial ${idx + 1}`}
+                />
+              ))}
             </div>
 
             {/* Prev / Next Buttons & Slide Indicators */}

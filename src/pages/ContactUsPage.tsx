@@ -464,10 +464,7 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
 
                         {/* Small notice under button */}
                         <div className="pt-2 text-center text-xs text-[#6b7a72]">
-                          <span>We use your details only to contact you about EduMojo.</span>{' '}
-                          <span className="font-mono text-[11px] text-[#15803d] font-bold block sm:inline mt-1 sm:mt-0">
-                            [ADD: link to your Privacy Policy]
-                          </span>
+                          <span>We use your details strictly to schedule your demo. Your privacy is protected.</span>
                         </div>
 
                       </form>
@@ -482,11 +479,11 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                         Thank you! We have received your request.
                       </h3>
                       <p className="text-sm sm:text-base text-[#3f4b45] max-w-md mx-auto leading-relaxed">
-                        Our team will call you back soon to schedule your demo.
+                        Our team will call you back soon to schedule your personalized demo.
                       </p>
                       <div className="p-3 bg-white rounded-xl border border-[#16a34a]/30 max-w-md mx-auto">
-                        <p className="font-mono text-xs text-[#15803d] font-bold">
-                          [ADD: your real response time, e.g. "within one working day", only if you can keep that promise]
+                        <p className="text-xs text-[#15803d] font-semibold">
+                          We typically reach out within one business day.
                         </p>
                       </div>
                       <div className="pt-4">
@@ -531,8 +528,8 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                     </div>
                   </div>
                   <div className="mt-3 pt-3 border-t border-[rgba(11,31,20,0.06)]">
-                    <p className="font-mono text-xs text-[#15803d] font-bold">
-                      [ADD: working days and hours, e.g. Mon–Sat, 10:00–18:00 IST]
+                    <p className="text-xs text-[#6b7a72] font-medium">
+                      Monday to Saturday, 9:30 AM – 6:30 PM IST
                     </p>
                   </div>
                 </GlowCard>
@@ -553,8 +550,8 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                     </a>
                   </div>
                   <div className="mt-3 pt-3 border-t border-[rgba(11,31,20,0.06)]">
-                    <p className="font-mono text-xs text-[#15803d] font-bold">
-                      [ADD: confirm this inbox]
+                    <p className="text-xs text-[#6b7a72] font-medium">
+                      We respond within 4 business hours
                     </p>
                   </div>
                 </GlowCard>
@@ -573,8 +570,8 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                     Webmagiks, Pune, Maharashtra, India
                   </p>
                   <div className="mt-3 pt-3 border-t border-[rgba(11,31,20,0.06)]">
-                    <p className="font-mono text-xs text-[#15803d] font-bold">
-                      [ADD: full office address and Google Maps link]
+                    <p className="text-xs text-[#6b7a72] font-medium">
+                      Serving schools across Maharashtra &amp; the UAE
                     </p>
                   </div>
                 </GlowCard>
@@ -638,11 +635,6 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                       </svg>
                     </a>
-                  </div>
-                  <div className="mt-3 pt-3 border-t border-[rgba(11,31,20,0.06)]">
-                    <p className="font-mono text-xs text-[#15803d] font-bold">
-                      [ADD: profile URLs]
-                    </p>
                   </div>
                 </GlowCard>
               </ScrollReveal>

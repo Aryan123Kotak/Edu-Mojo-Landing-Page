@@ -10,7 +10,7 @@ import {
   CheckCircle2,
   Users2
 } from 'lucide-react';
-import { CLIENT_LOGOS, SchoolLogoDisplay } from '../components/ClientLogos';
+import { LogoMarquee } from '../components/LogoMarquee';
 import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { GlowCard } from '../components/GlowCard';
@@ -28,10 +28,10 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
 
   // Numbers Strip Count-Up State
   const [stats, setStats] = useState({
+    teachersWork: 0,
     schools: 0,
     students: 0,
     modules: 0,
-    countries: 0,
   });
 
   // Dynamic Head SEO/AEO Tags & Canonical URL
@@ -99,7 +99,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
 
           const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           if (reduceMotion) {
-            setStats({ schools: 15, students: 20000, modules: 24, countries: 2 });
+            setStats({ teachersWork: 40, schools: 15, students: 20000, modules: 24 });
             return;
           }
 
@@ -112,10 +112,10 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             step++;
             const progress = step / steps;
             setStats({
+              teachersWork: Math.round(40 * progress),
               schools: Math.round(15 * progress),
               students: Math.round(20000 * progress),
               modules: Math.round(24 * progress),
-              countries: Math.round(2 * progress),
             });
 
             if (step >= steps) {
@@ -276,8 +276,8 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
               EduMojo is an AI-powered school ERP built by Webmagiks. We bring admissions, academics, communication, finance and operations into one platform, so the people who run schools spend less time on paperwork and more time on students.
             </p>
 
-            {/* Primary & Secondary Buttons */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3.5">
+            {/* Primary Action Button */}
+            <div className="pt-2 flex items-center justify-center">
               <button
                 type="button"
                 onClick={handleBookDemo}
@@ -285,14 +285,6 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
               >
                 <span>Book a demo</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => onNavigate('features')}
-                className="bg-white/90 hover:bg-white text-[#0b1f14] border border-[rgba(11,31,20,0.12)] font-semibold text-sm sm:text-base px-6 py-3 rounded-full transition-all duration-200 cursor-pointer shadow-sm hover:border-[#16a34a]/40 hover:-translate-y-0.5 inline-flex items-center"
-              >
-                <span>See all features</span>
               </button>
             </div>
 
@@ -310,63 +302,68 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
         <div className="page-container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
             
-            {/* Stat 1: 15+ */}
+            {/* Stat 1: 40% */}
             <ScrollReveal delayMs={0}>
-              <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5 text-center h-full flex flex-col justify-center">
+              <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1 text-center h-full flex flex-col justify-center">
                 <div 
-                  className="text-[#15803d] font-mono tracking-tight text-3xl sm:text-4xl lg:text-5xl font-black"
+                  className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200"
+                >
+                  {stats.teachersWork}%
+                </div>
+                <div className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
+                  Teachers spend up to 40% less time on routine work
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Stat 2: 15+ */}
+            <ScrollReveal delayMs={80}>
+              <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1 text-center h-full flex flex-col justify-center">
+                <div 
+                  className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200"
                 >
                   {stats.schools}+
                 </div>
-                <div className="text-xs sm:text-sm text-[#0b1f14] font-bold mt-2">
+                <div className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
                   Schools, colleges &amp; institutes
                 </div>
               </div>
             </ScrollReveal>
 
-            {/* Stat 2: 20,000+ */}
-            <ScrollReveal delayMs={80}>
-              <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5 text-center h-full flex flex-col justify-center">
+            {/* Stat 3: 20,000+ */}
+            <ScrollReveal delayMs={160}>
+              <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1 text-center h-full flex flex-col justify-center">
                 <div 
-                  className="text-[#15803d] font-mono tracking-tight text-3xl sm:text-4xl lg:text-5xl font-black"
+                  className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200"
                 >
                   {stats.students.toLocaleString('en-IN')}+
                 </div>
-                <div className="text-xs sm:text-sm text-[#0b1f14] font-bold mt-2">
+                <div className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
                   Students &amp; teachers impacted
                 </div>
               </div>
             </ScrollReveal>
 
-            {/* Stat 3: 24+ */}
-            <ScrollReveal delayMs={160}>
-              <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5 text-center h-full flex flex-col justify-center">
+            {/* Stat 4: 24+ */}
+            <ScrollReveal delayMs={240}>
+              <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1 text-center h-full flex flex-col justify-center">
                 <div 
-                  className="text-[#15803d] font-mono tracking-tight text-3xl sm:text-4xl lg:text-5xl font-black"
+                  className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200"
                 >
                   {stats.modules}+
                 </div>
-                <div className="text-xs sm:text-sm text-[#0b1f14] font-bold mt-2">
-                  Modules in one platform
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Stat 4: 2 */}
-            <ScrollReveal delayMs={240}>
-              <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5 text-center h-full flex flex-col justify-center">
-                <div 
-                  className="text-[#15803d] font-mono tracking-tight text-3xl sm:text-4xl lg:text-5xl font-black"
-                >
-                  {stats.countries}
-                </div>
-                <div className="text-xs sm:text-sm text-[#0b1f14] font-bold mt-2">
-                  Countries: India &amp; UAE
+                <div className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
+                  Modules, one simple app
                 </div>
               </div>
             </ScrollReveal>
 
           </div>
+
+          {/* Footnote under stats row */}
+          <p className="text-center text-xs text-[#6b7a72] mt-4">
+            *Based on routine task time reported across partner schools, 2025–26
+          </p>
         </div>
       </section>
 
@@ -413,16 +410,23 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ==================================================
-          4. MISSION & VISION (two cards side by side, 3px green left border, line icon at top)
+          4. MISSION & VISION (Modern Elevated Cards with Interactive Hover Features)
           ================================================== */}
       <section className="py-12 sm:py-16 border-b border-[rgba(11,31,20,0.06)] bg-[#f7faf8]">
-        <div className="page-container space-y-6">
+        <div className="page-container space-y-8">
           
           <ScrollReveal>
-            {/* H2 is visually shown as instructed */}
-            <h2 className="text-2xl sm:text-3xl font-black text-[#0b1f14] tracking-tight text-center">
-              Our mission and vision
-            </h2>
+            <div className="text-center max-w-2xl mx-auto space-y-1">
+              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
+                Purpose &amp; Direction
+              </p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight">
+                Our mission and vision
+              </h2>
+              <p className="text-xs sm:text-sm text-[#4b5563] pt-1">
+                Built in Pune for schools, colleges and institutes in India and Dubai that value speed, simplicity and trust.
+              </p>
+            </div>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
@@ -430,34 +434,70 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             {/* Card 1: Mission */}
             <ScrollReveal delayMs={0}>
               <div 
-                className="bg-white rounded-[18px] p-6 sm:p-8 border border-[rgba(11,31,20,0.09)] border-l-[3px] border-l-[#16a34a] shadow-[0_4px_20px_rgba(11,31,20,0.04)] h-full flex flex-col justify-start"
+                className="group relative bg-white rounded-3xl p-7 sm:p-9 border border-[rgba(11,31,20,0.08)] shadow-[0_4px_24px_rgba(11,31,20,0.04)] hover:shadow-[0_24px_48px_-12px_rgba(21,128,61,0.18)] hover:border-[#2eca8b]/70 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden cursor-default h-full"
               >
-                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4">
-                  <Target className="w-6 h-6" />
+                {/* Background ambient mesh bloom */}
+                <div className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gradient-to-br from-[#2eca8b]/15 via-[#16a34a]/10 to-transparent blur-2xl group-hover:scale-150 group-hover:opacity-100 opacity-40 transition-all duration-500" />
+                
+                <div>
+                  {/* Top row with pill and modern icon badge */}
+                  <div className="flex items-center justify-between gap-4 mb-5">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fdf4] border border-[#2eca8b]/30 text-[11px] font-black uppercase tracking-wider text-[#15803d]">
+                      Our Mission
+                    </span>
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/40 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300 shrink-0">
+                      <Target className="w-7 h-7 stroke-[2.2]" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors duration-200 mb-3">
+                    Empowering schools to focus on teaching
+                  </h3>
+                  
+                  <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
+                    To empower schools to focus on what truly matters, education, by bringing admissions, academics, finance, communication, operations and AI together in one future-ready platform.
+                  </p>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight mb-3">
-                  Our mission
-                </h3>
-                <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
-                  To empower schools to focus on what truly matters, education, by bringing admissions, academics, finance, communication, operations and AI together in one future-ready platform.
-                </p>
+
+                {/* Subtle animated interactive accent bar */}
+                <div className="pt-6">
+                  <div className="w-12 group-hover:w-full h-1 bg-gradient-to-r from-[#15803d] via-[#16a34a] to-[#2eca8b] rounded-full transition-all duration-500" />
+                </div>
               </div>
             </ScrollReveal>
 
             {/* Card 2: Vision */}
             <ScrollReveal delayMs={100}>
               <div 
-                className="bg-white rounded-[18px] p-6 sm:p-8 border border-[rgba(11,31,20,0.09)] border-l-[3px] border-l-[#16a34a] shadow-[0_4px_20px_rgba(11,31,20,0.04)] h-full flex flex-col justify-start"
+                className="group relative bg-white rounded-3xl p-7 sm:p-9 border border-[rgba(11,31,20,0.08)] shadow-[0_4px_24px_rgba(11,31,20,0.04)] hover:shadow-[0_24px_48px_-12px_rgba(15,118,110,0.18)] hover:border-[#14b8a6]/70 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden cursor-default h-full"
               >
-                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4">
-                  <Eye className="w-6 h-6" />
+                {/* Background ambient mesh bloom */}
+                <div className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gradient-to-br from-[#14b8a6]/15 via-[#0f766e]/10 to-transparent blur-2xl group-hover:scale-150 group-hover:opacity-100 opacity-40 transition-all duration-500" />
+
+                <div>
+                  {/* Top row with pill and modern icon badge */}
+                  <div className="flex items-center justify-between gap-4 mb-5">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fdf4] border border-[#2eca8b]/30 text-[11px] font-black uppercase tracking-wider text-[#15803d]">
+                      Our Vision
+                    </span>
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-teal-50 to-[#ccfbf1] text-[#0f766e] border border-[#2eca8b]/40 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#0f766e] group-hover:text-white transition-all duration-300 shrink-0">
+                      <Eye className="w-7 h-7 stroke-[2.2]" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight group-hover:text-[#0f766e] transition-colors duration-200 mb-3">
+                    Connected data across every campus
+                  </h3>
+
+                  <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
+                    A future where every school, college and institute, whatever its size, runs on connected data: less manual work, better visibility, faster communication and smarter decisions.
+                  </p>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight mb-3">
-                  Our vision
-                </h3>
-                <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
-                  A future where every school, college and institute, whatever its size, runs on connected data: less manual work, better visibility, faster communication and smarter decisions.
-                </p>
+
+                {/* Subtle animated interactive accent bar */}
+                <div className="pt-6">
+                  <div className="w-12 group-hover:w-full h-1 bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#2eca8b] rounded-full transition-all duration-500" />
+                </div>
               </div>
             </ScrollReveal>
 
@@ -487,61 +527,69 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             
             {/* Card 1: One unified platform */}
             <ScrollReveal delayMs={0}>
-              <GlowCard className="p-6 h-full flex flex-col">
-                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
-                  <Layers className="w-6 h-6" />
+              <GlowCard className="group p-6 sm:p-7 h-full flex flex-col justify-between rounded-3xl border border-[rgba(11,31,20,0.08)] hover:border-[#2eca8b]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(21,128,61,0.12)]">
+                <div>
+                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                    <Layers className="w-6 h-6 stroke-[2.2]" />
+                  </div>
+                  <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight group-hover:text-[#15803d] transition-colors duration-200">
+                    One unified platform
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                    Every department works from the same system and the same data, so nothing falls through the gaps.
+                  </p>
                 </div>
-                <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
-                  One unified platform
-                </h3>
-                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
-                  Every department works from the same system and the same data, so nothing falls through the gaps.
-                </p>
               </GlowCard>
             </ScrollReveal>
 
             {/* Card 2: Deep school workflows */}
             <ScrollReveal delayMs={70}>
-              <GlowCard className="p-6 h-full flex flex-col">
-                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
-                  <Workflow className="w-6 h-6" />
+              <GlowCard className="group p-6 sm:p-7 h-full flex flex-col justify-between rounded-3xl border border-[rgba(11,31,20,0.08)] hover:border-[#14b8a6]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(15,118,110,0.12)]">
+                <div>
+                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#ccfbf1] text-[#0f766e] border border-[#14b8a6]/35 shadow-xs flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-[#0f766e] group-hover:text-white transition-all duration-300">
+                    <Workflow className="w-6 h-6 stroke-[2.2]" />
+                  </div>
+                  <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight group-hover:text-[#0f766e] transition-colors duration-200">
+                    Deep school workflows
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                    24+ modules shaped around real school processes, from admissions and timetables to certificates and alumni.
+                  </p>
                 </div>
-                <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
-                  Deep school workflows
-                </h3>
-                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
-                  24+ modules shaped around real school processes, from admissions and timetables to certificates and alumni.
-                </p>
               </GlowCard>
             </ScrollReveal>
 
             {/* Card 3: AI that does real work */}
             <ScrollReveal delayMs={140}>
-              <GlowCard className="p-6 h-full flex flex-col">
-                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
-                  <Sparkles className="w-6 h-6" />
+              <GlowCard className="group p-6 sm:p-7 h-full flex flex-col justify-between rounded-3xl border border-[rgba(11,31,20,0.08)] hover:border-[#2eca8b]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(21,128,61,0.12)]">
+                <div>
+                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#fefce8] to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                    <Sparkles className="w-6 h-6 stroke-[2.2]" />
+                  </div>
+                  <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight group-hover:text-[#15803d] transition-colors duration-200">
+                    AI that does real work
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                    An AI assistant, at-risk student insights and automated workflows that save staff hours every week.
+                  </p>
                 </div>
-                <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
-                  AI that does real work
-                </h3>
-                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
-                  An AI assistant, at-risk student insights and automated workflows that save staff hours every week.
-                </p>
               </GlowCard>
             </ScrollReveal>
 
             {/* Card 4: Operational excellence */}
             <ScrollReveal delayMs={210}>
-              <GlowCard className="p-6 h-full flex flex-col">
-                <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
-                  <Award className="w-6 h-6" />
+              <GlowCard className="group p-6 sm:p-7 h-full flex flex-col justify-between rounded-3xl border border-[rgba(11,31,20,0.08)] hover:border-[#2eca8b]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(21,128,61,0.12)]">
+                <div>
+                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#bbf7d0] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                    <Award className="w-6 h-6 stroke-[2.2]" />
+                  </div>
+                  <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight group-hover:text-[#15803d] transition-colors duration-200">
+                    Operational excellence
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
+                    Reliable daily operations backed by implementation guidance, training and ongoing support.
+                  </p>
                 </div>
-                <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
-                  Operational excellence
-                </h3>
-                <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
-                  Reliable daily operations backed by implementation guidance, training and ongoing support.
-                </p>
               </GlowCard>
             </ScrollReveal>
 
@@ -551,47 +599,9 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ==================================================
-          6. WHO WE SERVE (going panel of schools, logos grey -> colour on hover, no boxes)
+          6. WHO WE SERVE (Logo Marquee Panel)
           ================================================== */}
-      <section className="py-12 sm:py-16 border-b border-[rgba(11,31,20,0.06)] bg-[#f7faf8]">
-        <div className="page-container mb-8 sm:mb-10">
-          <div className="max-w-3xl space-y-3">
-            <ScrollReveal>
-              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
-                Who we serve
-              </p>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1 mb-3">
-                Trusted by schools, colleges and institutes in India and Dubai
-              </h2>
-              <p className="text-sm sm:text-base text-[#3f4b45] leading-relaxed">
-                From preschools to colleges, institutions use EduMojo to run admissions, academics, fees and communication from one place. Our clients include Dhruv Global School in Pune and Dubai, Blue Ridge Public School, Arihant College, 2Sigma Education Academy, Dhruv Pre-School and Stock Paper Scissors (SPS).
-              </p>
-
-              {/* Visible confirmation placeholder box */}
-              <div className="p-3.5 sm:p-4 rounded-[14px] bg-white border border-[#16a34a]/30 shadow-sm mt-3 inline-block">
-                <span className="font-mono text-xs text-[#15803d] font-bold">
-                  [ADD: confirm this client list and that you have permission to show each logo]
-                </span>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-
-        {/* CONTINUOUS GOING PANEL OF GIVEN SCHOOLS */}
-        <div className="marquee w-full py-3 sm:py-4 bg-[#fbfdfc] border-y border-[rgba(11,31,20,0.06)]">
-          <div className="marquee-track items-center gap-12 sm:gap-16">
-            {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, index) => (
-              <div
-                key={`about-going-school-${client.id}-${index}`}
-                className="marquee-item shrink-0 px-4 sm:px-6 py-1 transition-all duration-300 hover:scale-105 cursor-pointer flex items-center justify-center bg-transparent"
-                title={`${client.name} · ${client.category} (${client.city})`}
-              >
-                <SchoolLogoDisplay client={client} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <LogoMarquee />
 
       {/* ==================================================
           7. HOW WE WORK WITH YOU (3 steps in a row with a thin connecting line; numbered 1-3)

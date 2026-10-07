@@ -6,7 +6,6 @@ import {
   DollarSign, 
   BarChart3, 
   GraduationCap, 
-  CheckCircle2, 
   ChevronLeft, 
   ChevronRight, 
   ArrowRight, 
@@ -32,6 +31,58 @@ interface UnifiedPlatformSectionProps {
   onGetQuote: () => void;
 }
 
+const TABS = [
+  {
+    id: 'teacher-apps',
+    label: 'Daily Teacher Apps',
+    shortLabel: 'Teacher Apps',
+    icon: Smartphone,
+    eyebrow: 'Everything a teacher needs, without switching between apps',
+  },
+  {
+    id: 'modules-suite',
+    label: '24+ Modules Suite',
+    shortLabel: '24+ Modules',
+    icon: LayoutGrid,
+    eyebrow: 'Everything your school needs, without the complexity',
+  },
+  {
+    id: 'timetables',
+    label: 'Timetable Engine',
+    shortLabel: 'Timetables',
+    icon: Calendar,
+    eyebrow: 'Timetables without the weekend spent rebuilding them',
+  },
+  {
+    id: 'who-it-helps',
+    label: 'Role Impact',
+    shortLabel: 'Who It Helps',
+    icon: Users,
+    eyebrow: 'Less work for teachers. Better visibility for everyone else.',
+  },
+  {
+    id: 'pricing-value',
+    label: 'Affordable Pricing',
+    shortLabel: 'Pricing',
+    icon: DollarSign,
+    eyebrow: 'Easy for every teacher. Affordable for every school.',
+  },
+  {
+    id: 'comparison',
+    label: 'Platform Comparison',
+    shortLabel: 'Comparison',
+    icon: BarChart3,
+    eyebrow: "Built to save teachers' time, not to add more screens",
+  },
+  {
+    id: 'training',
+    label: 'Training & Onboarding',
+    shortLabel: 'Training',
+    icon: GraduationCap,
+    eyebrow: 'We train every teacher, so nobody is left behind',
+  },
+];
+
 export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({ 
   onBookDemo, 
   onGetQuote 
@@ -39,58 +90,6 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
   const [activeTab, setActiveTab] = useState<number>(0);
   const [modulesSlide, setModulesSlide] = useState<number>(0);
   const tabContainerRef = useRef<HTMLDivElement>(null);
-
-  const TABS = [
-    {
-      id: 'teacher-apps',
-      label: 'Daily Teacher Apps',
-      shortLabel: 'Teacher Apps',
-      icon: Smartphone,
-      eyebrow: 'Everything a teacher needs, without switching between apps',
-    },
-    {
-      id: 'modules-suite',
-      label: '24+ Modules Suite',
-      shortLabel: '24+ Modules',
-      icon: LayoutGrid,
-      eyebrow: 'Everything your school needs, without the complexity',
-    },
-    {
-      id: 'timetables',
-      label: 'Timetable Engine',
-      shortLabel: 'Timetables',
-      icon: Calendar,
-      eyebrow: 'Timetables without the weekend spent rebuilding them',
-    },
-    {
-      id: 'who-it-helps',
-      label: 'Role Impact',
-      shortLabel: 'Who It Helps',
-      icon: Users,
-      eyebrow: 'Less work for teachers. Better visibility for everyone else.',
-    },
-    {
-      id: 'pricing-value',
-      label: 'Affordable Pricing',
-      shortLabel: 'Pricing',
-      icon: DollarSign,
-      eyebrow: 'Easy for every teacher. Affordable for every school.',
-    },
-    {
-      id: 'comparison',
-      label: 'Platform Comparison',
-      shortLabel: 'Comparison',
-      icon: BarChart3,
-      eyebrow: "Built to save teachers' time, not to add more screens",
-    },
-    {
-      id: 'training',
-      label: 'Training & Onboarding',
-      shortLabel: 'Training',
-      icon: GraduationCap,
-      eyebrow: 'We train every teacher, so nobody is left behind',
-    },
-  ];
 
   const handleNextTab = () => {
     setActiveTab((prev) => (prev + 1) % TABS.length);
@@ -280,10 +279,10 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   return (
                     <div 
                       key={idx}
-                      className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.06)] hover:border-[#2eca8b]/50 hover:bg-white transition-all duration-200 shadow-2xs group"
+                      className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.06)] hover:border-[#2eca8b]/50 hover:bg-white transition-all duration-200 shadow-2xs group hover:-translate-y-0.5"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-white text-[#15803d] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-2xs">
-                        <ModIcon className="w-5 h-5 text-[#15803d]" />
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-emerald-100 text-[#15803d] border border-emerald-500/25 shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                        <ModIcon className="w-6 h-6 stroke-[2.2]" />
                       </div>
                       <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight">
                         {mod.title}
@@ -373,12 +372,12 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* 1. Teachers */}
-                <div className="bg-[#f0fdf4] rounded-2xl p-5 border border-[#2eca8b]/50 shadow-2xs flex flex-col justify-between">
+                <div className="group bg-[#f0fdf4] rounded-2xl p-5 border border-[#2eca8b]/50 shadow-2xs hover:shadow-md hover:border-[#15803d]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-white text-[#15803d] flex items-center justify-center mb-3 shadow-xs">
-                      <GraduationCap className="w-5 h-5 text-[#15803d]" />
+                    <div className="w-12 h-12 rounded-2xl bg-white text-[#15803d] border border-[#2eca8b]/30 shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                      <GraduationCap className="w-6 h-6 stroke-[2.2]" />
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight">
+                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Teachers
                     </h4>
                     <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
@@ -391,12 +390,12 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 </div>
 
                 {/* 2. Administrators */}
-                <div className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs flex flex-col justify-between">
+                <div className="group bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-white text-[#15803d] flex items-center justify-center mb-3 shadow-xs">
-                      <Building className="w-5 h-5 text-[#15803d]" />
+                    <div className="w-12 h-12 rounded-2xl bg-white text-[#15803d] border border-[rgba(11,31,20,0.08)] shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                      <Building className="w-6 h-6 stroke-[2.2]" />
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight">
+                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Administrators
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
@@ -409,12 +408,12 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 </div>
 
                 {/* 3. Parents */}
-                <div className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs flex flex-col justify-between">
+                <div className="group bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-white text-[#15803d] flex items-center justify-center mb-3 shadow-xs">
-                      <Users className="w-5 h-5 text-[#15803d]" />
+                    <div className="w-12 h-12 rounded-2xl bg-white text-[#15803d] border border-[rgba(11,31,20,0.08)] shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                      <Users className="w-6 h-6 stroke-[2.2]" />
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight">
+                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Parents
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
@@ -427,12 +426,12 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 </div>
 
                 {/* 4. Management */}
-                <div className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs flex flex-col justify-between">
+                <div className="group bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-white text-[#15803d] flex items-center justify-center mb-3 shadow-xs">
-                      <ShieldCheck className="w-5 h-5 text-[#15803d]" />
+                    <div className="w-12 h-12 rounded-2xl bg-white text-[#15803d] border border-[rgba(11,31,20,0.08)] shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                      <ShieldCheck className="w-6 h-6 stroke-[2.2]" />
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight">
+                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Management
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
@@ -463,12 +462,12 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Card 1 */}
-                <div className="bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] flex flex-col justify-between">
+                <div className="group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] flex flex-col justify-between hover:bg-white hover:border-[#2eca8b]/60 hover:shadow-md transition-all duration-300">
                   <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center border border-[#2eca8b]/30">
-                      <Smartphone className="w-5 h-5 text-[#15803d]" />
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-emerald-100 text-[#15803d] border border-emerald-500/25 shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                      <Smartphone className="w-6 h-6 stroke-[2.2]" />
                     </div>
-                    <h4 className="text-lg font-black text-[#0b1f14] tracking-tight">
+                    <h4 className="text-lg font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors">
                       Simple from day one
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
@@ -476,15 +475,15 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                     </p>
                     <ul className="space-y-2 pt-1 text-xs sm:text-sm text-[#0b1f14] font-semibold">
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] shrink-0" />
+                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
                         <span>Everything in one login</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] shrink-0" />
+                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
                         <span>Works on phone, tablet and computer</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] shrink-0" />
+                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
                         <span>Training and onboarding for every teacher</span>
                       </li>
                     </ul>
@@ -492,12 +491,12 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 </div>
 
                 {/* Card 2 */}
-                <div className="bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] flex flex-col justify-between">
+                <div className="group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] flex flex-col justify-between hover:bg-white hover:border-[#2eca8b]/60 hover:shadow-md transition-all duration-300">
                   <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center border border-[#2eca8b]/30">
-                      <DollarSign className="w-5 h-5 text-[#15803d]" />
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-emerald-100 text-[#15803d] border border-emerald-500/25 shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
+                      <DollarSign className="w-6 h-6 stroke-[2.2]" />
                     </div>
-                    <h4 className="text-lg font-black text-[#0b1f14] tracking-tight">
+                    <h4 className="text-lg font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors">
                       Priced for real school budgets
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
@@ -505,16 +504,16 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                     </p>
                     <ul className="space-y-2 pt-1 text-xs sm:text-sm text-[#0b1f14] font-semibold">
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] shrink-0" />
+                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
                         <span>One app instead of many subscriptions</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] shrink-0" />
-                        <span>Implementation and support included <span className="text-[#15803d] font-normal">[ADD: confirm this is included in the price]</span></span>
+                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
+                        <span>Implementation and personalized support included</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] shrink-0" />
-                        <span className="text-[#15803d] font-semibold">[ADD: price indicator, e.g. &apos;Plans from ₹X per student per year&apos;]</span>
+                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
+                        <span>Transparent pricing tailored to your school size</span>
                       </li>
                     </ul>
 
@@ -527,8 +526,8 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                         <span>Get a price quote</span>
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </button>
-                      <span className="text-[10px] text-[#6b7a72] italic">
-                        *[ADD: confirm statement]
+                      <span className="text-[10px] text-[#6b7a72]">
+                        No hidden setup fees
                       </span>
                     </div>
                   </div>

@@ -93,8 +93,9 @@ export const MacOsMockup: React.FC<MacOsMockupProps> = ({ className = '', onOpen
 
         {/* Centred title "EduMojo · Management Dashboard" in #6b7a72, 13px */}
         <div className="text-[13px] font-semibold text-[#6b7a72] flex items-center gap-2 font-mono">
-          <span className="w-2 h-2 rounded-full bg-[#16a34a] animate-pulse" />
-          <span>EduMojo · Management Dashboard</span>
+          <img src="/edumojo-transparent-logo.png" alt="EduMojo" className="h-4.5 w-auto object-contain" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#16a34a] animate-pulse" />
+          <span>Management Dashboard</span>
         </div>
 
         {/* Controls */}

@@ -145,9 +145,6 @@ export const AttendanceLeftColumn: React.FC<AttendanceLeftColumnProps> = ({ onSc
         >
           See it in a 15-minute demo <span className="arr">→</span>
         </a>
-        <p className="text-[11px] text-[#6b7a72] italic">
-          [ADD: change &quot;15-minute&quot; if your demo is a different length]
-        </p>
       </div>
     </div>
   );

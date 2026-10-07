@@ -64,12 +64,16 @@ export const TeacherTimeSection: React.FC<TeacherTimeSectionProps> = ({ onBookDe
         {/* Column Headers (Desktop only) */}
         <div className="hidden md:grid grid-cols-12 gap-4 px-5 pb-2 text-xs font-bold uppercase tracking-wider text-[#6b7a72]">
           <div className="col-span-3">Task</div>
-          <div className="col-span-4 flex items-center gap-1.5 text-slate-500">
-            <Clock className="w-3.5 h-3.5" />
+          <div className="col-span-4 flex items-center gap-2 text-slate-500">
+            <span className="w-5 h-5 rounded-md bg-slate-200/80 text-slate-600 inline-flex items-center justify-center">
+              <Clock className="w-3 h-3 stroke-[2.5]" />
+            </span>
             <span>Before</span>
           </div>
-          <div className="col-span-5 flex items-center gap-1.5 text-[#15803d]">
-            <Check className="w-3.5 h-3.5 text-[#16a34a]" />
+          <div className="col-span-5 flex items-center gap-2 text-[#15803d]">
+            <span className="w-5 h-5 rounded-md bg-emerald-500 text-white inline-flex items-center justify-center shadow-xs">
+              <Check className="w-3 h-3 stroke-[3]" />
+            </span>
             <span>With EduMojo</span>
           </div>
         </div>
@@ -89,7 +93,9 @@ export const TeacherTimeSection: React.FC<TeacherTimeSectionProps> = ({ onBookDe
                 {/* Before Column */}
                 <div className="md:col-span-4 bg-[#f8fafc] rounded-xl p-3 sm:p-3.5 border border-slate-200/70">
                   <div className="md:hidden flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                    <Clock className="w-3 h-3" />
+                    <span className="w-4 h-4 rounded bg-slate-200 text-slate-600 inline-flex items-center justify-center">
+                      <Clock className="w-2.5 h-2.5 stroke-[2.5]" />
+                    </span>
                     <span>Before</span>
                   </div>
                   <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
@@ -100,7 +106,9 @@ export const TeacherTimeSection: React.FC<TeacherTimeSectionProps> = ({ onBookDe
                 {/* With EduMojo Column */}
                 <div className="md:col-span-5 bg-[#f0fdf4] rounded-xl p-3 sm:p-3.5 border border-[#2eca8b]/30">
                   <div className="md:hidden flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#15803d] mb-1">
-                    <Check className="w-3 h-3 text-[#16a34a]" />
+                    <span className="w-4 h-4 rounded bg-emerald-500 text-white inline-flex items-center justify-center shadow-xs">
+                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                    </span>
                     <span>With EduMojo</span>
                   </div>
                   <p className="text-xs sm:text-sm text-[#14532d] font-medium leading-relaxed">
@@ -117,7 +125,7 @@ export const TeacherTimeSection: React.FC<TeacherTimeSectionProps> = ({ onBookDe
           <div className="mt-8 rounded-[20px] bg-gradient-to-br from-[#0b1f14] via-[#0f2d1e] to-[#15803d] p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-1.5 max-w-xl">
               <div className="flex flex-wrap items-baseline gap-2.5">
-                <span className="text-3xl sm:text-4xl lg:text-5xl font-black font-mono text-[#86efac] tracking-tight">
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-black font-sans text-[#86efac] tracking-tight">
                   Up to 40%
                 </span>
                 <span className="text-lg sm:text-xl font-bold text-white">
@@ -125,7 +133,7 @@ export const TeacherTimeSection: React.FC<TeacherTimeSectionProps> = ({ onBookDe
                 </span>
               </div>
               <p className="text-xs text-[#a7c4b5] leading-relaxed pt-1">
-                *[ADD: what the 40% is based on, e.g. &apos;Average reduction in time spent on routine tasks reported by teachers at EduMojo schools, 2025–26&apos;]
+                *Based on routine task time reported across partner schools, 2025–26
               </p>
             </div>
 

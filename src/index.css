@@ -592,7 +592,7 @@ html, body {
 .ann a:hover .arr { transform: translateX(3px); }
 @keyframes spin { to { --a: 360deg; } }
 @keyframes fadeup { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.hero h1 { font-size: clamp(2.5rem, 6.6vw, 5.2rem); font-weight: 900; letter-spacing: -.02em; line-height: 1.15; max-width: 1020px; margin: 0 auto; }
+.hero h1 { font-size: clamp(1.85rem, 4.2vw, 3.75rem); font-weight: 900; letter-spacing: -.025em; line-height: 1.16; max-width: 1200px; margin: 0 auto; }
 .hero h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0.04em 0.12em 0.14em 0.04em; }
 .hero h1 .w > span { display: inline-block; padding-right: 0.08em; animation: rise .8s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(.15s + var(--i) * 80ms); }
 .hero h1 .g { color: var(--green-d); }

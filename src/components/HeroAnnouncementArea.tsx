@@ -136,36 +136,40 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
         Simple school ERP · India &amp; Dubai
       </p>
 
-      {/* 2. Sliding Headline with Rotating Word */}
+      {/* 2. Sliding Headline with Rotating Word in 2 lines */}
       <h1 id="heroTitle">
-        <span className="w pr-1">
-          <span style={{ '--i': 0 } as React.CSSProperties}>Teachers</span>
-        </span>{' '}
-        <span className="w pr-1">
-          <span style={{ '--i': 1 } as React.CSSProperties}>spend</span>
-        </span>{' '}
-        <span className="w">
-          <span className="g" style={{ '--i': 2 } as React.CSSProperties}>up</span>
-        </span>{' '}
-        <span className="w">
-          <span className="g" style={{ '--i': 3 } as React.CSSProperties}>to</span>
-        </span>{' '}
-        <span className="w">
-          <span className="g" style={{ '--i': 4 } as React.CSSProperties}>40%</span>
-        </span>{' '}
-        <span className="w pr-1">
-          <span className="g" style={{ '--i': 5 } as React.CSSProperties}>less</span>
-        </span>{' '}
-        <span className="w">
-          <span className="g" style={{ '--i': 6 } as React.CSSProperties}>time</span>
-        </span>{' '}
-        <span className="w">
-          <span style={{ '--i': 7 } as React.CSSProperties}>on</span>
-        </span>{' '}
-        <span className="w !overflow-visible">
-          <span style={{ '--i': 8 } as React.CSSProperties} className="!overflow-visible">
-            <span className="rot whitespace-nowrap" id="rot" ref={rotRef}>
-              <span className="whitespace-nowrap">attendance</span>
+        <span className="block">
+          <span className="w pr-1">
+            <span style={{ '--i': 0 } as React.CSSProperties}>Teachers</span>
+          </span>{' '}
+          <span className="w pr-1">
+            <span style={{ '--i': 1 } as React.CSSProperties}>spend</span>
+          </span>{' '}
+          <span className="w">
+            <span className="g" style={{ '--i': 2 } as React.CSSProperties}>up</span>
+          </span>{' '}
+          <span className="w">
+            <span className="g" style={{ '--i': 3 } as React.CSSProperties}>to</span>
+          </span>{' '}
+          <span className="w">
+            <span className="g" style={{ '--i': 4 } as React.CSSProperties}>40%</span>
+          </span>{' '}
+          <span className="w pr-1">
+            <span className="g" style={{ '--i': 5 } as React.CSSProperties}>less</span>
+          </span>{' '}
+          <span className="w">
+            <span className="g" style={{ '--i': 6 } as React.CSSProperties}>time</span>
+          </span>
+        </span>
+        <span className="block mt-0.5 sm:mt-1">
+          <span className="w">
+            <span style={{ '--i': 7 } as React.CSSProperties}>on</span>
+          </span>{' '}
+          <span className="w !overflow-visible">
+            <span style={{ '--i': 8 } as React.CSSProperties} className="!overflow-visible">
+              <span className="rot whitespace-nowrap" id="rot" ref={rotRef}>
+                <span className="whitespace-nowrap">attendance</span>
+              </span>
             </span>
           </span>
         </span>
@@ -181,98 +185,52 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
         <button
           type="button"
           onClick={handleBookDemo}
-          className="w-full sm:w-auto bg-[#0b1f14] hover:bg-[#16a34a] text-white font-semibold text-[15px] px-[26px] py-[13px] rounded-[50px] transition-all duration-200 cursor-pointer shadow-lg hover:-translate-y-0.5"
+          className="w-full sm:w-auto bg-[#0b1f14] hover:bg-[#16a34a] text-white font-semibold text-[15px] px-[28px] py-[14px] rounded-[50px] transition-all duration-200 cursor-pointer shadow-lg hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 group"
         >
-          Book a demo →
+          <span>Book a demo</span>
+          <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
         </button>
-
-        <button
-          type="button"
-          onClick={handleScrollTeacherTime}
-          className="w-full sm:w-auto bg-white/70 hover:bg-white text-[#0b1f14] font-semibold text-[15px] px-[26px] py-[13px] rounded-[50px] border border-[rgba(11,31,20,0.15)] backdrop-blur-md transition-all duration-200 cursor-pointer"
-        >
-          See how teachers save time
-        </button>
-      </div>
-
-      {/* 5. Principal Photos + Trust Line */}
-      <div className="trust">
-        <div className="avs">
-          <span className="av" tabIndex={0} style={{ background: '#15803d' }}>
-            SR
-            <span className="tip">
-              Ms. Sangeeta Rautji<small>Dhruv Global School, Pune</small>
-            </span>
-          </span>
-          <span className="av" tabIndex={0} style={{ background: '#0e7490' }}>
-            VM
-            <span className="tip">
-              Ms. Vaidehi Moghe<small>Blue Ridge Public School</small>
-            </span>
-          </span>
-          <span className="av" tabIndex={0} style={{ background: '#b45309' }}>
-            MT
-            <span className="tip">
-              Mr. Mangesh Takpire<small>Arihant College, Pune</small>
-            </span>
-          </span>
-          <span className="av" tabIndex={0} style={{ background: '#7c3aed' }}>
-            PM
-            <span className="tip">
-              Ms. Pranati Mazumder<small>Dhruv Global School, Dubai</small>
-            </span>
-          </span>
-          <span className="av" tabIndex={0} style={{ background: '#be185d' }}>
-            AG
-            <span className="tip">
-              Dr. Arun Gaikwad<small>Sangamner College</small>
-            </span>
-          </span>
-        </div>
-        <div className="text-left text-xs sm:text-sm text-[#3f4b45] font-medium leading-tight">
-          Trusted by principals at <strong>15+ schools, colleges and institutes in India &amp; Dubai</strong>
-        </div>
       </div>
 
       {/* 6. Four Static Stats that count up once from 0 (1.4s, ease-out) */}
       <div className="w-full mx-auto mt-8 sm:mt-12">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
           {/* Card 1: 40% */}
-          <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5">
-            <div className="text-3xl sm:text-4xl font-black font-mono text-[#15803d] tracking-tight">
+          <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1">
+            <div className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200">
               {stats.teachersWork}%
             </div>
-            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-1.5 leading-snug">
-              Up to 40% less daily work for teachers
+            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
+              Teachers spend up to 40% less time on routine work
             </p>
           </div>
 
           {/* Card 2: 15+ */}
-          <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5">
-            <div className="text-3xl sm:text-4xl font-black font-mono text-[#15803d] tracking-tight">
+          <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1">
+            <div className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200">
               {stats.schools}+
             </div>
-            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-1.5 leading-snug">
+            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
               Schools, colleges &amp; institutes
             </p>
           </div>
 
           {/* Card 3: 20,000+ */}
-          <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5">
-            <div className="text-3xl sm:text-4xl font-black font-mono text-[#15803d] tracking-tight">
+          <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1">
+            <div className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200">
               {stats.impacted.toLocaleString('en-IN')}+
             </div>
-            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-1.5 leading-snug">
+            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
               Students &amp; teachers impacted
             </p>
           </div>
 
           {/* Card 4: 24+ */}
-          <div className="bg-gradient-to-b from-white to-[#f0fdf4]/80 rounded-2xl p-5 sm:p-6 border border-[#2eca8b] shadow-xs hover:border-[#16a34a] hover:shadow-[0_8px_24px_rgba(46,202,139,0.16)] transition-all duration-300 hover:-translate-y-0.5">
-            <div className="text-3xl sm:text-4xl font-black font-mono text-[#15803d] tracking-tight">
+          <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1">
+            <div className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200">
               {stats.modules}+
             </div>
-            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-1.5 leading-snug">
+            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
               Modules, one simple app
             </p>
           </div>
@@ -280,7 +238,7 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
 
         {/* Footnote under stats row */}
         <p className="text-center text-xs text-[#6b7a72] mt-3.5">
-          *[ADD: what the 40% is based on, e.g. &apos;Average reduction in time spent on routine tasks reported by teachers at EduMojo schools, 2025–26&apos;]
+          *Based on routine task time reported across partner schools, 2025–26
         </p>
       </div>
     </>

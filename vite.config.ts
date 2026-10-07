@@ -120,5 +120,12 @@ export default defineConfig({
     port: 3000,
     host: true,
   },
+  preview: {
+    port: 3000,
+    host: true,
+  },
+  optimizeDeps: {
+    include: ['lucide-react', 'react', 'react-dom'],
+  },
 });
 

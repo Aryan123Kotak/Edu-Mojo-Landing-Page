@@ -99,13 +99,6 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
     window.location.hash = 'form';
   };
 
-  const scrollToModules = () => {
-    const el = document.getElementById('modules');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   // Structured Data JSON-LD Schema
   const structuredData = {
     "@context": "https://schema.org",
@@ -286,7 +279,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
             </p>
 
             {/* Buttons */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3.5">
+            <div className="pt-2 flex items-center justify-center">
               <button
                 type="button"
                 onClick={handleBookDemo}
@@ -294,14 +287,6 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
               >
                 <span>Book a demo</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                type="button"
-                onClick={scrollToModules}
-                className="bg-white/90 hover:bg-white text-[#0b1f14] border border-[rgba(11,31,20,0.12)] font-semibold text-sm sm:text-base px-6 py-3 rounded-full transition-all duration-200 cursor-pointer shadow-sm hover:border-[#16a34a]/40 hover:-translate-y-0.5 inline-flex items-center"
-              >
-                <span>Jump to all modules</span>
               </button>
             </div>
 
@@ -365,9 +350,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* 1. Pre-Admission & CRM */}
-                <GlowCard id="pre-admission-crm" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="pre-admission-crm" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <UserPlus className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -394,9 +379,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 2. Admissions Management */}
-                <GlowCard id="admissions-management" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="admissions-management" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <FileCheck2 className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -423,9 +408,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 3. Student Profiles */}
-                <GlowCard id="student-profiles" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="student-profiles" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Users className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -452,9 +437,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 4. Academics & Class Management */}
-                <GlowCard id="academics-class-management" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="academics-class-management" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <GraduationCap className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -481,9 +466,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 5. Daily Academic Updates & E-Learning */}
-                <GlowCard id="daily-academic-updates-elearning" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="daily-academic-updates-elearning" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <BookOpenCheck className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -532,9 +517,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* 6. Communication System */}
-                <GlowCard id="communication-system" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="communication-system" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <MessageSquareQuote className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -561,9 +546,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 7. Parent / School App */}
-                <GlowCard id="parent-school-app" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="parent-school-app" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Smartphone className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -590,9 +575,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 8. Fee Management & Accounting */}
-                <GlowCard id="fee-management-accounting" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="fee-management-accounting" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Receipt className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -619,9 +604,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 9. Custom Payment Links */}
-                <GlowCard id="custom-payment-links" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="custom-payment-links" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <CreditCard className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -648,9 +633,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 10. Transportation */}
-                <GlowCard id="transportation" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="transportation" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Bus className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -677,9 +662,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 11. Library */}
-                <GlowCard id="library" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="library" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <BookMarked className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -728,9 +713,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* 12. Inventory & Requisition */}
-                <GlowCard id="inventory-requisition" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="inventory-requisition" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Boxes className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -757,9 +742,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 13. Health Records / Infirmary */}
-                <GlowCard id="health-records-infirmary" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="health-records-infirmary" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Stethoscope className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -786,9 +771,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 14. Timetable */}
-                <GlowCard id="timetable" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="timetable" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <CalendarClock className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -815,9 +800,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 15. Documents */}
-                <GlowCard id="documents" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="documents" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <FileArchive className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -844,9 +829,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 16. Academic Reports */}
-                <GlowCard id="academic-reports" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="academic-reports" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <BarChart3 className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -873,9 +858,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 17. Sports & Performing Arts (SPA) */}
-                <GlowCard id="sports-performing-arts" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="sports-performing-arts" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Trophy className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -902,9 +887,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 18. Administration & Setup */}
-                <GlowCard id="administration-setup" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="administration-setup" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Sliders className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -953,9 +938,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* 19. AI & Automation */}
-                <GlowCard id="ai-automation" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="ai-automation" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Sparkles className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -982,9 +967,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 20. Analytics & Dashboards */}
-                <GlowCard id="analytics-dashboards" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="analytics-dashboards" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <LayoutDashboard className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -1011,9 +996,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 21. Certificates & Exit Process */}
-                <GlowCard id="certificates-exit-process" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="certificates-exit-process" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Award className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -1040,9 +1025,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 22. Appointment Scheduling */}
-                <GlowCard id="appointment-scheduling" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="appointment-scheduling" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <CalendarCheck className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -1069,9 +1054,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 23. Alumni Management */}
-                <GlowCard id="alumni-management" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="alumni-management" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Network className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -1098,9 +1083,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                 </GlowCard>
 
                 {/* 24. Hostel Management */}
-                <GlowCard id="hostel-management" className="p-6 h-full flex flex-col justify-between">
+                <GlowCard id="hostel-management" className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                   <div>
-                    <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                       <Building2 className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -1391,9 +1376,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
             
             {/* Card 1: School supplies */}
             <ScrollReveal delayMs={0}>
-              <GlowCard className="p-6 h-full flex flex-col justify-between">
+              <GlowCard className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                 <div>
-                  <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                     <Package className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -1413,9 +1398,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
 
             {/* Card 2: Audio bots & CRM */}
             <ScrollReveal delayMs={100}>
-              <GlowCard className="p-6 h-full flex flex-col justify-between">
+              <GlowCard className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                 <div>
-                  <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                     <Bot className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">
@@ -1433,9 +1418,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
 
             {/* Card 3: Built for scale */}
             <ScrollReveal delayMs={200}>
-              <GlowCard className="p-6 h-full flex flex-col justify-between">
+              <GlowCard className="group p-6 h-full flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
                 <div>
-                  <div className="w-12 h-12 rounded-[14px] bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-4 shrink-0">
+                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-4 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
                     <Globe2 className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight">

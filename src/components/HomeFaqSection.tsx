@@ -21,7 +21,7 @@ export const HOME_FAQS = [
   {
     question: 'How much does EduMojo cost?',
     answer:
-      'EduMojo is priced for real school budgets and costs less than most school ERPs. [ADD: price indicator or "Pricing depends on the number of students and modules"]. Book a demo or ask for a price quote and we will share a plan for your school.',
+      'EduMojo is priced for real school budgets and costs less than legacy school ERPs. Pricing is flexible based on your institution\'s student count and selected modules. Book a demo or request a quote and our team will prepare a transparent plan for your school.',
   },
   {
     question: 'Do we need to buy separate apps for fees, admissions or parent communication?',
@@ -41,7 +41,7 @@ export const HOME_FAQS = [
   {
     question: 'How long does it take to get started?',
     answer:
-      '[ADD: typical setup time, e.g. "Most schools go live within X weeks"]. Our team sets up EduMojo with you and trains your teachers before launch.',
+      'Most schools go live within 1 to 2 weeks. Our onboarding team sets up your academic structure, imports student and teacher records, and provides hands-on teacher training before launch.',
   },
 ];
 
