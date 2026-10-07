@@ -7,7 +7,7 @@ import {
   Clock
 } from 'lucide-react';
 import { MacOsMockup } from '../components/MacOsMockup';
-import { AttendanceLeftColumn } from '../components/AttendanceLeftColumn';
+import { TeacherTasksRotator } from '../components/TeacherTasksRotator';
 import { TeacherTimeSection } from '../components/TeacherTimeSection';
 import { UnifiedPlatformSection } from '../components/UnifiedPlatformSection';
 import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
@@ -134,45 +134,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onRequestCallBac
       </section>
 
       {/* ==================================================
-          5. FEATURE HIGHLIGHT — SPLIT + REAL APP SCREENSHOT
+          5. TEACHER TASKS ROTATOR (Brochure Features 3-Slide Rotator)
           ================================================== */}
-      <section 
-        className="py-12 sm:py-16 border-b border-[rgba(11,31,20,0.06)] relative overflow-hidden"
-        style={{
-          background: 'radial-gradient(ellipse 50% 60% at 85% 50%, rgba(46, 202, 139, 0.16), transparent 65%), #ffffff',
-        }}
-      >
-        <div className="page-container grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-16 items-center">
-          {/* Left Column: Animated Attendance Text */}
-          <div className="lg:col-span-7">
-            <AttendanceLeftColumn onScheduleDemo={handleBookDemo} />
-          </div>
-
-          {/* Right Column: Real app screenshot inside dark phone frame */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div 
-              className="w-[290px] sm:w-[320px] lg:w-[350px] xl:w-[380px] aspect-[9/19] select-none"
-              style={{
-                borderRadius: '40px',
-                background: '#1a1a1a',
-                padding: '10px',
-                boxShadow: '0 30px 60px -20px rgba(11, 31, 20, 0.35)',
-              }}
-            >
-              <img 
-                src="/images/app/attendance-screen.png" 
-                alt="EduMojo Attendance & Parent Update App" 
-                className="w-full h-full block"
-                style={{
-                  borderRadius: '31px',
-                  objectFit: 'cover',
-                  objectPosition: 'top',
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <TeacherTasksRotator onScheduleDemo={handleBookDemo} />
 
       {/* ==================================================
           6. UNIFIED ALL-IN-ONE PLATFORM SECTION (Compacted Sections)

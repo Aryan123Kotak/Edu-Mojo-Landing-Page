@@ -5,12 +5,12 @@ export const OnePlatformTabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const tabs = [
-    'Attendance',
-    'Homework',
-    'Marks & report cards',
-    'Parent updates',
-    'Timetable',
-    'Admin & fees',
+    { label: 'Attendance', icon: 'ph-user-check' },
+    { label: 'Homework', icon: 'ph-notebook' },
+    { label: 'Marks & report cards', icon: 'ph-exam' },
+    { label: 'Parent updates', icon: 'ph-megaphone' },
+    { label: 'Timetable', icon: 'ph-calendar-check' },
+    { label: 'Admin & fees', icon: 'ph-wallet' },
   ];
 
   // Auto-play animation (cycles through tabs every 5 seconds unless hovered/interacted)
@@ -30,13 +30,16 @@ export const OnePlatformTabs: React.FC = () => {
             key={idx}
             type="button"
             onClick={() => setActiveTab(idx)}
-            className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
               activeTab === idx
                 ? 'bg-[#16a34a] text-white shadow-md shadow-[#16a34a]/25'
                 : 'bg-white hover:bg-slate-100 text-[#3f4b45] border border-slate-200'
             }`}
           >
-            {tab}
+            <span className={`ic sm ${activeTab === idx ? 'active' : ''}`} style={{ '--s': '26px', fontSize: '13px' } as React.CSSProperties}>
+              <i className={`ph-bold ${tab.icon}`} aria-hidden="true" />
+            </span>
+            <span>{tab.label}</span>
           </button>
         ))}
       </div>

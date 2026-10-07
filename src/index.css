@@ -46,6 +46,111 @@ html, body {
 }
 
 /* ==================================================
+   EDUMOJO BROCHURE ICON CIRCLE SYSTEM (.ic)
+   ================================================== */
+.ic {
+  --s: 56px;
+  width: var(--s);
+  height: var(--s);
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8f7ee;
+  color: #16a34a;
+  font-size: calc(var(--s) * 0.5);
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+
+.ic i {
+  line-height: 1;
+}
+
+.ic.sm {
+  --s: 36px;
+}
+
+.ic.lg {
+  --s: 72px;
+}
+
+/* hover / active: circle fills green, icon turns white */
+.card:hover .ic,
+.group:hover .ic,
+a:hover > .ic,
+button:hover > .ic,
+.is-active .ic,
+.ic.active {
+  background: #16a34a !important;
+  color: #ffffff !important;
+}
+
+.card:hover .ic,
+.group:hover .ic {
+  transform: translateY(-2px);
+}
+
+/* on dark or green bands (like brochure page 6): no fill, bright green icon, dotted ring */
+.ic.on-dark {
+  background: transparent !important;
+  color: #4ade80 !important;
+  outline: 2px dotted rgba(74, 222, 128, 0.7);
+  outline-offset: 4px;
+}
+
+/* warnings only */
+.ic.warn {
+  background: #fff1e6 !important;
+  color: #ea580c !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ic {
+    transition: none;
+  }
+}
+
+/* ==================================================
+   SECTION TAB BAR (.sec-tabs)
+   ================================================== */
+.sec-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sec-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #3f4b45;
+  background: #ffffff;
+  border: 1px solid rgba(11, 31, 20, 0.09);
+  border-radius: 99px;
+  padding: 4px 16px 4px 4px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.sec-tab:hover {
+  border-color: rgba(22, 163, 74, 0.4);
+  color: #0b1f14;
+}
+
+.sec-tab.is-active {
+  color: #0b1f14;
+  border-color: rgba(22, 163, 74, 0.5);
+}
+
+.sec-tab:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: 3px;
+}
+
+/* ==================================================
    1. THE LAVA GRADIENT (EXACT SPECIFICATION)
    ================================================== */
 .lava {
@@ -579,6 +684,361 @@ html, body {
 .att.noanim *, .att.noanim *::before, .att.noanim *::after { transition: none !important; animation: none !important; }
 @media (prefers-reduced-motion: reduce) {
   .att *, .att *::before, .att *::after { transition: none !important; animation: none !important; }
+}
+
+/* ===== Teacher Tasks 3-Slide Rotator (.ts) ===== */
+.ts {
+  padding: 80px 24px;
+  border-bottom: 1px solid rgba(11,31,20,0.06);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse 50% 60% at 85% 50%, rgba(46, 202, 139, 0.16), transparent 65%), #ffffff;
+}
+
+.ts-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .ts-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+  }
+}
+
+.ts-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.ts-tab {
+  position: relative;
+  overflow: hidden;
+  background: #f4f6f4;
+  border: 1px solid rgba(11,31,20,0.08);
+  border-radius: 99px;
+  padding: 10px 20px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #3f4b45;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all .25s ease;
+  user-select: none;
+}
+
+.ts-tab b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(11,31,20,0.08);
+  color: #0b1f14;
+  font-size: 12px;
+  font-weight: 800;
+  transition: all .25s ease;
+}
+
+.ts-tab:hover {
+  background: #ffffff;
+  color: #0b1f14;
+}
+
+.ts-tab[aria-selected="true"] {
+  background: #ffffff;
+  color: #0b1f14;
+  border-color: rgba(22,163,74,0.4);
+  box-shadow: 0 4px 16px -2px rgba(11,31,20,0.08);
+}
+
+.ts-tab[aria-selected="true"] b {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.ts-tab:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: 3px;
+}
+
+.ts-tab .bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: #16a34a;
+  border-radius: 2px;
+}
+
+.ts-tab .bar.running {
+  animation: tsBarFill 5s linear forwards;
+}
+
+@keyframes tsBarFill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.ts-texts {
+  position: relative;
+  min-height: 480px;
+}
+
+.ts-text {
+  display: none;
+}
+
+.ts-text.in {
+  display: block;
+}
+
+.ts-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #16a34a;
+  margin-bottom: 14px;
+}
+
+.ts-kicker::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
+}
+
+.ts-h {
+  font-size: clamp(2rem, 3.8vw, 2.9rem);
+  font-weight: 900;
+  letter-spacing: -.038em;
+  line-height: 1.15;
+  color: #0b1f14;
+  margin: 0 0 16px;
+}
+
+.ts-hl {
+  display: inline;
+  color: #0b1f14;
+  background-image: linear-gradient(#16a34a, #16a34a);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
+  border-radius: 8px;
+  padding: 0 .22em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size .65s cubic-bezier(.7,0,.2,1) .25s, color .25s ease .55s;
+}
+
+.ts-text.in .ts-hl {
+  background-size: 100% 100%;
+  color: #ffffff;
+}
+
+.ts-rule {
+  width: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: #f17425;
+  margin: 18px 0;
+  transition: width .55s cubic-bezier(.2,.8,.2,1) .45s;
+}
+
+.ts-text.in .ts-rule {
+  width: 58px;
+}
+
+.ts-p {
+  color: #3f4b45;
+  font-size: 1.05rem;
+  line-height: 1.68;
+  max-width: 540px;
+  margin: 0 0 24px;
+}
+
+.ts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: grid;
+  gap: 16px;
+}
+
+.ts-list li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.ts-ck {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(46,202,139,.18);
+  display: grid;
+  place-items: center;
+  margin-top: 2px;
+}
+
+.ts-ck svg path {
+  fill: none;
+  stroke: #15803d;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ts-list h3 {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #0b1f14;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.ts-list p {
+  font-size: 13.5px;
+  color: #4b5563;
+  margin: 3px 0 0;
+  line-height: 1.48;
+}
+
+.ts-cta {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #16a34a;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 13px 26px;
+  border-radius: 99px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px -4px rgba(22,163,74,0.35);
+  transition: all .25s ease;
+}
+
+.ts-cta:hover {
+  background: #15803d;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -4px rgba(22,163,74,0.45);
+  color: #ffffff;
+}
+
+.ts-cta span {
+  transition: transform .25s ease;
+}
+
+.ts-cta:hover span {
+  transform: translateX(4px);
+}
+
+.ts-phone-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ts-phone {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 9/19;
+  background: #121815;
+  border-radius: 46px;
+  padding: 10px;
+  box-shadow: 0 32px 64px -16px rgba(11, 31, 20, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  user-select: none;
+}
+
+.ts-phone-notch {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.ts-screens {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #f4f7f5;
+}
+
+.ts-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+  border-radius: 36px;
+}
+
+.ts-screen.in {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Staggered text animations for .ts-anim */
+.ts-text.in .ts-anim {
+  animation: tsFadeUp .5s ease both;
+}
+
+.ts-text.in .ts-kicker.ts-anim { animation-delay: .05s; }
+.ts-text.in .ts-h.ts-anim { animation-delay: .15s; }
+.ts-text.in div.ts-anim { animation-delay: .25s; }
+.ts-text.in .ts-list.ts-anim { animation-delay: .35s; }
+.ts-text.in .ts-cta.ts-anim { animation-delay: .45s; }
+
+@keyframes tsFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ts-text.in .ts-anim { animation: none !important; }
+  .ts-hl { transition: none !important; background-size: 100% 100% !important; color: #fff !important; }
+  .ts-rule { transition: none !important; width: 58px !important; }
+  .ts-tab .bar.running { animation: none !important; width: 100% !important; }
 }
 
 /* ===== Hero Announcement & Rotating Title Animation ===== */

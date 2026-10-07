@@ -1,26 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { 
-  LayoutGrid, 
-  Calendar, 
-  Users, 
-  DollarSign, 
-  BarChart3, 
-  GraduationCap, 
-  ChevronLeft, 
-  ChevronRight, 
-  ArrowRight, 
-  Smartphone, 
-  BookOpen, 
-  Award, 
-  CalendarClock, 
-  Wallet, 
-  Sparkles, 
-  Building, 
-  ShieldCheck, 
-  HeartHandshake, 
-  Check, 
-  UserCheck 
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import { ScrollReveal } from './ScrollReveal';
 import { OnePlatformTabs } from './OnePlatformTabs';
 import { SelfBuildingTimetable } from './SelfBuildingTimetable';
@@ -34,62 +12,68 @@ interface UnifiedPlatformSectionProps {
 const TABS = [
   {
     id: 'teacher-apps',
-    label: 'Daily Teacher Apps',
-    shortLabel: 'Teacher Apps',
-    icon: Smartphone,
+    href: '#teacher-apps',
+    label: 'Teacher apps',
+    icon: 'ph-chalkboard-teacher',
     eyebrow: 'Everything a teacher needs, without switching between apps',
   },
   {
-    id: 'modules-suite',
-    label: '24+ Modules Suite',
-    shortLabel: '24+ Modules',
-    icon: LayoutGrid,
+    id: 'modules',
+    href: '#modules',
+    label: '24 modules',
+    icon: 'ph-squares-four',
     eyebrow: 'Everything your school needs, without the complexity',
   },
   {
-    id: 'timetables',
-    label: 'Timetable Engine',
-    shortLabel: 'Timetables',
-    icon: Calendar,
+    id: 'timetable',
+    href: '#timetable',
+    label: 'Timetable',
+    icon: 'ph-calendar-check',
     eyebrow: 'Timetables without the weekend spent rebuilding them',
   },
   {
-    id: 'who-it-helps',
-    label: 'Role Impact',
-    shortLabel: 'Who It Helps',
-    icon: Users,
+    id: 'who',
+    href: '#who',
+    label: 'Who it helps',
+    icon: 'ph-users-three',
     eyebrow: 'Less work for teachers. Better visibility for everyone else.',
   },
   {
-    id: 'pricing-value',
-    label: 'Affordable Pricing',
-    shortLabel: 'Pricing',
-    icon: DollarSign,
+    id: 'simple-affordable',
+    href: '#simple-affordable',
+    label: 'Pricing',
+    icon: 'ph-currency-inr',
     eyebrow: 'Easy for every teacher. Affordable for every school.',
   },
   {
-    id: 'comparison',
-    label: 'Platform Comparison',
-    shortLabel: 'Comparison',
-    icon: BarChart3,
+    id: 'compare',
+    href: '#compare',
+    label: 'Compare',
+    icon: 'ph-scales',
     eyebrow: "Built to save teachers' time, not to add more screens",
   },
   {
-    id: 'training',
-    label: 'Training & Onboarding',
-    shortLabel: 'Training',
-    icon: GraduationCap,
+    id: 'support',
+    href: '#support',
+    label: 'Training & support',
+    icon: 'ph-headset',
     eyebrow: 'We train every teacher, so nobody is left behind',
   },
 ];
 
 export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({ 
-  onBookDemo, 
   onGetQuote 
 }) => {
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [modulesSlide, setModulesSlide] = useState<number>(0);
-  const tabContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleTabClick = (e: React.MouseEvent, idx: number, targetId: string) => {
+    e.preventDefault();
+    setActiveTab(idx);
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  };
 
   const handleNextTab = () => {
     setActiveTab((prev) => (prev + 1) % TABS.length);
@@ -99,15 +83,19 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
     setActiveTab((prev) => (prev - 1 + TABS.length) % TABS.length);
   };
 
-  // Scroll active tab button into view on mobile
+  // Sync hash changes if user navigated by hash
   useEffect(() => {
-    if (tabContainerRef.current) {
-      const activeBtn = tabContainerRef.current.children[activeTab] as HTMLElement;
-      if (activeBtn) {
-        activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      const foundIdx = TABS.findIndex((t) => t.id === hash);
+      if (foundIdx !== -1) {
+        setActiveTab(foundIdx);
       }
-    }
-  }, [activeTab]);
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   return (
     <section 
@@ -121,7 +109,9 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[rgba(11,31,20,0.06)] pb-5">
             <div className="space-y-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f0fdf4] border border-[#2eca8b]/30 text-xs font-black text-[#15803d] uppercase tracking-[0.16em]">
-                <Sparkles className="w-3.5 h-3.5" />
+                <span className="ic sm" style={{ '--s': '24px', fontSize: '13px' } as React.CSSProperties}>
+                  <i className="ph-bold ph-sparkle" aria-hidden="true" />
+                </span>
                 <span>All-In-One School Operating System</span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight">
@@ -132,10 +122,10 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
               </p>
             </div>
 
-            {/* Horizontal Slider Controls */}
+            {/* Step Controls */}
             <div className="flex items-center gap-3 shrink-0 self-start md:self-auto">
               <span className="text-xs font-mono font-bold text-[#6b7a72] bg-white px-3 py-1.5 rounded-full border border-[rgba(11,31,20,0.08)] shadow-2xs">
-                {activeTab + 1} / {TABS.length} · {TABS[activeTab].shortLabel}
+                {activeTab + 1} / {TABS.length} · {TABS[activeTab].label}
               </span>
               <div className="flex items-center gap-1.5">
                 <button
@@ -144,7 +134,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   className="w-9 h-9 rounded-full bg-white hover:bg-[#f0fdf4] text-[#0b1f14] hover:text-[#16a34a] border border-[rgba(11,31,20,0.09)] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer"
                   aria-label="Previous tab"
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <i className="ph-bold ph-caret-left text-sm" aria-hidden="true" />
                 </button>
                 <button
                   type="button"
@@ -152,49 +142,43 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   className="w-9 h-9 rounded-full bg-white hover:bg-[#f0fdf4] text-[#0b1f14] hover:text-[#16a34a] border border-[rgba(11,31,20,0.09)] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer"
                   aria-label="Next tab"
                 >
-                  <ChevronRight className="w-4 h-4" />
+                  <i className="ph-bold ph-caret-right text-sm" aria-hidden="true" />
                 </button>
               </div>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* Sleek Horizontal Tab Navigation Strip */}
-        <div className="relative">
-          <div 
-            ref={tabContainerRef}
-            className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 scroll-smooth"
-          >
-            {TABS.map((tab, idx) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === idx;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setActiveTab(idx)}
-                  className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold whitespace-nowrap transition-all duration-200 cursor-pointer shrink-0 border ${
-                    isActive
-                      ? 'bg-[#15803d] text-white border-[#15803d] shadow-sm shadow-[#15803d]/20 scale-[1.02]'
-                      : 'bg-white text-[#3f4b45] hover:text-[#0b1f14] hover:bg-slate-50 border-[rgba(11,31,20,0.08)]'
-                  }`}
-                >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#16a34a]'}`} />
-                  <span>{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* ==================================================
+            3. THE SECTION TAB BAR (Phosphor .sec-tabs)
+            ================================================== */}
+        <nav className="sec-tabs" aria-label="On this page">
+          {TABS.map((tab, idx) => {
+            const isActive = activeTab === idx;
+            return (
+              <a
+                key={tab.id}
+                href={tab.href}
+                onClick={(e) => handleTabClick(e, idx, tab.id)}
+                className={`sec-tab ${isActive ? 'is-active' : ''}`}
+              >
+                <span className={`ic sm ${isActive ? 'active' : ''}`}>
+                  <i className={`ph-bold ${tab.icon}`} aria-hidden="true" />
+                </span>
+                <span>{tab.label}</span>
+              </a>
+            );
+          })}
+        </nav>
 
-        {/* Main Sleek Workspace Card (Single Height-Controlled Window) */}
+        {/* Main Sleek Workspace Card */}
         <div className="bg-white rounded-3xl sm:rounded-[32px] border border-[rgba(11,31,20,0.08)] shadow-[0_20px_50px_-15px_rgba(11,31,20,0.07)] p-4 sm:p-7 lg:p-8 transition-all duration-300">
           
           {/* ==================================================
-              TAB 0: DAILY TEACHER APPS (OnePlatformTabs)
+              TAB 0: TEACHER APPS
               ================================================== */}
           {activeTab === 0 && (
-            <div className="animate-in fade-in duration-300 space-y-4">
+            <div id="teacher-apps" className="animate-in fade-in duration-300 space-y-4">
               <div className="text-center sm:text-left mb-2">
                 <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
                   Interactive Daily Workflows
@@ -208,10 +192,10 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 1: 24+ MODULES SUITE (Horizontal Slider Deck)
+              TAB 1: 24+ MODULES SUITE
               ================================================== */}
           {activeTab === 1 && (
-            <div className="animate-in fade-in duration-300 space-y-6">
+            <div id="modules" className="animate-in fade-in duration-300 space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[rgba(11,31,20,0.06)] pb-4">
                 <div>
                   <h3 className="text-lg sm:text-xl font-black text-[#0b1f14]">
@@ -221,83 +205,67 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                     Start with what your teachers need most. Admissions, fees, transport, library and hostel are there when you are ready.
                   </p>
                 </div>
-                <div className="flex items-center gap-1.5 self-end sm:self-auto">
-                  <button
-                    type="button"
-                    onClick={() => setModulesSlide((prev) => Math.max(0, prev - 1))}
-                    disabled={modulesSlide === 0}
-                    className="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setModulesSlide((prev) => Math.min(1, prev + 1))}
-                    disabled={modulesSlide === 1}
-                    className="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
               </div>
 
-              {/* Horizontal sliding cards */}
+              {/* Module cards (.ic 56px at top-left) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
                   {
-                    icon: UserCheck,
+                    icon: 'ph-user-check',
                     title: 'Attendance & Parent Alerts',
                     desc: 'One-tap attendance with automatic alerts to parents.',
                   },
                   {
-                    icon: BookOpen,
+                    icon: 'ph-notebook',
                     title: 'Homework & E-Learning',
                     desc: 'Assignments, homework and learning materials, shared once for the whole class.',
                   },
                   {
-                    icon: Award,
+                    icon: 'ph-exam',
                     title: 'Marks & Report Cards',
                     desc: 'Enter marks once and generate report cards for every student.',
                   },
                   {
-                    icon: CalendarClock,
+                    icon: 'ph-calendar-check',
                     title: 'Timetable & Substitutions',
                     desc: 'Class timetables and teacher allocation, updated for everyone at once.',
                   },
                   {
-                    icon: Wallet,
+                    icon: 'ph-wallet',
                     title: 'Fees & Payment Links',
                     desc: 'Receipts, reminders and payment links, so fee follow-ups never land on teachers.',
                   },
                   {
-                    icon: Sparkles,
+                    icon: 'ph-sparkle',
                     title: 'Smart Assistant',
                     desc: 'Ask for an attendance summary or report and get it in one click.',
                   },
-                ].map((mod, idx) => {
-                  const ModIcon = mod.icon;
-                  return (
-                    <div 
-                      key={idx}
-                      className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.06)] hover:border-[#2eca8b]/50 hover:bg-white transition-all duration-200 shadow-2xs group hover:-translate-y-0.5"
-                    >
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-emerald-100 text-[#15803d] border border-emerald-500/25 shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                        <ModIcon className="w-6 h-6 stroke-[2.2]" />
-                      </div>
-                      <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight">
-                        {mod.title}
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
-                        {mod.desc}
-                      </p>
+                ].map((mod, idx) => (
+                  <div 
+                    key={idx}
+                    className="card bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.06)] hover:border-[#2eca8b]/50 hover:bg-white transition-all duration-200 shadow-2xs group hover:-translate-y-0.5"
+                  >
+                    <div className="mb-3.5">
+                      <span className="ic">
+                        <i className={`ph-bold ${mod.icon}`} aria-hidden="true" />
+                      </span>
                     </div>
-                  );
-                })}
+                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight">
+                      {mod.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
+                      {mod.desc}
+                    </p>
+                  </div>
+                ))}
               </div>
 
               {/* Included Tag Pill Cloud */}
               <div className="p-4 rounded-2xl bg-[#f0fdf4]/70 border border-[#2eca8b]/20 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
-                <span className="font-extrabold text-[#15803d] uppercase tracking-wider shrink-0">
+                <span className="font-extrabold text-[#15803d] uppercase tracking-wider shrink-0 flex items-center gap-1.5">
+                  <span className="ic sm" style={{ '--s': '24px', fontSize: '13px' } as React.CSSProperties}>
+                    <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                  </span>
                   Also Included:
                 </span>
                 <p className="text-[#3f4b45] leading-relaxed">
@@ -308,10 +276,10 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 2: TIMETABLES (SelfBuildingTimetable)
+              TAB 2: TIMETABLE
               ================================================== */}
           {activeTab === 2 && (
-            <div className="animate-in fade-in duration-300">
+            <div id="timetable" className="animate-in fade-in duration-300">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 {/* Left Column: Copy */}
                 <div className="lg:col-span-5 space-y-4">
@@ -328,20 +296,20 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   </p>
                   <ul className="space-y-2.5 pt-1 text-xs sm:text-sm text-[#0b1f14] font-semibold">
                     <li className="flex items-center gap-2.5">
-                      <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
-                        <Check className="w-3.5 h-3.5 stroke-[3]" />
+                      <span className="ic sm" style={{ '--s': '26px', fontSize: '13px' } as React.CSSProperties}>
+                        <i className="ph-bold ph-calendar-check" aria-hidden="true" />
                       </span>
                       <span>Class and section timetables</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
-                        <Check className="w-3.5 h-3.5 stroke-[3]" />
+                      <span className="ic sm" style={{ '--s': '26px', fontSize: '13px' } as React.CSSProperties}>
+                        <i className="ph-bold ph-chalkboard-teacher" aria-hidden="true" />
                       </span>
                       <span>Teacher allocation with clash checks</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
-                        <Check className="w-3.5 h-3.5 stroke-[3]" />
+                      <span className="ic sm" style={{ '--s': '26px', fontSize: '13px' } as React.CSSProperties}>
+                        <i className="ph-bold ph-device-mobile" aria-hidden="true" />
                       </span>
                       <span>Updates visible on the teacher and parent app</span>
                     </li>
@@ -357,88 +325,97 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 3: ROLE IMPACT (Who It Helps)
+              TAB 3: WHO IT HELPS (.ic.lg 72px centred above title)
               ================================================== */}
           {activeTab === 3 && (
-            <div className="animate-in fade-in duration-300 space-y-6">
+            <div id="who" className="animate-in fade-in duration-300 space-y-6">
               <div className="space-y-1 text-center sm:text-left">
                 <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
-                  Stakeholder Value
+                  Stakeholder Impact
                 </span>
                 <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight">
                   Less work for teachers. Better visibility for everyone else.
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* 4 Cards with .ic.lg centered above title as in brochure */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 {/* 1. Teachers */}
-                <div className="group bg-[#f0fdf4] rounded-2xl p-5 border border-[#2eca8b]/50 shadow-2xs hover:shadow-md hover:border-[#15803d]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                <div className="card group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white text-[#15803d] border border-[#2eca8b]/30 shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                      <GraduationCap className="w-6 h-6 stroke-[2.2]" />
+                    <div className="mb-4">
+                      <span className="ic lg">
+                        <i className="ph-bold ph-chalkboard-teacher" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight group-hover:text-[#15803d] transition-colors">
+                    <h4 className="text-lg font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Teachers
                     </h4>
                     <p className="text-xs sm:text-sm text-[#3f4b45] leading-relaxed">
                       Up to 40% less routine work, so more time goes into teaching.
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-[#2eca8b]/20 text-[11px] font-bold text-[#15803d]">
+                  <div className="mt-4 pt-3 border-t border-[#2eca8b]/20 text-[11px] font-bold text-[#15803d] w-full">
                     Primary benefactors
                   </div>
                 </div>
 
                 {/* 2. Administrators */}
-                <div className="group bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                <div className="card group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white text-[#15803d] border border-[rgba(11,31,20,0.08)] shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                      <Building className="w-6 h-6 stroke-[2.2]" />
+                    <div className="mb-4">
+                      <span className="ic lg">
+                        <i className="ph-bold ph-squares-four" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight group-hover:text-[#15803d] transition-colors">
+                    <h4 className="text-lg font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Administrators
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
                       Admissions, fees and records handled in the same simple app.
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-[rgba(11,31,20,0.06)] text-[11px] font-bold text-[#6b7a72]">
+                  <div className="mt-4 pt-3 border-t border-[rgba(11,31,20,0.06)] text-[11px] font-bold text-[#6b7a72] w-full">
                     Operations unified
                   </div>
                 </div>
 
                 {/* 3. Parents */}
-                <div className="group bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                <div className="card group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white text-[#15803d] border border-[rgba(11,31,20,0.08)] shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                      <Users className="w-6 h-6 stroke-[2.2]" />
+                    <div className="mb-4">
+                      <span className="ic lg">
+                        <i className="ph-bold ph-users-three" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight group-hover:text-[#15803d] transition-colors">
+                    <h4 className="text-lg font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Parents
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
                       Attendance, homework, fees and notices on their phone, without calling the school.
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-[rgba(11,31,20,0.06)] text-[11px] font-bold text-[#6b7a72]">
+                  <div className="mt-4 pt-3 border-t border-[rgba(11,31,20,0.06)] text-[11px] font-bold text-[#6b7a72] w-full">
                     Real-time transparency
                   </div>
                 </div>
 
                 {/* 4. Management */}
-                <div className="group bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                <div className="card group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white text-[#15803d] border border-[rgba(11,31,20,0.08)] shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                      <ShieldCheck className="w-6 h-6 stroke-[2.2]" />
+                    <div className="mb-4">
+                      <span className="ic lg">
+                        <i className="ph-bold ph-presentation-chart" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight group-hover:text-[#15803d] transition-colors">
+                    <h4 className="text-lg font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Management
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
                       Clear reports on attendance, results and fees, without asking anyone to compile them.
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-[rgba(11,31,20,0.06)] text-[11px] font-bold text-[#6b7a72]">
+                  <div className="mt-4 pt-3 border-t border-[rgba(11,31,20,0.06)] text-[11px] font-bold text-[#6b7a72] w-full">
                     Instant oversight
                   </div>
                 </div>
@@ -447,10 +424,10 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 4: PRICING & VALUE (Simple & Affordable)
+              TAB 4: PRICING (.ic.lg 72px centered, NEVER dollar sign)
               ================================================== */}
           {activeTab === 4 && (
-            <div className="animate-in fade-in duration-300 space-y-6">
+            <div id="simple-affordable" className="animate-in fade-in duration-300 space-y-6">
               <div className="space-y-1 text-center sm:text-left">
                 <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
                   Honest Value
@@ -462,28 +439,36 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Card 1 */}
-                <div className="group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] flex flex-col justify-between hover:bg-white hover:border-[#2eca8b]/60 hover:shadow-md transition-all duration-300">
-                  <div className="space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-emerald-100 text-[#15803d] border border-emerald-500/25 shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                      <Smartphone className="w-6 h-6 stroke-[2.2]" />
+                <div className="card group bg-[#f7faf8] rounded-2xl p-7 border border-[rgba(11,31,20,0.08)] flex flex-col items-center text-center justify-between hover:bg-white hover:border-[#2eca8b]/60 hover:shadow-md transition-all duration-300">
+                  <div className="space-y-3 flex flex-col items-center">
+                    <div className="mb-2">
+                      <span className="ic lg">
+                        <i className="ph-bold ph-device-mobile" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-lg font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors">
+                    <h4 className="text-xl font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors">
                       Simple from day one
                     </h4>
-                    <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed max-w-sm">
                       Clean screens, simple steps and a mobile app teachers already know how to use. If your staff can use WhatsApp, they can use EduMojo.
                     </p>
-                    <ul className="space-y-2 pt-1 text-xs sm:text-sm text-[#0b1f14] font-semibold">
+                    <ul className="space-y-2 pt-2 text-xs sm:text-sm text-[#0b1f14] font-semibold text-left w-full">
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
+                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
+                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        </span>
                         <span>Everything in one login</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
+                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
+                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        </span>
                         <span>Works on phone, tablet and computer</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
+                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
+                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        </span>
                         <span>Training and onboarding for every teacher</span>
                       </li>
                     </ul>
@@ -491,42 +476,50 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 </div>
 
                 {/* Card 2 */}
-                <div className="group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] flex flex-col justify-between hover:bg-white hover:border-[#2eca8b]/60 hover:shadow-md transition-all duration-300">
-                  <div className="space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-emerald-100 text-[#15803d] border border-emerald-500/25 shadow-xs flex items-center justify-center mb-3.5 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                      <DollarSign className="w-6 h-6 stroke-[2.2]" />
+                <div className="card group bg-[#f7faf8] rounded-2xl p-7 border border-[rgba(11,31,20,0.08)] flex flex-col items-center text-center justify-between hover:bg-white hover:border-[#2eca8b]/60 hover:shadow-md transition-all duration-300">
+                  <div className="space-y-3 flex flex-col items-center w-full">
+                    <div className="mb-2">
+                      <span className="ic lg">
+                        <i className="ph-bold ph-currency-inr" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-lg font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors">
+                    <h4 className="text-xl font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors">
                       Priced for real school budgets
                     </h4>
-                    <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed max-w-sm">
                       EduMojo costs less than most school ERPs, and you don&apos;t pay for separate apps for admissions, fees, attendance and parent communication.
                     </p>
-                    <ul className="space-y-2 pt-1 text-xs sm:text-sm text-[#0b1f14] font-semibold">
+                    <ul className="space-y-2 pt-2 text-xs sm:text-sm text-[#0b1f14] font-semibold text-left w-full">
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
+                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
+                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        </span>
                         <span>One app instead of many subscriptions</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
+                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
+                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        </span>
                         <span>Implementation and personalized support included</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#16a34a] stroke-[2.5] shrink-0" />
+                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
+                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        </span>
                         <span>Transparent pricing tailored to your school size</span>
                       </li>
                     </ul>
 
-                    <div className="pt-3 border-t border-[rgba(11,31,20,0.06)] flex items-center justify-between">
+                    <div className="pt-4 border-t border-[rgba(11,31,20,0.06)] flex items-center justify-between w-full">
                       <button
                         type="button"
                         onClick={onGetQuote}
                         className="inline-flex items-center gap-2 text-sm font-black text-[#15803d] hover:text-[#166534] transition-colors cursor-pointer group"
                       >
                         <span>Get a price quote</span>
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        <i className="ph-bold ph-arrow-right text-xs" aria-hidden="true" />
                       </button>
-                      <span className="text-[10px] text-[#6b7a72]">
+                      <span className="text-[11px] text-[#6b7a72]">
                         No hidden setup fees
                       </span>
                     </div>
@@ -537,10 +530,10 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 5: PLATFORM COMPARISON (ComparisonTable)
+              TAB 5: COMPARE
               ================================================== */}
           {activeTab === 5 && (
-            <div className="animate-in fade-in duration-300 space-y-4">
+            <div id="compare" className="animate-in fade-in duration-300 space-y-4">
               <div className="space-y-1 text-center sm:text-left">
                 <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
                   Side-By-Side Evaluation
@@ -556,10 +549,10 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 6: TRAINING & ONBOARDING (Support Cards)
+              TAB 6: TRAINING & SUPPORT (.ic 56px)
               ================================================== */}
           {activeTab === 6 && (
-            <div className="animate-in fade-in duration-300 space-y-6">
+            <div id="support" className="animate-in fade-in duration-300 space-y-6">
               <div className="space-y-1 text-center sm:text-left">
                 <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
                   Zero Abandonment Guarantee
@@ -571,27 +564,31 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
                 {/* Pillar 1 */}
-                <div className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs flex flex-col justify-between">
+                <div className="card group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:bg-white transition-all flex flex-col justify-between">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-3">
-                      <Check className="w-5 h-5 text-[#15803d]" />
+                    <div className="mb-4">
+                      <span className="ic">
+                        <i className="ph-bold ph-flag" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight">
+                    <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Setup done with you
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
-                      We set up your classes, students and teachers with your team before go-live. <span className="text-[#15803d] font-semibold text-xs block mt-1">[ADD: confirm]</span>
+                      We set up your classes, students and teachers with your team before go-live.
                     </p>
                   </div>
                 </div>
 
                 {/* Pillar 2 */}
-                <div className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs flex flex-col justify-between">
+                <div className="card group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:bg-white transition-all flex flex-col justify-between">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-3">
-                      <BookOpen className="w-5 h-5 text-[#15803d]" />
+                    <div className="mb-4">
+                      <span className="ic">
+                        <i className="ph-bold ph-presentation" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight">
+                    <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Training for every teacher
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
@@ -601,12 +598,14 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 </div>
 
                 {/* Pillar 3 */}
-                <div className="bg-[#f7faf8] rounded-2xl p-5 border border-[rgba(11,31,20,0.08)] shadow-2xs flex flex-col justify-between">
+                <div className="card group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:bg-white transition-all flex flex-col justify-between">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-3">
-                      <HeartHandshake className="w-5 h-5 text-[#15803d]" />
+                    <div className="mb-4">
+                      <span className="ic">
+                        <i className="ph-bold ph-headset" aria-hidden="true" />
+                      </span>
                     </div>
-                    <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight">
+                    <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
                       Help when you need it
                     </h4>
                     <p className="text-xs sm:text-sm text-[#4b5563] leading-relaxed">
