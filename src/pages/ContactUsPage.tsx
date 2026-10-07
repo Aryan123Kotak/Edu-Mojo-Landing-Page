@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { GlowCard } from '../components/GlowCard';
+import { UniversalFaqSection } from '../components/UniversalFaqSection';
 import { PageRoute } from '../components/Navbar';
 
 interface ContactUsPageProps {
@@ -238,19 +239,6 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
               Contact us
             </p>
 
-            {/* Breadcrumb: Home › Contact Us */}
-            <nav aria-label="Breadcrumb" className="inline-flex items-center text-xs text-[#6b7a72] font-medium">
-              <button
-                type="button"
-                onClick={() => onNavigate('home')}
-                className="hover:text-[#16a34a] transition-colors cursor-pointer"
-              >
-                Home
-              </button>
-              <span className="mx-2 text-[#6b7a72]/60">›</span>
-              <span className="text-[#16a34a] font-semibold">Contact Us</span>
-            </nav>
-
             {/* Exactly ONE <h1>: "talk to the EduMojo team" in dark green */}
             <h1 className="font-black text-[#0b1f14] tracking-[-0.035em] text-3xl sm:text-5xl lg:text-6xl leading-[1.12]">
               Book a demo or <span className="text-[#15803d]">talk to the EduMojo team</span>
@@ -464,7 +452,7 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
 
                         {/* Small notice under button */}
                         <div className="pt-2 text-center text-xs text-[#6b7a72]">
-                          <span>We use your details strictly to schedule your demo. Your privacy is protected.</span>
+                          <span>We use your details only to contact you about EduMojo.</span>
                         </div>
 
                       </form>
@@ -479,13 +467,8 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                         Thank you! We have received your request.
                       </h3>
                       <p className="text-sm sm:text-base text-[#3f4b45] max-w-md mx-auto leading-relaxed">
-                        Our team will call you back soon to schedule your personalized demo.
+                        Our team will call you back soon to schedule your demo.
                       </p>
-                      <div className="p-3 bg-white rounded-xl border border-[#16a34a]/30 max-w-md mx-auto">
-                        <p className="text-xs text-[#15803d] font-semibold">
-                          We typically reach out within one business day.
-                        </p>
-                      </div>
                       <div className="pt-4">
                         <button
                           type="button"
@@ -527,11 +510,6 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                       </a>
                     </div>
                   </div>
-                  <div className="mt-3 pt-3 border-t border-[rgba(11,31,20,0.06)]">
-                    <p className="text-xs text-[#6b7a72] font-medium">
-                      Monday to Saturday, 9:30 AM – 6:30 PM IST
-                    </p>
-                  </div>
                 </GlowCard>
               </ScrollReveal>
 
@@ -549,11 +527,6 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                       contact@edu-mojo.com
                     </a>
                   </div>
-                  <div className="mt-3 pt-3 border-t border-[rgba(11,31,20,0.06)]">
-                    <p className="text-xs text-[#6b7a72] font-medium">
-                      We respond within 4 business hours
-                    </p>
-                  </div>
                 </GlowCard>
               </ScrollReveal>
 
@@ -569,11 +542,6 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
                   <p className="text-sm sm:text-base text-[#3f4b45] font-semibold">
                     Webmagiks, Pune, Maharashtra, India
                   </p>
-                  <div className="mt-3 pt-3 border-t border-[rgba(11,31,20,0.06)]">
-                    <p className="text-xs text-[#6b7a72] font-medium">
-                      Serving schools across Maharashtra &amp; the UAE
-                    </p>
-                  </div>
                 </GlowCard>
               </ScrollReveal>
 
@@ -720,88 +688,36 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ==================================================
-          4. FAQ (<details><summary> with round light-green "+" rotating to "×")
+          4. FAQ (Universal accordion with green '+' toggle)
           ================================================== */}
-      <section className="py-12 sm:py-16 bg-white border-b border-[rgba(11,31,20,0.06)]">
-        <div className="page-container space-y-6">
-          
-          <ScrollReveal>
-            <div className="text-center mb-6 sm:mb-8">
-              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
-                FAQ
-              </p>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1">
-                Before you book a demo
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <div className="space-y-3.5">
-            
-            {/* Q1 */}
-            <ScrollReveal delayMs={0}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>How do I book an EduMojo demo?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Fill in the form on this page or call +91 96840 33959 or +91 77989 69669. Our team will call you back to understand your institution and schedule a demo of the modules you need.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q2 */}
-            <ScrollReveal delayMs={50}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Who should join the demo?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  We recommend the principal or director, an administrator, and someone from accounts or the fee office, so every team sees the modules that matter to them.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q3 */}
-            <ScrollReveal delayMs={100}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Does EduMojo work with schools in Dubai and the UAE?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Yes. EduMojo is used by schools, colleges and institutes in India and in Dubai, UAE, and our team supports institutions in both countries.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q4 */}
-            <ScrollReveal delayMs={150}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Do you help us set up EduMojo?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Yes. Implementation guidance is part of every rollout. Our team helps you set up your institution in EduMojo and trains your staff before you go live.
-                </div>
-              </details>
-            </ScrollReveal>
-
-          </div>
-
-        </div>
-      </section>
+      <UniversalFaqSection
+        id="faq"
+        kicker="FAQ"
+        title="Before you book a demo"
+        items={[
+          {
+            question: 'How do I book an EduMojo demo?',
+            answer:
+              'Fill in the form on this page or call +91 96840 33959 or +91 77989 69669. Our team will call you back to understand your institution and schedule a demo of the modules you need.',
+          },
+          {
+            question: 'Who should join the demo?',
+            answer:
+              'We recommend the principal or director, an administrator, and someone from accounts or the fee office, so every team sees the modules that matter to them.',
+          },
+          {
+            question: 'Does EduMojo work with schools in Dubai and the UAE?',
+            answer:
+              'Yes. EduMojo is used by schools, colleges and institutes in India and in Dubai, UAE, and our team supports institutions in both countries.',
+          },
+          {
+            question: 'Do you help us set up EduMojo?',
+            answer:
+              'Yes. Implementation guidance is part of every rollout. Our team helps you set up your institution in EduMojo and trains your staff before you go live.',
+          },
+        ]}
+        className="py-12 sm:py-16 bg-white border-b border-[rgba(11,31,20,0.06)]"
+      />
 
       {/* ==================================================
           STRUCTURED DATA (JSON-LD before closing root)

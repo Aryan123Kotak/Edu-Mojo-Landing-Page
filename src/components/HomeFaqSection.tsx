@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
-import { ScrollReveal } from './ScrollReveal';
+import React from 'react';
+import { UniversalFaqSection, FaqItem } from './UniversalFaqSection';
 
-export const HOME_FAQS = [
+export const HOME_FAQS: FaqItem[] = [
   {
     question: 'What is EduMojo?',
     answer:
@@ -46,81 +45,14 @@ export const HOME_FAQS = [
 ];
 
 export const HomeFaqSection: React.FC = () => {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
-
-  const toggle = (idx: number) => {
-    setOpenIdx(openIdx === idx ? null : idx);
-  };
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: HOME_FAQS.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  };
-
   return (
-    <section className="py-12 sm:py-16 bg-white border-b border-[rgba(11,31,20,0.06)]" id="faq">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <div className="page-container">
-        <ScrollReveal>
-          <div className="text-center mb-10 space-y-2">
-            <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
-              Got questions?
-            </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight">
-              Frequently asked questions about EduMojo
-            </h2>
-            <p className="text-sm sm:text-base text-[#3f4b45] max-w-xl mx-auto leading-relaxed">
-              Everything you need to know about how EduMojo saves teachers&apos; time, how setup works, and pricing.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <div className="max-w-3xl mx-auto space-y-3">
-          {HOME_FAQS.map((faq, idx) => {
-            const isOpen = openIdx === idx;
-            return (
-              <ScrollReveal key={idx} delayMs={idx * 40}>
-                <div className="bg-[#f7faf8] rounded-[16px] border border-[rgba(11,31,20,0.08)] overflow-hidden transition-all duration-200">
-                  <button
-                    type="button"
-                    onClick={() => toggle(idx)}
-                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
-                    aria-expanded={isOpen}
-                  >
-                    <span className="font-bold text-[#0b1f14] text-base sm:text-[17px] leading-snug">
-                      {faq.question}
-                    </span>
-                    <span 
-                      className={`w-7 h-7 rounded-full bg-white border border-[rgba(11,31,20,0.1)] flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 bg-[#16a34a] text-white border-transparent' : 'text-[#3f4b45]'
-                      }`}
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                    </span>
-                  </button>
-
-                  {isOpen && (
-                    <div className="px-4 pb-5 sm:px-5 sm:pb-5 pt-0 text-sm text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] bg-white/70">
-                      <p className="pt-3">{faq.answer}</p>
-                    </div>
-                  )}
-                </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+    <UniversalFaqSection
+      id="faq"
+      kicker="Got questions?"
+      title="Frequently asked questions about EduMojo"
+      subtitle="Everything you need to know about how EduMojo saves teachers' time, how setup works, and pricing."
+      items={HOME_FAQS}
+      className="py-12 sm:py-16 bg-[#f7faf8] border-b border-[rgba(11,31,20,0.06)]"
+    />
   );
 };

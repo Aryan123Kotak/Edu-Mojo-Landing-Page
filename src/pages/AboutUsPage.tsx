@@ -15,6 +15,7 @@ import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { GlowCard } from '../components/GlowCard';
 import { TeamPhotoCard } from '../components/TeamPhotoCard';
+import { UniversalFaqSection, FaqItem } from '../components/UniversalFaqSection';
 import { PageRoute } from '../components/Navbar';
 
 interface AboutUsPageProps {
@@ -252,19 +253,6 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
               About EduMojo
             </p>
-
-            {/* Breadcrumb: Home › About Us */}
-            <nav aria-label="Breadcrumb" className="inline-flex items-center text-xs text-[#6b7a72] font-medium">
-              <button
-                type="button"
-                onClick={() => onNavigate('home')}
-                className="hover:text-[#16a34a] transition-colors cursor-pointer"
-              >
-                Home
-              </button>
-              <span className="mx-2 text-[#6b7a72]/60">›</span>
-              <span className="text-[#16a34a] font-semibold">About Us</span>
-            </nav>
 
             {/* Exactly ONE <h1>: Headline with words slide up on load */}
             <h1 className="font-black text-[#0b1f14] tracking-[-0.035em] text-3xl sm:text-5xl lg:text-6xl leading-[1.12]">
@@ -690,88 +678,35 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ==================================================
-          9. FAQ (<details><summary> with round light-green "+" rotating to "×")
+          9. FAQ (Universal accordion with green '+' toggle)
           ================================================== */}
-      <section className="py-12 sm:py-16 bg-[#f7faf8] border-b border-[rgba(11,31,20,0.06)]">
-        <div className="page-container space-y-6">
-          
-          <ScrollReveal>
-            <div className="text-center mb-6 sm:mb-8">
-              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
-                FAQ
-              </p>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1">
-                About EduMojo: common questions
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <div className="space-y-3.5">
-            
-            {/* Q1 */}
-            <ScrollReveal delayMs={0}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Who makes EduMojo?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  EduMojo is built by Webmagiks, a technology company based in Pune, Maharashtra, India. Webmagiks designs, implements and supports EduMojo for schools, colleges and institutes in India and Dubai.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q2 */}
-            <ScrollReveal delayMs={50}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>How many institutions use EduMojo?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  EduMojo is used by 15+ schools, colleges and institutes across India and Dubai, and has impacted more than 20,000 students and teachers.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q3 */}
-            <ScrollReveal delayMs={100}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>What makes EduMojo different from other school ERPs?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  EduMojo combines four things in one product: a single unified platform for every department, deep school workflows from admission to alumni, AI built into daily work, and hands-on implementation, training and support.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q4 */}
-            <ScrollReveal delayMs={150}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Does EduMojo work for colleges and institutes, not just schools?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Yes. EduMojo is built for schools, colleges and institutes. Its clients include K-12 schools, a preschool and colleges such as Arihant College in Pune and Sangamner College.
-                </div>
-              </details>
-            </ScrollReveal>
-
-          </div>
-
-        </div>
-      </section>
+      <UniversalFaqSection
+        id="faq"
+        kicker="FAQ"
+        title="About EduMojo: common questions"
+        items={[
+          {
+            question: 'Who makes EduMojo?',
+            answer:
+              'EduMojo is built by Webmagiks, a technology company based in Pune, Maharashtra, India. Webmagiks designs, implements and supports EduMojo for schools, colleges and institutes in India and Dubai.',
+          },
+          {
+            question: 'How many institutions use EduMojo?',
+            answer:
+              'EduMojo is used by 15+ schools, colleges and institutes across India and Dubai, and has impacted more than 20,000 students and teachers.',
+          },
+          {
+            question: 'What makes EduMojo different from other school ERPs?',
+            answer:
+              'EduMojo combines four things in one product: a single unified platform for every department, deep school workflows from admission to alumni, AI built into daily work, and hands-on implementation, training and support.',
+          },
+          {
+            question: 'Does EduMojo work for colleges and institutes, not just schools?',
+            answer:
+              'Yes. EduMojo is built for schools, colleges and institutes. Its clients include K-12 schools, a preschool and colleges such as Arihant College in Pune and Sangamner College.',
+          },
+        ]}
+      />
 
       {/* ==================================================
           10. CTA BAND (lava gradient block, like Home CTA but without form)

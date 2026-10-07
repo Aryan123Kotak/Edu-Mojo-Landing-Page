@@ -33,6 +33,7 @@ import {
 import { ScrollReveal } from '../components/ScrollReveal';
 import { GlowCard } from '../components/GlowCard';
 import { SelfBuildingTimetable } from '../components/SelfBuildingTimetable';
+import { UniversalFaqSection } from '../components/UniversalFaqSection';
 import { PageRoute } from '../components/Navbar';
 
 interface FeaturesPageProps {
@@ -254,19 +255,6 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
             <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
               Features
             </p>
-
-            {/* Breadcrumb: Home › Features */}
-            <nav aria-label="Breadcrumb" className="inline-flex items-center text-xs text-[#6b7a72] font-medium">
-              <button
-                type="button"
-                onClick={() => onNavigate('home')}
-                className="hover:text-[#16a34a] transition-colors cursor-pointer"
-              >
-                Home
-              </button>
-              <span className="mx-2 text-[#6b7a72]/60">›</span>
-              <span className="text-[#16a34a] font-semibold">Features</span>
-            </nav>
 
             {/* Exactly ONE <h1>: Headline with "One login." in dark green */}
             <h1 className="font-black text-[#0b1f14] tracking-[-0.035em] text-3xl sm:text-5xl lg:text-6xl leading-[1.12]">
@@ -1166,21 +1154,23 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                     <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]/70" />
                   </div>
                   <span className="text-[11px] font-mono text-[#6b7a72] font-semibold">Admissions CRM Pipeline</span>
-                  <span className="text-[10px] font-mono font-bold text-[#15803d] bg-[#f0fdf4] px-2 py-0.5 rounded-full border border-[#16a34a]/30">
-                    [ADD: screenshot]
-                  </span>
                 </div>
 
                 {/* Pipeline visual mockup */}
                 <div className="p-5 space-y-3">
-                  <img
-                    src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='260' viewBox='0 0 500 260'><rect width='500' height='260' fill='%23fafdfb'/><rect x='20' y='20' width='140' height='220' rx='10' fill='%23ffffff' stroke='%23e2e8f0'/><text x='35' y='45' font-family='sans-serif' font-size='12' font-weight='bold' fill='%230f172a'>New Enquiries (24)</text><rect x='32' y='60' width='116' height='42' rx='6' fill='%23f1f5f9'/><text x='42' y='80' font-family='sans-serif' font-size='11' font-weight='600' fill='%23334155'>Rohan Mehta</text><text x='42' y='94' font-family='sans-serif' font-size='9' fill='%2315803d'>Website Form</text><rect x='180' y='20' width='140' height='220' rx='10' fill='%23ffffff' stroke='%23e2e8f0'/><text x='195' y='45' font-family='sans-serif' font-size='12' font-weight='bold' fill='%230f172a'>Documents (12)</text><rect x='192' y='60' width='116' height='42' rx='6' fill='%23dcfce7'/><text x='202' y='80' font-family='sans-serif' font-size='11' font-weight='600' fill='%23166534'>Ananya Verma</text><text x='202' y='94' font-family='sans-serif' font-size='9' fill='%2315803d'>Verified ✓</text><rect x='340' y='20' width='140' height='220' rx='10' fill='%23ffffff' stroke='%23e2e8f0'/><text x='355' y='45' font-family='sans-serif' font-size='12' font-weight='bold' fill='%230f172a'>Enrolled (38)</text><rect x='352' y='60' width='116' height='42' rx='6' fill='%23f0fdf4'/><text x='362' y='80' font-family='sans-serif' font-size='11' font-weight='600' fill='%2315803d'>Kabir Joshi</text><text x='362' y='94' font-family='sans-serif' font-size='9' fill='%2364748b'>Grade 5-B</text></svg>"
-                    alt="EduMojo admissions CRM showing enquiries by source and follow-up status"
-                    className="w-full h-auto rounded-[12px] border border-[rgba(11,31,20,0.06)] block"
-                  />
+                  <div className="box-shot">
+                    <img 
+                      src="/admissions-crm.png" 
+                      width="1568" 
+                      height="816" 
+                      loading="lazy" 
+                      decoding="async"
+                      alt="EduMojo enquiries screen listing today's follow-ups with each enquiry's grade, source, status and next follow-up time" 
+                    />
+                  </div>
                   <div className="flex items-center justify-between text-xs text-[#6b7a72] pt-1">
-                    <span>Source attribution: Web, Meta Ads, Walk-in</span>
-                    <span className="text-[#15803d] font-bold">100% Enquiry SLA</span>
+                    <span>Enquiries from website, Facebook, walk-ins and referrals</span>
+                    <span className="text-[#15803d] font-bold">Follow-ups in one list</span>
                   </div>
                 </div>
               </div>
@@ -1203,20 +1193,22 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                     <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]/70" />
                   </div>
                   <span className="text-[11px] font-mono text-[#6b7a72] font-semibold">Fee Collection Ledger</span>
-                  <span className="text-[10px] font-mono font-bold text-[#15803d] bg-[#f0fdf4] px-2 py-0.5 rounded-full border border-[#16a34a]/30">
-                    [ADD: screenshot]
-                  </span>
                 </div>
 
                 <div className="p-5 space-y-3">
-                  <img
-                    src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='260' viewBox='0 0 500 260'><rect width='500' height='260' fill='%23fafdfb'/><rect x='20' y='20' width='140' height='60' rx='8' fill='%23f0fdf4' stroke='%23bbf7d0'/><text x='32' y='42' font-family='sans-serif' font-size='10' font-weight='600' fill='%2315803d'>COLLECTED</text><text x='32' y='65' font-family='sans-serif' font-size='16' font-weight='900' fill='%230f172a'>₹38,60,96,224</text><rect x='180' y='20' width='140' height='60' rx='8' fill='%23fffbeb' stroke='%23fde68a'/><text x='192' y='42' font-family='sans-serif' font-size='10' font-weight='600' fill='%23b45309'>PENDING</text><text x='192' y='65' font-family='sans-serif' font-size='16' font-weight='900' fill='%230f172a'>₹1,01,11,242</text><rect x='340' y='20' width='140' height='60' rx='8' fill='%23fef2f2' stroke='%23fecaca'/><text x='352' y='42' font-family='sans-serif' font-size='10' font-weight='600' fill='%23b91c1c'>OVERDUE</text><text x='352' y='65' font-family='sans-serif' font-size='16' font-weight='900' fill='%230f172a'>₹24,30,000</text><rect x='20' y='95' width='460' height='140' rx='10' fill='%23ffffff' stroke='%23e2e8f0'/><text x='35' y='125' font-family='sans-serif' font-size='12' font-weight='bold' fill='%230f172a'>Automated WhatsApp Payment Link Dispatched</text><rect x='35' y='140' width='430' height='40' rx='6' fill='%23f8fafc'/><text x='48' y='164' font-family='sans-serif' font-size='11' font-weight='600' fill='%23334155'>Aryan Shah (Grade 8-A) · Term 2 Tuition: ₹48,000</text><text x='380' y='164' font-family='sans-serif' font-size='10' font-weight='bold' fill='%2315803d'>Paid via UPI ✓</text></svg>"
-                    alt="EduMojo fee collection dashboard with collected, pending and overdue amounts"
-                    className="w-full h-auto rounded-[12px] border border-[rgba(11,31,20,0.06)] block"
-                  />
+                  <div className="box-shot">
+                    <img 
+                      src="/fees-payment-links.png" 
+                      width="1568" 
+                      height="816" 
+                      loading="lazy" 
+                      decoding="async"
+                      alt="EduMojo fees screen showing collected, pending and overdue totals and a list of pending fees with Send link buttons for WhatsApp, email and SMS" 
+                    />
+                  </div>
                   <div className="flex items-center justify-between text-xs text-[#6b7a72] pt-1">
-                    <span>Instant receipts, GST &amp; 80G compliant</span>
-                    <span className="text-[#15803d] font-bold">Direct bank reconciliation</span>
+                    <span>Receipts and invoices generated automatically</span>
+                    <span className="text-[#15803d] font-bold">Payment links on WhatsApp, email, SMS</span>
                   </div>
                 </div>
               </div>
@@ -1295,20 +1287,22 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                     <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]/70" />
                   </div>
                   <span className="text-[11px] font-mono text-[#6b7a72] font-semibold">AI Assistant Intelligence</span>
-                  <span className="text-[10px] font-mono font-bold text-[#15803d] bg-[#f0fdf4] px-2 py-0.5 rounded-full border border-[#16a34a]/30">
-                    [ADD: screenshot]
-                  </span>
                 </div>
 
                 <div className="p-5 space-y-3">
-                  <img
-                    src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='260' viewBox='0 0 500 260'><rect width='500' height='260' fill='%23fafdfb'/><rect x='20' y='20' width='460' height='75' rx='8' fill='%23f0fdf4' stroke='%23bbf7d0'/><text x='35' y='45' font-family='sans-serif' font-size='12' font-weight='bold' fill='%2315803d'>AI Prompt: Generate Grade 10 Attendance Summary</text><text x='35' y='68' font-family='sans-serif' font-size='11' fill='%23166534'>Grade 10 overall attendance is 96.2%. 3 students require early intervention.</text><rect x='20' y='110' width='220' height='125' rx='8' fill='%23ffffff' stroke='%23e2e8f0'/><text x='35' y='135' font-family='sans-serif' font-size='11' font-weight='bold' fill='%230f172a'>At-Risk Intervention Alert</text><text x='35' y='160' font-family='sans-serif' font-size='10' fill='%23ef4444'>• Tanvi P. (3 consecutive absences)</text><text x='35' y='180' font-family='sans-serif' font-size='10' fill='%23f59e0b'>• Dev K. (Fee reminder pending)</text><rect x='260' y='110' width='220' height='125' rx='8' fill='%23ffffff' stroke='%23e2e8f0'/><text x='275' y='135' font-family='sans-serif' font-size='11' font-weight='bold' fill='%230f172a'>Engagement Score</text><text x='275' y='175' font-family='sans-serif' font-size='28' font-weight='900' fill='%2315803d'>94.8%</text><text x='275' y='200' font-family='sans-serif' font-size='10' fill='%2364748b'>High parent app activity</text></svg>"
-                    alt="EduMojo AI insights showing at-risk students, engagement score and fee collection"
-                    className="w-full h-auto rounded-[12px] border border-[rgba(11,31,20,0.06)] block"
-                  />
+                  <div className="box-shot">
+                    <img 
+                      src="/ai-analytics.png" 
+                      width="1568" 
+                      height="816" 
+                      loading="lazy" 
+                      decoding="async"
+                      alt="EduMojo AI assistant answering an attendance summary for Grade 10-A, with a table of students who need attention" 
+                    />
+                  </div>
                   <div className="flex items-center justify-between text-xs text-[#6b7a72] pt-1">
-                    <span>One-click natural language insights</span>
-                    <span className="text-[#15803d] font-bold">Predictive student risk model</span>
+                    <span>Ask in plain words, get a summary</span>
+                    <span className="text-[#15803d] font-bold">At-risk students flagged early</span>
                   </div>
                 </div>
               </div>
@@ -1388,11 +1382,6 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
                     EduMojo works with Stock Paper Scissors to deliver school supplies directly to parents' homes.
                   </p>
                 </div>
-                <div className="p-2.5 bg-[#f7faf8] rounded-xl border border-[#16a34a]/30">
-                  <p className="font-mono text-xs text-[#15803d] font-bold">
-                    [ADD: confirm this partnership is live]
-                  </p>
-                </div>
               </GlowCard>
             </ScrollReveal>
 
@@ -1438,148 +1427,54 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
 
           </div>
 
-          {/* Third-party integrations placeholder notice */}
-          <div className="p-4 sm:p-5 rounded-[18px] bg-[#f7faf8] border-2 border-dashed border-[#16a34a]/30 text-[#0b1f14] text-xs sm:text-sm leading-relaxed max-w-4xl mx-auto">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#15803d] mb-1">
-              <span className="w-2 h-2 rounded-full bg-[#16a34a] animate-pulse" />
-              <span>Integration Configuration Placeholder:</span>
-            </div>
-            <p className="italic text-[#15803d] font-mono">
-              [ADD: decide about third-party integrations. The brochure lists Google Workspace, Microsoft 365, Zoom, Razorpay and AWS. Only if these are live, add a 4th card: H3 "Works with the tools you use" — "Connect EduMojo with Google Workspace, Microsoft 365, Zoom, Razorpay, AWS and more." Otherwise leave it out.]
-            </p>
-          </div>
-
         </div>
       </section>
 
       {/* ==================================================
-          5. FAQ (<details><summary> with round light-green "+" rotating to "×")
+          5. FAQ (Universal accordion with green '+' toggle)
           ================================================== */}
-      <section className="py-12 sm:py-16 bg-[#f7faf8] border-b border-[rgba(11,31,20,0.06)]">
-        <div className="page-container space-y-6">
-          
-          <ScrollReveal>
-            <div className="text-center mb-6 sm:mb-8">
-              <p className="uppercase text-[#15803d] font-bold tracking-[0.18em] text-xs sm:text-sm">
-                FAQ
-              </p>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight mt-1">
-                EduMojo features: common questions
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <div className="space-y-3.5">
-            
-            {/* Q1 */}
-            <ScrollReveal delayMs={0}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>What features does EduMojo have?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  EduMojo has 24+ modules in four groups: the student lifecycle (enquiries, admissions, student profiles, academics, e-learning), communication and finance (notices, parent app, fees, payment links, transport, library), operations (inventory, health records, timetable, documents, report cards, sports and arts, setup) and extended tools (AI, analytics, certificates, appointments, alumni, hostel).
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q2 */}
-            <ScrollReveal delayMs={40}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Does EduMojo include admission and enquiry management?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Yes. The Pre-Admission &amp; CRM module tracks every enquiry by source with follow-up reminders, and the Admissions module handles online applications, document collection and admission status tracking.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q3 */}
-            <ScrollReveal delayMs={80}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Can EduMojo collect school fees online?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Yes. EduMojo manages fee plans and fee heads, generates receipts and invoices, and creates custom payment links that schools share with parents on WhatsApp, email or SMS.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q4 */}
-            <ScrollReveal delayMs={120}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Does EduMojo manage transport, library and hostel?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Yes. EduMojo includes Transportation (route planning, live pickup and drop tracking, vehicle records), Library (cataloguing, issue and return, search) and Hostel Management (room allocation, resident records, occupancy).
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q5 */}
-            <ScrollReveal delayMs={160}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Can EduMojo generate transfer certificates and report cards?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Yes. The Certificates &amp; Exit Process module generates transfer certificates, bonafide certificates and other documents, and the Academic Reports module creates report cards and tracks performance.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q6 */}
-            <ScrollReveal delayMs={200}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>What does the AI in EduMojo do?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  EduMojo's AI assistant creates summaries such as a class attendance report in one click, highlights at-risk students and engagement trends, and runs automated workflows for routine processes.
-                </div>
-              </details>
-            </ScrollReveal>
-
-            {/* Q7 */}
-            <ScrollReveal delayMs={240}>
-              <details className="group rounded-[18px] bg-white border border-[rgba(11,31,20,0.09)] shadow-[0_4px_16px_rgba(11,31,20,0.03)] overflow-hidden transition-all duration-200">
-                <summary className="list-none flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-base sm:text-lg text-[#0b1f14] hover:text-[#16a34a] transition-colors [&::-webkit-details-marker]:hidden">
-                  <span>Does EduMojo have a mobile app?</span>
-                  <span className="w-8 h-8 rounded-full bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 ml-4 font-bold text-lg transition-transform duration-200 group-open:rotate-45 group-open:bg-[#16a34a] group-open:text-white">
-                    +
-                  </span>
-                </summary>
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-[#3f4b45] leading-relaxed border-t border-[rgba(11,31,20,0.06)] pt-4">
-                  Yes. The EduMojo parent and school app gives parents and students mobile access to schedules, homework, attendance, notices and fees, with real-time alerts.
-                </div>
-              </details>
-            </ScrollReveal>
-
-          </div>
-
-        </div>
-      </section>
+      <UniversalFaqSection
+        id="faq"
+        kicker="FAQ"
+        title="EduMojo features: common questions"
+        items={[
+          {
+            question: 'What features does EduMojo have?',
+            answer:
+              'EduMojo has 24+ modules in four groups: the student lifecycle (enquiries, admissions, student profiles, academics, e-learning), communication and finance (notices, parent app, fees, payment links, transport, library), operations (inventory, health records, timetable, documents, report cards, sports and arts, setup) and extended tools (AI, analytics, certificates, appointments, alumni, hostel).',
+          },
+          {
+            question: 'Does EduMojo include admission and enquiry management?',
+            answer:
+              'Yes. The Pre-Admission & CRM module tracks every enquiry by source with follow-up reminders, and the Admissions module handles online applications, document collection and admission status tracking.',
+          },
+          {
+            question: 'Can EduMojo collect school fees online?',
+            answer:
+              'Yes. EduMojo manages fee plans and fee heads, generates receipts and invoices, and creates custom payment links that schools share with parents on WhatsApp, email or SMS.',
+          },
+          {
+            question: 'Does EduMojo manage transport, library and hostel?',
+            answer:
+              'Yes. EduMojo includes Transportation (route planning, live pickup and drop tracking, vehicle records), Library (cataloguing, issue and return, search) and Hostel Management (room allocation, resident records, occupancy).',
+          },
+          {
+            question: 'Can EduMojo generate transfer certificates and report cards?',
+            answer:
+              'Yes. The Certificates & Exit Process module generates transfer certificates, bonafide certificates and other documents, and the Academic Reports module creates report cards and tracks performance.',
+          },
+          {
+            question: 'What does the AI in EduMojo do?',
+            answer:
+              "EduMojo's AI assistant creates summaries such as a class attendance report in one click, highlights at-risk students and engagement trends, and runs automated workflows for routine processes.",
+          },
+          {
+            question: 'Does EduMojo have a mobile app?',
+            answer:
+              'Yes. The EduMojo parent and school app gives parents and students mobile access to schedules, homework, attendance, notices and fees, with real-time alerts.',
+          },
+        ]}
+      />
 
       {/* ==================================================
           6. CTA BAND (lava gradient block)
