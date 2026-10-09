@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { 
   ArrowRight, 
-  PhoneCall, 
-  Check, 
-  Sparkles, 
-  Clock
+  Check 
 } from 'lucide-react';
 import { MacOsMockup } from '../components/MacOsMockup';
 import { TeacherTasksRotator } from '../components/TeacherTasksRotator';

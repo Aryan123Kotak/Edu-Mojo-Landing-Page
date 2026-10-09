@@ -399,10 +399,6 @@ export const TestimonialsCarousel: React.FC = () => {
 
       {/* Section Header */}
       <div className="text-center mb-8 sm:mb-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f0fdf4] border border-[#2eca8b]/40 text-xs sm:text-sm font-black text-[#15803d] uppercase tracking-[0.16em] mb-3 shadow-xs">
-          <Star className="w-3.5 h-3.5 fill-[#16a34a] text-[#16a34a]" />
-          <span>Voices of Educational Leadership</span>
-        </div>
         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-[-0.035em] text-[#0b1f14]">
           What Our Principals Are Saying
         </h2>

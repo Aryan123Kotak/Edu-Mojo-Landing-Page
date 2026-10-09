@@ -8,37 +8,37 @@ interface TeacherTimeSectionProps {
 const COMPARISON_ITEMS = [
   {
     task: 'Attendance',
-    icon: 'ph-user-check',
+    phIcon: 'ph-user-check',
     before: 'Paper register every period, then copied into a spreadsheet.',
     after: 'One tap in the app. Parents are informed automatically.',
   },
   {
     task: 'Homework & materials',
-    icon: 'ph-notebook',
+    phIcon: 'ph-notebook',
     before: 'Written on the board, then repeated to parents on WhatsApp.',
     after: 'Post it once. Every student and parent sees it in the app.',
   },
   {
     task: 'Report cards',
-    icon: 'ph-exam',
+    phIcon: 'ph-certificate',
     before: 'Marks typed into a template for every single student.',
     after: 'Enter marks once. Report cards are generated for the whole class.',
   },
   {
     task: 'Parent updates',
-    icon: 'ph-megaphone',
+    phIcon: 'ph-megaphone',
     before: 'Individual calls and messages to dozens of parents.',
     after: 'One notice reaches every parent instantly.',
   },
   {
     task: 'Timetables & substitutions',
-    icon: 'ph-calendar-check',
+    phIcon: 'ph-calendar',
     before: 'Rebuilt by hand whenever something changes.',
     after: 'Built and updated in the system, visible to everyone.',
   },
   {
     task: 'Fee follow-ups',
-    icon: 'ph-wallet',
+    phIcon: 'ph-wallet',
     before: 'Teachers asked to remind parents for the office.',
     after: 'Automatic reminders and payment links. Teachers are out of it.',
   },
@@ -82,10 +82,10 @@ export const TeacherTimeSection: React.FC<TeacherTimeSectionProps> = ({ onBookDe
           {COMPARISON_ITEMS.map((item, idx) => (
             <ScrollReveal key={item.task} delayMs={idx * 80}>
               <div className="card bg-white rounded-[16px] border border-[rgba(11,31,20,0.08)] p-4 sm:p-5 shadow-xs transition-all duration-200 hover:border-[#2eca8b]/50 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-center">
-                {/* Task Name with .ic.sm */}
+                {/* Task Name with .ic circle badge */}
                 <div className="md:col-span-4 flex items-center gap-3">
                   <span className="ic sm">
-                    <i className={`ph-bold ${item.icon}`} aria-hidden="true" />
+                    <i className={`ph-bold ${item.phIcon}`} />
                   </span>
                   <h3 className="font-black text-[#0b1f14] text-base sm:text-[17px] tracking-tight">
                     {item.task}
@@ -116,13 +116,10 @@ export const TeacherTimeSection: React.FC<TeacherTimeSectionProps> = ({ onBookDe
           ))}
         </div>
 
-        {/* Dark-Green Rounded Banner with .ic.on-dark ph-clock-countdown */}
+        {/* Dark-Green Rounded Banner */}
         <ScrollReveal delayMs={150}>
           <div className="mt-8 rounded-[24px] bg-gradient-to-br from-[#0b1f14] via-[#0f2d1e] to-[#15803d] p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="flex items-center gap-5 max-w-xl">
-              <span className="ic on-dark">
-                <i className="ph-bold ph-clock-countdown" aria-hidden="true" />
-              </span>
+            <div className="max-w-xl">
               <div className="space-y-1">
                 <div className="flex flex-wrap items-baseline gap-2.5">
                   <span className="text-3xl sm:text-4xl lg:text-5xl font-black font-sans text-[#86efac] tracking-tight">

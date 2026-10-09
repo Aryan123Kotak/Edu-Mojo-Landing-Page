@@ -5,12 +5,12 @@ export const OnePlatformTabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const tabs = [
-    { label: 'Attendance', icon: 'ph-user-check' },
-    { label: 'Homework', icon: 'ph-notebook' },
-    { label: 'Marks & report cards', icon: 'ph-exam' },
-    { label: 'Parent updates', icon: 'ph-megaphone' },
-    { label: 'Timetable', icon: 'ph-calendar-check' },
-    { label: 'Admin & fees', icon: 'ph-wallet' },
+    { label: 'Attendance', phIcon: 'ph-user-check' },
+    { label: 'Homework', phIcon: 'ph-notebook' },
+    { label: 'Marks & report cards', phIcon: 'ph-certificate' },
+    { label: 'Parent updates', phIcon: 'ph-megaphone' },
+    { label: 'Timetable', phIcon: 'ph-calendar' },
+    { label: 'Admin & fees', phIcon: 'ph-wallet' },
   ];
 
   // Auto-play animation (cycles through tabs every 5 seconds unless hovered/interacted)
@@ -36,8 +36,10 @@ export const OnePlatformTabs: React.FC = () => {
                 : 'bg-white hover:bg-slate-100 text-[#3f4b45] border border-slate-200'
             }`}
           >
-            <span className={`ic sm ${activeTab === idx ? 'active' : ''}`} style={{ '--s': '26px', fontSize: '13px' } as React.CSSProperties}>
-              <i className={`ph-bold ${tab.icon}`} aria-hidden="true" />
+            <span className="w-5 h-5 flex items-center justify-center shrink-0">
+              <i
+                className={`ph-bold ${tab.phIcon} text-base ${activeTab === idx ? 'text-white' : 'text-[#16a34a]'}`}
+              />
             </span>
             <span>{tab.label}</span>
           </button>

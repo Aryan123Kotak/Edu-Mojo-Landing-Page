@@ -37,10 +37,6 @@ export const FamilyAppModal: React.FC<FamilyAppModalProps> = ({ isOpen, onClose 
         </button>
 
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-[#16a34a] text-xs font-bold uppercase tracking-wider mb-2 border border-emerald-100">
-            <Smartphone className="w-3.5 h-3.5" />
-            <span>EduMojo Family & Staff Portal</span>
-          </div>
           <h3 className="text-2xl font-black text-slate-900">Unified Institutional Login</h3>
           <p className="text-xs text-slate-500 mt-1">Access attendance, fees, report cards, and communication</p>
         </div>

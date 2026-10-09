@@ -48,11 +48,11 @@ export const HomeFaqSection: React.FC = () => {
   return (
     <UniversalFaqSection
       id="faq"
-      kicker="Got questions?"
-      title="Frequently asked questions about EduMojo"
-      subtitle="Everything you need to know about how EduMojo saves teachers' time, how setup works, and pricing."
+      kicker="FAQ"
+      title="Frequently asked questions"
+      subtitle="Everything you need to know about our school ERP software, teacher time-saving features, and nationwide support."
       items={HOME_FAQS}
-      className="py-12 sm:py-16 bg-[#f7faf8] border-b border-[rgba(11,31,20,0.06)]"
+      className="py-14 sm:py-20 bg-white border-b border-[rgba(11,31,20,0.06)]"
     />
   );
 };

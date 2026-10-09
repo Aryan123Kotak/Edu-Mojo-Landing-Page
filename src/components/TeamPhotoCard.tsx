@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 export const TeamPhotoCard: React.FC = () => {
   return (
@@ -53,12 +53,9 @@ export const TeamPhotoCard: React.FC = () => {
           <span className="font-bold text-[#0b1f14]">Pune, Maharashtra</span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-bold text-[#15803d] bg-[#f0fdf4] border border-[#2eca8b]/30 px-2.5 py-1 rounded-full flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-[#16a34a]" />
-            <span>Product &amp; Dev Team</span>
-          </span>
-        </div>
+        <span className="text-[11px] font-semibold text-[#6b7a72]">
+          Product &amp; Dev Team
+        </span>
       </div>
     </div>
   );

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  UserCheck, 
-  Wallet, 
-  CalendarClock, 
-  FilePenLine, 
-  BarChart3, 
-  MessageSquare,
-  ArrowRight,
-  Sparkles
-} from 'lucide-react';
+import {
+  HugeIcon,
+  UserCheck01Icon,
+  Wallet01Icon,
+  Calendar01Icon,
+  DiplomaIcon,
+  Analytics01Icon,
+  Megaphone01Icon,
+  ArrowRight01Icon,
+  SparkleIcon,
+} from './HugeIcon';
 
 interface FeatureModule {
   id: string;
@@ -19,7 +20,7 @@ interface FeatureModule {
   badge: string;
   metrics: { label: string; value: string }[];
   highlightColor: string;
-  icon: React.ReactNode;
+  icon: any;
 }
 
 const MODULES: FeatureModule[] = [
@@ -36,7 +37,7 @@ const MODULES: FeatureModule[] = [
       { label: 'Daily Accuracy', value: '99.9%' },
     ],
     highlightColor: '#16a34a',
-    icon: <UserCheck className="w-5 h-5" />,
+    icon: UserCheck01Icon,
   },
   {
     id: 'fees',
@@ -51,7 +52,7 @@ const MODULES: FeatureModule[] = [
       { label: 'Receipt Automation', value: 'Instant' },
     ],
     highlightColor: '#15803d',
-    icon: <Wallet className="w-5 h-5" />,
+    icon: Wallet01Icon,
   },
   {
     id: 'timetable',
@@ -66,7 +67,7 @@ const MODULES: FeatureModule[] = [
       { label: 'Time Saved / Term', value: '40+ hrs' },
     ],
     highlightColor: '#2eca8b',
-    icon: <CalendarClock className="w-5 h-5" />,
+    icon: Calendar01Icon,
   },
   {
     id: 'exams',
@@ -81,7 +82,7 @@ const MODULES: FeatureModule[] = [
       { label: 'Teacher Burden', value: '-80%' },
     ],
     highlightColor: '#16a34a',
-    icon: <FilePenLine className="w-5 h-5" />,
+    icon: DiplomaIcon,
   },
   {
     id: 'analytics',
@@ -96,7 +97,7 @@ const MODULES: FeatureModule[] = [
       { label: 'Data Points Analyzed', value: '10M+' },
     ],
     highlightColor: '#0284c7',
-    icon: <BarChart3 className="w-5 h-5" />,
+    icon: Analytics01Icon,
   },
   {
     id: 'communication',
@@ -111,7 +112,7 @@ const MODULES: FeatureModule[] = [
       { label: 'Media Support', value: 'PDF & Images' },
     ],
     highlightColor: '#16a34a',
-    icon: <MessageSquare className="w-5 h-5" />,
+    icon: Megaphone01Icon,
   },
 ];
 
@@ -195,7 +196,7 @@ export const AutoFeatureTabs: React.FC<AutoFeatureTabsProps> = ({ onLearnMore })
         {/* Left Column: Module Information */}
         <div className="lg:col-span-6 space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-bold text-[#15803d] uppercase tracking-wider bg-[rgba(46,202,139,0.12)] px-3 py-1 rounded-full">
-            {current.icon}
+            <HugeIcon icon={current.icon} size={16} />
             <span>{current.badge}</span>
           </div>
 
@@ -228,7 +229,7 @@ export const AutoFeatureTabs: React.FC<AutoFeatureTabsProps> = ({ onLearnMore })
               className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#15803d] hover:text-[#0b1f14] group cursor-pointer"
             >
               <span>Explore all capabilities of this module</span>
-              <ArrowRight className="w-4 h-4 text-[#16a34a] group-hover:translate-x-1 transition-transform" />
+              <HugeIcon icon={ArrowRight01Icon} size={16} className="text-[#16a34a] group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>

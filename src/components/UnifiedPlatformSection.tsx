@@ -3,7 +3,6 @@ import { ScrollReveal } from './ScrollReveal';
 import { OnePlatformTabs } from './OnePlatformTabs';
 import { SelfBuildingTimetable } from './SelfBuildingTimetable';
 import { ComparisonTable } from './ComparisonTable';
-
 interface UnifiedPlatformSectionProps {
   onBookDemo: () => void;
   onGetQuote: () => void;
@@ -14,49 +13,49 @@ const TABS = [
     id: 'teacher-apps',
     href: '#teacher-apps',
     label: 'Teacher apps',
-    icon: 'ph-chalkboard-teacher',
+    phIcon: 'ph-chalkboard-teacher',
     eyebrow: 'Everything a teacher needs, without switching between apps',
   },
   {
     id: 'modules',
     href: '#modules',
     label: '24 modules',
-    icon: 'ph-squares-four',
+    phIcon: 'ph-buildings',
     eyebrow: 'Everything your school needs, without the complexity',
   },
   {
     id: 'timetable',
     href: '#timetable',
     label: 'Timetable',
-    icon: 'ph-calendar-check',
+    phIcon: 'ph-calendar',
     eyebrow: 'Timetables without the weekend spent rebuilding them',
   },
   {
     id: 'who',
     href: '#who',
     label: 'Who it helps',
-    icon: 'ph-users-three',
+    phIcon: 'ph-users',
     eyebrow: 'Less work for teachers. Better visibility for everyone else.',
   },
   {
     id: 'simple-affordable',
     href: '#simple-affordable',
     label: 'Pricing',
-    icon: 'ph-currency-inr',
+    phIcon: 'ph-currency-inr',
     eyebrow: 'Easy for every teacher. Affordable for every school.',
   },
   {
     id: 'compare',
     href: '#compare',
     label: 'Compare',
-    icon: 'ph-scales',
+    phIcon: 'ph-scales',
     eyebrow: "Built to save teachers' time, not to add more screens",
   },
   {
     id: 'support',
     href: '#support',
     label: 'Training & support',
-    icon: 'ph-headset',
+    phIcon: 'ph-headset',
     eyebrow: 'We train every teacher, so nobody is left behind',
   },
 ];
@@ -108,12 +107,6 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[rgba(11,31,20,0.06)] pb-5">
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f0fdf4] border border-[#2eca8b]/30 text-xs font-black text-[#15803d] uppercase tracking-[0.16em]">
-                <span className="ic sm" style={{ '--s': '24px', fontSize: '13px' } as React.CSSProperties}>
-                  <i className="ph-bold ph-sparkle" aria-hidden="true" />
-                </span>
-                <span>All-In-One School Operating System</span>
-              </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0b1f14] tracking-tight">
                 Complete Platform Console
               </h2>
@@ -134,7 +127,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   className="w-9 h-9 rounded-full bg-white hover:bg-[#f0fdf4] text-[#0b1f14] hover:text-[#16a34a] border border-[rgba(11,31,20,0.09)] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer"
                   aria-label="Previous tab"
                 >
-                  <i className="ph-bold ph-caret-left text-sm" aria-hidden="true" />
+                  <i className="ph-bold ph-arrow-left text-sm" />
                 </button>
                 <button
                   type="button"
@@ -142,7 +135,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   className="w-9 h-9 rounded-full bg-white hover:bg-[#f0fdf4] text-[#0b1f14] hover:text-[#16a34a] border border-[rgba(11,31,20,0.09)] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer"
                   aria-label="Next tab"
                 >
-                  <i className="ph-bold ph-caret-right text-sm" aria-hidden="true" />
+                  <i className="ph-bold ph-arrow-right text-sm" />
                 </button>
               </div>
             </div>
@@ -150,7 +143,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
         </ScrollReveal>
 
         {/* ==================================================
-            3. THE SECTION TAB BAR (Phosphor .sec-tabs)
+            3. THE SECTION TAB BAR (.sec-tabs)
             ================================================== */}
         <nav className="sec-tabs" aria-label="On this page">
           {TABS.map((tab, idx) => {
@@ -162,8 +155,8 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 onClick={(e) => handleTabClick(e, idx, tab.id)}
                 className={`sec-tab ${isActive ? 'is-active' : ''}`}
               >
-                <span className={`ic sm ${isActive ? 'active' : ''}`}>
-                  <i className={`ph-bold ${tab.icon}`} aria-hidden="true" />
+                <span className="w-5 h-5 flex items-center justify-center shrink-0">
+                  <i className={`ph-bold ${tab.phIcon} text-base ${isActive ? 'text-[#16a34a]' : 'text-slate-500'}`} />
                 </span>
                 <span>{tab.label}</span>
               </a>
@@ -180,9 +173,6 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           {activeTab === 0 && (
             <div id="teacher-apps" className="animate-in fade-in duration-300 space-y-4">
               <div className="text-center sm:text-left mb-2">
-                <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
-                  Interactive Daily Workflows
-                </span>
                 <p className="text-xs sm:text-sm text-[#4b5563] mt-0.5">
                   Attendance, homework, marks, timetables and parent messages live in one place, with one login.
                 </p>
@@ -207,36 +197,36 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 </div>
               </div>
 
-              {/* Module cards (.ic 56px at top-left) */}
+              {/* Module cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
                   {
-                    icon: 'ph-user-check',
+                    phIcon: 'ph-user-check',
                     title: 'Attendance & Parent Alerts',
                     desc: 'One-tap attendance with automatic alerts to parents.',
                   },
                   {
-                    icon: 'ph-notebook',
+                    phIcon: 'ph-notebook',
                     title: 'Homework & E-Learning',
                     desc: 'Assignments, homework and learning materials, shared once for the whole class.',
                   },
                   {
-                    icon: 'ph-exam',
+                    phIcon: 'ph-certificate',
                     title: 'Marks & Report Cards',
                     desc: 'Enter marks once and generate report cards for every student.',
                   },
                   {
-                    icon: 'ph-calendar-check',
+                    phIcon: 'ph-calendar',
                     title: 'Timetable & Substitutions',
                     desc: 'Class timetables and teacher allocation, updated for everyone at once.',
                   },
                   {
-                    icon: 'ph-wallet',
+                    phIcon: 'ph-wallet',
                     title: 'Fees & Payment Links',
                     desc: 'Receipts, reminders and payment links, so fee follow-ups never land on teachers.',
                   },
                   {
-                    icon: 'ph-sparkle',
+                    phIcon: 'ph-sparkle',
                     title: 'Smart Assistant',
                     desc: 'Ask for an attendance summary or report and get it in one click.',
                   },
@@ -247,7 +237,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   >
                     <div className="mb-3.5">
                       <span className="ic">
-                        <i className={`ph-bold ${mod.icon}`} aria-hidden="true" />
+                        <i className={`ph-bold ${mod.phIcon}`} />
                       </span>
                     </div>
                     <h4 className="text-base font-black text-[#0b1f14] mb-1 tracking-tight">
@@ -263,8 +253,8 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
               {/* Included Tag Pill Cloud */}
               <div className="p-4 rounded-2xl bg-[#f0fdf4]/70 border border-[#2eca8b]/20 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
                 <span className="font-extrabold text-[#15803d] uppercase tracking-wider shrink-0 flex items-center gap-1.5">
-                  <span className="ic sm" style={{ '--s': '24px', fontSize: '13px' } as React.CSSProperties}>
-                    <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                  <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
+                    <i className="ph-bold ph-check text-xs" />
                   </span>
                   Also Included:
                 </span>
@@ -284,9 +274,6 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                 {/* Left Column: Copy */}
                 <div className="lg:col-span-5 space-y-4">
                   <div className="space-y-1">
-                    <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
-                      AI Conflict Resolution
-                    </span>
                     <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight">
                       Timetables without the weekend spent rebuilding them
                     </h3>
@@ -296,20 +283,20 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   </p>
                   <ul className="space-y-2.5 pt-1 text-xs sm:text-sm text-[#0b1f14] font-semibold">
                     <li className="flex items-center gap-2.5">
-                      <span className="ic sm" style={{ '--s': '26px', fontSize: '13px' } as React.CSSProperties}>
-                        <i className="ph-bold ph-calendar-check" aria-hidden="true" />
+                      <span className="ic sm">
+                        <i className="ph-bold ph-calendar" />
                       </span>
                       <span>Class and section timetables</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <span className="ic sm" style={{ '--s': '26px', fontSize: '13px' } as React.CSSProperties}>
-                        <i className="ph-bold ph-chalkboard-teacher" aria-hidden="true" />
+                      <span className="ic sm">
+                        <i className="ph-bold ph-chalkboard-teacher" />
                       </span>
                       <span>Teacher allocation with clash checks</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <span className="ic sm" style={{ '--s': '26px', fontSize: '13px' } as React.CSSProperties}>
-                        <i className="ph-bold ph-device-mobile" aria-hidden="true" />
+                      <span className="ic sm">
+                        <i className="ph-bold ph-device-mobile" />
                       </span>
                       <span>Updates visible on the teacher and parent app</span>
                     </li>
@@ -325,27 +312,24 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 3: WHO IT HELPS (.ic.lg 72px centred above title)
+              TAB 3: WHO IT HELPS
               ================================================== */}
           {activeTab === 3 && (
             <div id="who" className="animate-in fade-in duration-300 space-y-6">
               <div className="space-y-1 text-center sm:text-left">
-                <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
-                  Stakeholder Impact
-                </span>
                 <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight">
                   Less work for teachers. Better visibility for everyone else.
                 </h3>
               </div>
 
-              {/* 4 Cards with .ic.lg centered above title as in brochure */}
+              {/* 4 Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 {/* 1. Teachers */}
                 <div className="card group bg-[#f7faf8] rounded-2xl p-6 border border-[rgba(11,31,20,0.08)] shadow-2xs hover:shadow-md hover:border-[#2eca8b]/60 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
                   <div>
                     <div className="mb-4">
                       <span className="ic lg">
-                        <i className="ph-bold ph-chalkboard-teacher" aria-hidden="true" />
+                        <i className="ph-bold ph-chalkboard-teacher" />
                       </span>
                     </div>
                     <h4 className="text-lg font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
@@ -365,7 +349,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   <div>
                     <div className="mb-4">
                       <span className="ic lg">
-                        <i className="ph-bold ph-squares-four" aria-hidden="true" />
+                        <i className="ph-bold ph-buildings" />
                       </span>
                     </div>
                     <h4 className="text-lg font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
@@ -385,7 +369,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   <div>
                     <div className="mb-4">
                       <span className="ic lg">
-                        <i className="ph-bold ph-users-three" aria-hidden="true" />
+                        <i className="ph-bold ph-users" />
                       </span>
                     </div>
                     <h4 className="text-lg font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
@@ -405,7 +389,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   <div>
                     <div className="mb-4">
                       <span className="ic lg">
-                        <i className="ph-bold ph-presentation-chart" aria-hidden="true" />
+                        <i className="ph-bold ph-chart-line-up" />
                       </span>
                     </div>
                     <h4 className="text-lg font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
@@ -424,14 +408,11 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 4: PRICING (.ic.lg 72px centered, NEVER dollar sign)
+              TAB 4: PRICING
               ================================================== */}
           {activeTab === 4 && (
             <div id="simple-affordable" className="animate-in fade-in duration-300 space-y-6">
               <div className="space-y-1 text-center sm:text-left">
-                <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
-                  Honest Value
-                </span>
                 <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight">
                   Easy for every teacher. Affordable for every school.
                 </h3>
@@ -443,7 +424,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   <div className="space-y-3 flex flex-col items-center">
                     <div className="mb-2">
                       <span className="ic lg">
-                        <i className="ph-bold ph-device-mobile" aria-hidden="true" />
+                        <i className="ph-bold ph-device-mobile" />
                       </span>
                     </div>
                     <h4 className="text-xl font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors">
@@ -454,20 +435,20 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                     </p>
                     <ul className="space-y-2 pt-2 text-xs sm:text-sm text-[#0b1f14] font-semibold text-left w-full">
                       <li className="flex items-center gap-2">
-                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
-                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
+                          <i className="ph-bold ph-check text-xs" />
                         </span>
                         <span>Everything in one login</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
-                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
+                          <i className="ph-bold ph-check text-xs" />
                         </span>
                         <span>Works on phone, tablet and computer</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
-                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
+                          <i className="ph-bold ph-check text-xs" />
                         </span>
                         <span>Training and onboarding for every teacher</span>
                       </li>
@@ -480,7 +461,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   <div className="space-y-3 flex flex-col items-center w-full">
                     <div className="mb-2">
                       <span className="ic lg">
-                        <i className="ph-bold ph-currency-inr" aria-hidden="true" />
+                        <i className="ph-bold ph-wallet" />
                       </span>
                     </div>
                     <h4 className="text-xl font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors">
@@ -491,20 +472,20 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                     </p>
                     <ul className="space-y-2 pt-2 text-xs sm:text-sm text-[#0b1f14] font-semibold text-left w-full">
                       <li className="flex items-center gap-2">
-                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
-                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
+                          <i className="ph-bold ph-check text-xs" />
                         </span>
                         <span>One app instead of many subscriptions</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
-                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
+                          <i className="ph-bold ph-check text-xs" />
                         </span>
                         <span>Implementation and personalized support included</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="ic sm" style={{ '--s': '24px', fontSize: '12px' } as React.CSSProperties}>
-                          <i className="ph-bold ph-check-circle" aria-hidden="true" />
+                        <span className="w-5 h-5 rounded-full bg-[#16a34a]/15 text-[#15803d] flex items-center justify-center shrink-0">
+                          <i className="ph-bold ph-check text-xs" />
                         </span>
                         <span>Transparent pricing tailored to your school size</span>
                       </li>
@@ -517,7 +498,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                         className="inline-flex items-center gap-2 text-sm font-black text-[#15803d] hover:text-[#166534] transition-colors cursor-pointer group"
                       >
                         <span>Get a price quote</span>
-                        <i className="ph-bold ph-arrow-right text-xs" aria-hidden="true" />
+                        <i className="ph-bold ph-arrow-right group-hover:translate-x-0.5 transition-transform" />
                       </button>
                       <span className="text-[11px] text-[#6b7a72]">
                         No hidden setup fees
@@ -535,9 +516,6 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           {activeTab === 5 && (
             <div id="compare" className="animate-in fade-in duration-300 space-y-4">
               <div className="space-y-1 text-center sm:text-left">
-                <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
-                  Side-By-Side Evaluation
-                </span>
                 <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight">
                   Built to save teachers&apos; time, not to add more screens
                 </h3>
@@ -549,14 +527,11 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
           )}
 
           {/* ==================================================
-              TAB 6: TRAINING & SUPPORT (.ic 56px)
+              TAB 6: TRAINING & SUPPORT
               ================================================== */}
           {activeTab === 6 && (
             <div id="support" className="animate-in fade-in duration-300 space-y-6">
               <div className="space-y-1 text-center sm:text-left">
-                <span className="text-xs uppercase font-black tracking-widest text-[#16a34a]">
-                  Zero Abandonment Guarantee
-                </span>
                 <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight">
                   We train every teacher, so nobody is left behind
                 </h3>
@@ -568,7 +543,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   <div>
                     <div className="mb-4">
                       <span className="ic">
-                        <i className="ph-bold ph-flag" aria-hidden="true" />
+                        <i className="ph-bold ph-flag" />
                       </span>
                     </div>
                     <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
@@ -585,7 +560,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   <div>
                     <div className="mb-4">
                       <span className="ic">
-                        <i className="ph-bold ph-presentation" aria-hidden="true" />
+                        <i className="ph-bold ph-chalkboard-teacher" />
                       </span>
                     </div>
                     <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">
@@ -602,7 +577,7 @@ export const UnifiedPlatformSection: React.FC<UnifiedPlatformSectionProps> = ({
                   <div>
                     <div className="mb-4">
                       <span className="ic">
-                        <i className="ph-bold ph-headset" aria-hidden="true" />
+                        <i className="ph-bold ph-headset" />
                       </span>
                     </div>
                     <h4 className="text-base font-black text-[#0b1f14] mb-1.5 tracking-tight group-hover:text-[#15803d] transition-colors">

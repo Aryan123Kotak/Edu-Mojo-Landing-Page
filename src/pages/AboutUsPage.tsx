@@ -1,15 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  ArrowRight,
-  Layers,
-  Workflow,
-  Sparkles,
-  Award,
-  Target,
-  Eye,
-  CheckCircle2,
-  Users2
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { LogoMarquee } from '../components/LogoMarquee';
 import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { ScrollReveal } from '../components/ScrollReveal';
@@ -100,7 +90,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
 
           const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           if (reduceMotion) {
-            setStats({ teachersWork: 40, schools: 15, students: 20000, modules: 24 });
+            setStats({ teachersWork: 40, schools: 20, students: 20000, modules: 24 });
             return;
           }
 
@@ -114,7 +104,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             const progress = step / steps;
             setStats({
               teachersWork: Math.round(40 * progress),
-              schools: Math.round(15 * progress),
+              schools: Math.round(20 * progress),
               students: Math.round(20000 * progress),
               modules: Math.round(24 * progress),
             });
@@ -288,13 +278,13 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
         className="py-8 sm:py-10 bg-[#f7faf8] border-b border-[rgba(11,31,20,0.06)]"
       >
         <div className="page-container">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto text-center">
             
             {/* Stat 1: 40% */}
             <ScrollReveal delayMs={0}>
-              <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1 text-center h-full flex flex-col justify-center">
+              <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent text-center h-full flex flex-col justify-center">
                 <div 
-                  className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200"
+                  className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight"
                 >
                   {stats.teachersWork}%
                 </div>
@@ -304,25 +294,25 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
               </div>
             </ScrollReveal>
 
-            {/* Stat 2: 15+ */}
-            <ScrollReveal delayMs={80}>
-              <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1 text-center h-full flex flex-col justify-center">
+            {/* Stat 2: 20+ Schools */}
+            <ScrollReveal delayMs={60}>
+              <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent text-center h-full flex flex-col justify-center">
                 <div 
-                  className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200"
+                  className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight"
                 >
                   {stats.schools}+
                 </div>
                 <div className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
-                  Schools, colleges &amp; institutes
+                  Schools, Colleges &amp; Institutes Served Internationally
                 </div>
               </div>
             </ScrollReveal>
 
             {/* Stat 3: 20,000+ */}
-            <ScrollReveal delayMs={160}>
-              <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1 text-center h-full flex flex-col justify-center">
+            <ScrollReveal delayMs={120}>
+              <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent text-center h-full flex flex-col justify-center">
                 <div 
-                  className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200"
+                  className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight"
                 >
                   {stats.students.toLocaleString('en-IN')}+
                 </div>
@@ -333,10 +323,10 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             </ScrollReveal>
 
             {/* Stat 4: 24+ */}
-            <ScrollReveal delayMs={240}>
-              <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1 text-center h-full flex flex-col justify-center">
+            <ScrollReveal delayMs={180}>
+              <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent text-center h-full flex flex-col justify-center">
                 <div 
-                  className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200"
+                  className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight"
                 >
                   {stats.modules}+
                 </div>
@@ -428,14 +418,11 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
                 <div className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gradient-to-br from-[#2eca8b]/15 via-[#16a34a]/10 to-transparent blur-2xl group-hover:scale-150 group-hover:opacity-100 opacity-40 transition-all duration-500" />
                 
                 <div>
-                  {/* Top row with pill and modern icon badge */}
-                  <div className="flex items-center justify-between gap-4 mb-5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fdf4] border border-[#2eca8b]/30 text-[11px] font-black uppercase tracking-wider text-[#15803d]">
-                      Our Mission
+                  {/* Top row with modern icon badge */}
+                  <div className="flex items-center justify-end mb-5">
+                    <span className="ic lg">
+                      <i className="ph-bold ph-target" />
                     </span>
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-emerald-50 to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/40 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300 shrink-0">
-                      <Target className="w-7 h-7 stroke-[2.2]" />
-                    </div>
                   </div>
 
                   <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight group-hover:text-[#15803d] transition-colors duration-200 mb-3">
@@ -463,14 +450,11 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
                 <div className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gradient-to-br from-[#14b8a6]/15 via-[#0f766e]/10 to-transparent blur-2xl group-hover:scale-150 group-hover:opacity-100 opacity-40 transition-all duration-500" />
 
                 <div>
-                  {/* Top row with pill and modern icon badge */}
-                  <div className="flex items-center justify-between gap-4 mb-5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fdf4] border border-[#2eca8b]/30 text-[11px] font-black uppercase tracking-wider text-[#15803d]">
-                      Our Vision
+                  {/* Top row with modern icon badge */}
+                  <div className="flex items-center justify-end mb-5">
+                    <span className="ic lg">
+                      <i className="ph-bold ph-eye" />
                     </span>
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f0fdf4] via-teal-50 to-[#ccfbf1] text-[#0f766e] border border-[#2eca8b]/40 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#0f766e] group-hover:text-white transition-all duration-300 shrink-0">
-                      <Eye className="w-7 h-7 stroke-[2.2]" />
-                    </div>
                   </div>
 
                   <h3 className="text-xl sm:text-2xl font-black text-[#0b1f14] tracking-tight group-hover:text-[#0f766e] transition-colors duration-200 mb-3">
@@ -517,8 +501,10 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             <ScrollReveal delayMs={0}>
               <GlowCard className="group p-6 sm:p-7 h-full flex flex-col justify-between rounded-3xl border border-[rgba(11,31,20,0.08)] hover:border-[#2eca8b]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(21,128,61,0.12)]">
                 <div>
-                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                    <Layers className="w-6 h-6 stroke-[2.2]" />
+                  <div className="mb-5">
+                    <span className="ic lg">
+                      <i className="ph-bold ph-squares-four" />
+                    </span>
                   </div>
                   <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight group-hover:text-[#15803d] transition-colors duration-200">
                     One unified platform
@@ -534,8 +520,10 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             <ScrollReveal delayMs={70}>
               <GlowCard className="group p-6 sm:p-7 h-full flex flex-col justify-between rounded-3xl border border-[rgba(11,31,20,0.08)] hover:border-[#14b8a6]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(15,118,110,0.12)]">
                 <div>
-                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#ccfbf1] text-[#0f766e] border border-[#14b8a6]/35 shadow-xs flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-[#0f766e] group-hover:text-white transition-all duration-300">
-                    <Workflow className="w-6 h-6 stroke-[2.2]" />
+                  <div className="mb-5">
+                    <span className="ic lg">
+                      <i className="ph-bold ph-sliders" />
+                    </span>
                   </div>
                   <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight group-hover:text-[#0f766e] transition-colors duration-200">
                     Deep school workflows
@@ -551,8 +539,10 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             <ScrollReveal delayMs={140}>
               <GlowCard className="group p-6 sm:p-7 h-full flex flex-col justify-between rounded-3xl border border-[rgba(11,31,20,0.08)] hover:border-[#2eca8b]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(21,128,61,0.12)]">
                 <div>
-                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#fefce8] to-[#dcfce7] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                    <Sparkles className="w-6 h-6 stroke-[2.2]" />
+                  <div className="mb-5">
+                    <span className="ic lg">
+                      <i className="ph-bold ph-sparkle" />
+                    </span>
                   </div>
                   <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight group-hover:text-[#15803d] transition-colors duration-200">
                     AI that does real work
@@ -568,8 +558,10 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate }) => {
             <ScrollReveal delayMs={210}>
               <GlowCard className="group p-6 sm:p-7 h-full flex flex-col justify-between rounded-3xl border border-[rgba(11,31,20,0.08)] hover:border-[#2eca8b]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-12px_rgba(21,128,61,0.12)]">
                 <div>
-                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#bbf7d0] text-[#15803d] border border-[#2eca8b]/35 shadow-xs flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-[#15803d] group-hover:text-white transition-all duration-300">
-                    <Award className="w-6 h-6 stroke-[2.2]" />
+                  <div className="mb-5">
+                    <span className="ic lg">
+                      <i className="ph-bold ph-headset" />
+                    </span>
                   </div>
                   <h3 className="text-lg font-black text-[#0b1f14] mb-2 tracking-tight group-hover:text-[#15803d] transition-colors duration-200">
                     Operational excellence

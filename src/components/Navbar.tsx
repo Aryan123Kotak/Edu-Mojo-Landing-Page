@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, PhoneCall, LogIn } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import { EduMojoLogo } from './EduMojoLogo';
 
 export type PageRoute = 'home' | 'about' | 'features' | 'contact';
@@ -106,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onRequestCallBack}
               className="inline-flex items-center gap-2 bg-[#16a34a] hover:bg-[#15803d] text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all duration-200 shadow-md shadow-[#16a34a]/20 hover:shadow-lg hover:shadow-[#16a34a]/30 hover:-translate-y-0.5 cursor-pointer"
             >
-              <PhoneCall className="w-3.5 h-3.5" />
+              <i className="ph-bold ph-phone text-sm" />
               <span>Book a demo</span>
             </button>
           </div>
@@ -123,10 +123,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#0b1f14] hover:text-black bg-white/80 border border-slate-200 cursor-pointer"
+              className="p-2 rounded-lg text-[#0b1f14] hover:text-black bg-white/80 border border-slate-200 cursor-pointer flex items-center justify-center w-9 h-9"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <i className="ph-bold ph-x text-lg" /> : <i className="ph-bold ph-list text-lg" />}
             </button>
           </div>
         </div>
@@ -177,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }}
               className="w-full py-3.5 bg-[#16a34a] text-white rounded-full font-bold text-center flex items-center justify-center gap-2 shadow-lg shadow-[#16a34a]/25 cursor-pointer"
             >
-              <PhoneCall className="w-4 h-4" />
+              <i className="ph-bold ph-phone text-base" />
               <span>Book a demo</span>
             </button>
             <p className="text-xs text-center text-[#6b7a72]">

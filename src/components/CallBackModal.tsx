@@ -82,11 +82,7 @@ export const CallBackModal: React.FC<CallBackModalProps> = ({ isOpen, onClose })
         ) : (
           <div>
             <div className="mb-6">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#16a34a] uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Priority Institutional Access</span>
-              </div>
-              <h3 className="text-2xl font-black tracking-tight text-slate-900 mt-1">
+              <h3 className="text-2xl font-black tracking-tight text-slate-900">
                 Request a Call Back
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">

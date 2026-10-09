@@ -18,6 +18,8 @@ html, body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #ffffff;
   color: #0b1f14;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* 75% content width on desktop / widescreen: exactly 25% negative space on both sides combined (12.5% left, 12.5% right) */
@@ -353,6 +355,9 @@ button:hover > .ic,
 
 .float-card.c2 { animation-delay: -1.5s; }
 .float-card.c3 { animation-delay: -3s; }
+@media (max-width: 768px) {
+  .float-card { display: none !important; }
+}
 
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
@@ -623,15 +628,9 @@ button:hover > .ic,
 .tool.t4.absorb { transition-delay: 1.35s; }
 .tool.t5.absorb { transition-delay: 1.10s; }
 .tool.t6.absorb { transition-delay: 1.30s; }
-@media (max-width: 760px) {
-  .statement { padding: 65px 16px 60px; }
-  .tool { font-size: 11px; padding: 7px 10px; }
-  .tool .ic { width: 24px; height: 24px; }
-  .tool.t1 { left: 3%; top: 3%; }
-  .tool.t2 { right: 3%; top: 8%; }
-  .tool.t3 { left: 3%; bottom: 4%; }
-  .tool.t4 { right: 3%; bottom: 5%; }
-  .tool.t5, .tool.t6 { display: none; }
+@media (max-width: 768px) {
+  .statement { padding: 50px 16px 45px; }
+  .tool { display: none !important; }
 }
 .statement.noanim *, .statement.noanim *::after { transition: none !important; animation: none !important; }
 @media (prefers-reduced-motion: reduce) {
@@ -691,8 +690,8 @@ button:hover > .ic,
 .ts-grid { display: grid; grid-template-columns: 1fr 310px; gap: clamp(20px, 3.5vw, 36px); align-items: center; max-width: 960px; margin: 0 auto; }
 @media (max-width: 900px) { .ts-grid { grid-template-columns: 1fr; gap: 24px; } }
 
-.ts-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
-.ts-tab { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #fff; color: var(--body); font: 600 14px 'Inter', sans-serif; padding: 9px 16px 11px; border-radius: 99px; cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.ts-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-width: 480px; margin-bottom: 32px; }
+.ts-tab { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #fff; color: var(--body); font: 600 14px 'Inter', sans-serif; padding: 9px 16px 11px; border-radius: 99px; cursor: pointer; transition: color .2s, border-color .2s, background .2s; width: 100%; justify-content: flex-start; white-space: nowrap; min-width: 0; }
 .ts-tab b { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; background: rgba(11,31,20,.06); color: var(--muted); transition: background .2s, color .2s; }
 .ts-tab[aria-selected="true"] { color: var(--ink); border-color: rgba(22,163,74,.45); background: rgba(46,202,139,.06); }
 .ts-tab[aria-selected="true"] b { background: var(--green); color: #fff; }
@@ -734,7 +733,19 @@ button:hover > .ic,
 .ts-phone::before { content: ''; position: absolute; top: 21px; left: 50%; transform: translateX(-50%); width: 84px; height: 22px; border-radius: 99px; background: #0b0c0d; z-index: 3; }
 .ts-screen { border-radius: 34px; overflow: hidden; background: #fbfaf5; padding-top: 34px; }
 .ts-screen img { display: block; width: 100%; height: auto; }
-@media (max-width: 900px) { .ts-visual { min-height: 0; } .ts-phone { width: 260px; } }
+@media (max-width: 900px) {
+  .ts-visual { min-height: 520px; }
+  .ts-phone { width: 260px; }
+}
+@media (max-width: 640px) {
+  .ts { padding: 44px 16px; }
+  .ts-tabs { gap: 6px; margin-bottom: 24px; max-width: 100%; }
+  .ts-tab { padding: 7px 12px 9px; font-size: 13px; }
+  .ts-h { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+  .ts-p { font-size: 0.95rem; }
+  .ts-visual { min-height: 480px; }
+  .ts-phone { width: 250px; }
+}
 .ts-cap { text-align: center; font-size: 13px; color: var(--muted); margin-top: 14px; min-height: 1.4em; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -753,7 +764,7 @@ button:hover > .ic,
 .ann a:hover .arr { transform: translateX(3px); }
 @keyframes spin { to { --a: 360deg; } }
 @keyframes fadeup { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.hero h1 { font-size: clamp(1.85rem, 4.2vw, 3.75rem); font-weight: 900; letter-spacing: -.025em; line-height: 1.16; max-width: 1200px; margin: 0 auto; }
+.hero h1 { font-size: clamp(1.6rem, 4.2vw, 3.75rem); font-weight: 900; letter-spacing: -.025em; line-height: 1.16; max-width: 1200px; margin: 0 auto; }
 .hero h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0.04em 0.12em 0.14em 0.04em; }
 .hero h1 .w > span { display: inline-block; padding-right: 0.08em; animation: rise .8s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(.15s + var(--i) * 80ms); }
 .hero h1 .g { color: var(--green-d); }

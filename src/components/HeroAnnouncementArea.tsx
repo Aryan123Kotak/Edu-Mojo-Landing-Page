@@ -78,7 +78,7 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
 
       setStats({
         teachersWork: Math.round(40 * ease),
-        schools: Math.round(15 * ease),
+        schools: Math.round(20 * ease),
         impacted: Math.round(20000 * ease),
         modules: Math.round(24 * ease),
       });
@@ -115,27 +115,6 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
 
   return (
     <>
-      {/* 1. Announcement Pill */}
-      <div className="ann">
-        <a 
-          href="#teacher-time" 
-          onClick={(e) => {
-            e.preventDefault();
-            handleScrollTeacherTime();
-          }}
-        >
-          <b>WHY EDUMOJO</b>Simple. Affordable. Built around teachers <span className="arr">→</span>
-        </a>
-      </div>
-
-      {/* Small label above the headline (<p>, uppercase, dark green, letter-spaced) */}
-      <p 
-        className="text-[11px] sm:text-xs font-black uppercase text-[#15803d] tracking-[0.16em] mb-3 select-none"
-        style={{ letterSpacing: '0.16em' }}
-      >
-        Simple school ERP · India &amp; Dubai
-      </p>
-
       {/* 2. Sliding Headline with Rotating Word in 2 lines */}
       <h1 id="heroTitle">
         <span className="block">
@@ -193,11 +172,11 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
       </div>
 
       {/* 6. Four Static Stats that count up once from 0 (1.4s, ease-out) */}
-      <div className="w-full mx-auto mt-8 sm:mt-12">
+      <div className="w-full max-w-5xl mx-auto mt-8 sm:mt-12">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
           {/* Card 1: 40% */}
-          <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1">
-            <div className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200">
+          <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent">
+            <div className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight">
               {stats.teachersWork}%
             </div>
             <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
@@ -205,19 +184,19 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
             </p>
           </div>
 
-          {/* Card 2: 15+ */}
-          <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1">
-            <div className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200">
+          {/* Card 2: 20+ Schools */}
+          <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent">
+            <div className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight">
               {stats.schools}+
             </div>
             <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
-              Schools, colleges &amp; institutes
+              Schools, Colleges &amp; Institutes Served Internationally
             </p>
           </div>
 
           {/* Card 3: 20,000+ */}
-          <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1">
-            <div className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200">
+          <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent">
+            <div className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight">
               {stats.impacted.toLocaleString('en-IN')}+
             </div>
             <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
@@ -226,8 +205,8 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
           </div>
 
           {/* Card 4: 24+ */}
-          <div className="group bg-gradient-to-b from-white via-white to-[#f0fdf4] rounded-2xl p-5 sm:p-6 border border-[#2eca8b]/40 shadow-xs hover:border-[#15803d] hover:shadow-[0_12px_28px_rgba(21,128,61,0.14)] transition-all duration-300 hover:-translate-y-1">
-            <div className="text-3xl sm:text-4xl lg:text-[44px] font-black font-sans text-[#15803d] tracking-tight group-hover:scale-105 transition-transform duration-200">
+          <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent">
+            <div className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight">
               {stats.modules}+
             </div>
             <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">

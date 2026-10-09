@@ -19,7 +19,8 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
     const caps = [
       'Daily update in the EduMojo app (parent view)',
       'Announcements in the EduMojo app (teacher view)',
-      'Report cards in the student profile (parent view)'
+      'Attendance in the EduMojo app (teacher view)',
+      'Management dashboard in the EduMojo app (admin view)',
     ];
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -175,26 +176,40 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
   };
 
   return (
-    <section className="ts" id="teacherSlider" aria-label="How EduMojo saves teachers time" ref={rootRef}>
+    <section className="ts" id="teacherSlider" aria-label="How EduMojo saves time for teachers and management" ref={rootRef}>
       <div className="ts-grid">
         <div>
           <div className="ts-tabs" role="tablist" aria-label="Teacher tasks">
             <button className="ts-tab" role="tab" id="ts-tab-0" aria-controls="ts-panel-0" aria-selected="true">
               <b>1</b>
-              <span className="ic sm"><i className="ph-bold ph-notebook" aria-hidden="true"></i></span>
+              <span className="ic sm mr-1.5">
+                <i className="ph-bold ph-notebook" />
+              </span>
               Homework
               <span className="bar"></span>
             </button>
             <button className="ts-tab" role="tab" id="ts-tab-1" aria-controls="ts-panel-1" aria-selected="false" tabIndex={-1}>
               <b>2</b>
-              <span className="ic sm"><i className="ph-bold ph-megaphone" aria-hidden="true"></i></span>
+              <span className="ic sm mr-1.5">
+                <i className="ph-bold ph-megaphone" />
+              </span>
               Parent updates
               <span className="bar"></span>
             </button>
             <button className="ts-tab" role="tab" id="ts-tab-2" aria-controls="ts-panel-2" aria-selected="false" tabIndex={-1}>
               <b>3</b>
-              <span className="ic sm"><i className="ph-bold ph-exam" aria-hidden="true"></i></span>
-              Report cards
+              <span className="ic sm mr-1.5">
+                <i className="ph-bold ph-user-check" />
+              </span>
+              Attendance
+              <span className="bar"></span>
+            </button>
+            <button className="ts-tab" role="tab" id="ts-tab-3" aria-controls="ts-panel-3" aria-selected="false" tabIndex={-1}>
+              <b>4</b>
+              <span className="ic sm mr-1.5">
+                <i className="ph-bold ph-squares-four" />
+              </span>
+              Dashboard
               <span className="bar"></span>
             </button>
           </div>
@@ -279,11 +294,11 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
             </div>
 
             <div className="ts-text" role="tabpanel" id="ts-panel-2" aria-labelledby="ts-tab-2" hidden>
-              <span className="ts-kicker ts-anim">Report cards</span>
-              <h2 className="ts-h ts-anim">Every report card, <span className="ts-hl">one tap away for parents</span></h2>
+              <span className="ts-kicker ts-anim">Attendance</span>
+              <h2 className="ts-h ts-anim">Attendance marked on the phone, <span className="ts-hl">parents see it the same day</span></h2>
               <div className="ts-anim">
                 <div className="ts-rule"></div>
-                <p className="ts-p">Report cards are published to each student's profile in the EduMojo app. Parents open the PDF any time, for this year and past years, without asking the office for a copy.</p>
+                <p className="ts-p">Teachers open their class on the phone, mark each student present or absent and save. Parents see it in the EduMojo app, and the office gets class-wise attendance without collecting paper registers.</p>
               </div>
               <ul className="ts-list ts-anim">
                 <li>
@@ -291,8 +306,8 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
                     <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
                   </span>
                   <div>
-                    <h3>Report cards in the app</h3>
-                    <p>Published to each student's profile, term by term.</p>
+                    <h3>Present or absent in a tap</h3>
+                    <p>One list per class, with the day's totals on top.</p>
                   </div>
                 </li>
                 <li>
@@ -300,8 +315,8 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
                     <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
                   </span>
                   <div>
-                    <h3>Past years kept safe</h3>
-                    <p>Earlier report cards stay available as PDFs.</p>
+                    <h3>Parents stay informed</h3>
+                    <p>Attendance shows in the EduMojo app for every parent.</p>
                   </div>
                 </li>
                 <li>
@@ -309,8 +324,47 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
                     <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
                   </span>
                   <div>
-                    <h3>The whole student profile</h3>
-                    <p>Achievements and health check-ups live in the same place.</p>
+                    <h3>No paper registers</h3>
+                    <p>Class-wise attendance reaches the office as soon as it is saved.</p>
+                  </div>
+                </li>
+              </ul>
+              <a href="#contact" onClick={handleCtaClick} className="ts-cta ts-anim">Book a demo <span>→</span></a>
+            </div>
+
+            <div className="ts-text" role="tabpanel" id="ts-panel-3" aria-labelledby="ts-tab-3" hidden>
+              <span className="ts-kicker ts-anim">Management dashboard</span>
+              <h2 className="ts-h ts-anim">The whole school <span className="ts-hl">on one screen</span></h2>
+              <div className="ts-anim">
+                <div className="ts-rule"></div>
+                <p className="ts-p">Principals and management see today's attendance, fee collection, new admission enquiries and announcements together, instead of asking each department for a report.</p>
+              </div>
+              <ul className="ts-list ts-anim">
+                <li>
+                  <span className="ts-ck">
+                    <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+                  </span>
+                  <div>
+                    <h3>Today at a glance</h3>
+                    <p>Attendance for the whole school and the classes that need a look.</p>
+                  </div>
+                </li>
+                <li>
+                  <span className="ts-ck">
+                    <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+                  </span>
+                  <div>
+                    <h3>Fees and admissions</h3>
+                    <p>Collected, pending and new enquiries in one place.</p>
+                  </div>
+                </li>
+                <li>
+                  <span className="ts-ck">
+                    <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+                  </span>
+                  <div>
+                    <h3>Act early</h3>
+                    <p>Spot a dip in attendance or fees before it becomes a problem.</p>
                   </div>
                 </li>
               </ul>
@@ -345,8 +399,18 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
               <div className="ts-phone">
                 <div className="ts-screen">
                   <img 
-                    src="/images/app/teacher-report-cards.png" 
-                    alt="EduMojo app: student profile with Term 1 report cards for 2026-27 and 2025-26, each with an Open PDF button" 
+                    src="/images/app/teacher-attendance.png" 
+                    alt="EduMojo teacher app: attendance for Class IX-B on Oct 9, 2026 with 38 present and 2 absent, a present/absent button for each student and a Save attendance button" 
+                  />
+                </div>
+              </div>
+            </figure>
+            <figure className="ts-shot">
+              <div className="ts-phone">
+                <div className="ts-screen">
+                  <img 
+                    src="/images/app/teacher-dashboard.png" 
+                    alt="EduMojo admin app: management dashboard for the whole school showing 94% student attendance today, Term 2 fees collected and pending, 24 new enquiries, 3 announcements and the classes with the lowest attendance" 
                   />
                 </div>
               </div>

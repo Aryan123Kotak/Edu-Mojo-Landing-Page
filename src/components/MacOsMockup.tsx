@@ -1,9 +1,4 @@
 import React, { useState } from 'react';
-import { 
-  RefreshCw, 
-  ExternalLink,
-  Check
-} from 'lucide-react';
 
 interface MacOsMockupProps {
   className?: string;
@@ -28,7 +23,7 @@ export const MacOsMockup: React.FC<MacOsMockupProps> = ({ className = '', onOpen
           className="ic text-[#15803d]"
           style={{ background: 'rgba(46, 202, 139, 0.16)' }}
         >
-          <Check className="w-4 h-4 stroke-[3]" />
+          <i className="ph-bold ph-check text-sm" />
         </div>
         <div>
           <span>Aarav marked present</span>
@@ -41,10 +36,10 @@ export const MacOsMockup: React.FC<MacOsMockupProps> = ({ className = '', onOpen
         className="float-card c2 top-[35%] sm:top-[40%] right-2 sm:-right-[40px] text-xs sm:text-sm py-1.5 sm:py-2.5 px-2.5 sm:px-3.5"
       >
         <div 
-          className="ic text-[#c2410c] text-base"
+          className="ic text-[#c2410c]"
           style={{ background: 'rgba(241, 116, 37, 0.14)' }}
         >
-          ₹
+          <i className="ph-bold ph-currency-inr text-sm" />
         </div>
         <div>
           <span>Fee received ₹12,500</span>
@@ -60,7 +55,7 @@ export const MacOsMockup: React.FC<MacOsMockupProps> = ({ className = '', onOpen
           className="ic text-[#15803d]"
           style={{ background: 'rgba(46, 202, 139, 0.16)' }}
         >
-          <RefreshCw className="w-3.5 h-3.5 stroke-[2.5]" />
+          <i className="ph-bold ph-arrows-clockwise text-sm" />
         </div>
         <div>
           <span>Timetable clash fixed</span>
@@ -107,7 +102,7 @@ export const MacOsMockup: React.FC<MacOsMockupProps> = ({ className = '', onOpen
             title="Refresh ERP metrics"
             aria-label="Refresh metrics"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-[#16a34a]' : ''}`} />
+            <i className={`ph-bold ph-arrows-clockwise text-sm ${isRefreshing ? 'animate-spin text-[#16a34a]' : ''}`} />
           </button>
           
           <button
@@ -116,7 +111,7 @@ export const MacOsMockup: React.FC<MacOsMockupProps> = ({ className = '', onOpen
             className="text-[11px] font-semibold text-[#15803d] hover:text-[#0b1f14] bg-[#2eca8b]/15 hover:bg-[#2eca8b]/25 px-2.5 py-1 rounded transition-colors flex items-center gap-1 cursor-pointer"
           >
             <span>Live Interactive Demo</span>
-            <ExternalLink className="w-3 h-3" />
+            <i className="ph-bold ph-arrow-square-out text-xs" />
           </button>
         </div>
       </div>
