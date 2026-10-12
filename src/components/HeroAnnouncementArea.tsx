@@ -6,56 +6,47 @@ interface HeroAnnouncementAreaProps {
   onRequestCallBack: () => void;
 }
 
-export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
-  onNavigate,
-  onRequestCallBack,
-}) => {
+const HeroRotatingWord: React.FC = () => {
   const rotRef = useRef<HTMLSpanElement>(null);
-
-  // Four static stats that count up once from 0 when the page loads (1.4s, ease-out)
-  const [stats, setStats] = useState({
-    teachersWork: 0,
-    schools: 0,
-    impacted: 0,
-    modules: 0,
-  });
+  const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const rot = rotRef.current;
-    if (!rot) return;
+    const textSpan = textRef.current;
+    if (!rot || !textSpan) return;
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // The rotating word cycles: attendance → homework → report cards → parent updates → timetables. "attendance" is in the HTML at load.
     const words = ['attendance', 'homework', 'report cards', 'parent updates', 'timetables'];
     let wi = 0;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    let intervalId: ReturnType<typeof setInterval> | null = null;
 
-    function sizeRot() {
-      if (rot && rot.firstElementChild) {
+    const sizeRot = () => {
+      if (rotRef.current && textRef.current) {
         // Add safety margin so font tracking (-0.05em), subpixel kerning and glyph overhangs are never clipped
-        const rect = rot.firstElementChild.getBoundingClientRect();
+        const rect = textRef.current.getBoundingClientRect();
         const baseWidth = Math.ceil(rect.width);
-        rot.style.width = `${baseWidth + 14}px`;
+        rotRef.current.style.width = `${baseWidth + 14}px`;
       }
-    }
+    };
 
     sizeRot();
 
-    let intervalId: ReturnType<typeof setInterval> | null = null;
-
     if (!reduce) {
       intervalId = setInterval(() => {
-        const cur = rot.firstElementChild;
-        if (!cur) return;
-        cur.classList.add('out');
-        setTimeout(() => {
+        if (!textRef.current || !rotRef.current) return;
+        const span = textRef.current;
+        span.classList.add('out');
+
+        timeoutId = setTimeout(() => {
+          if (!textRef.current || !rotRef.current) return;
           wi = (wi + 1) % words.length;
-          const n = document.createElement('span');
-          n.className = 'pre whitespace-nowrap';
-          n.textContent = words[wi];
-          rot.replaceChild(n, cur);
+          const currentSpan = textRef.current;
+          currentSpan.textContent = words[wi];
+          currentSpan.className = 'pre whitespace-nowrap';
           sizeRot();
-          void n.offsetWidth;
-          n.className = 'whitespace-nowrap';
+          void currentSpan.offsetWidth;
+          currentSpan.className = 'whitespace-nowrap';
           requestAnimationFrame(sizeRot);
         }, 420);
       }, 2600);
@@ -66,9 +57,39 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
       document.fonts.ready.then(sizeRot);
     }
 
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+      if (timeoutId) clearTimeout(timeoutId);
+      window.removeEventListener('resize', sizeRot);
+    };
+  }, []);
+
+  return (
+    <span className="rot whitespace-nowrap" id="rot" ref={rotRef}>
+      <span ref={textRef} className="whitespace-nowrap">
+        attendance
+      </span>
+    </span>
+  );
+};
+
+export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
+  onNavigate,
+  onRequestCallBack,
+}) => {
+  // Four static stats that count up once from 0 when the page loads (1.4s, ease-out)
+  const [stats, setStats] = useState({
+    teachersWork: 0,
+    schools: 0,
+    impacted: 0,
+    modules: 0,
+  });
+
+  useEffect(() => {
     // 1.4s count up on load
     const duration = 1400;
     const startTime = performance.now();
+    let animFrame: number;
 
     const animateStats = (now: number) => {
       const elapsed = now - startTime;
@@ -84,16 +105,14 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
       });
 
       if (progress < 1) {
-        requestAnimationFrame(animateStats);
+        animFrame = requestAnimationFrame(animateStats);
       }
     };
 
-    const animFrame = requestAnimationFrame(animateStats);
+    animFrame = requestAnimationFrame(animateStats);
 
     return () => {
-      if (intervalId) clearInterval(intervalId);
       cancelAnimationFrame(animFrame);
-      window.removeEventListener('resize', sizeRot);
     };
   }, []);
 
@@ -146,9 +165,7 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
           </span>{' '}
           <span className="w !overflow-visible">
             <span style={{ '--i': 8 } as React.CSSProperties} className="!overflow-visible">
-              <span className="rot whitespace-nowrap" id="rot" ref={rotRef}>
-                <span className="whitespace-nowrap">attendance</span>
-              </span>
+              <HeroRotatingWord />
             </span>
           </span>
         </span>

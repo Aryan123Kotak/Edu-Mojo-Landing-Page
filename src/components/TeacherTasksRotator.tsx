@@ -177,44 +177,10 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
 
   return (
     <section className="ts" id="teacherSlider" aria-label="How EduMojo saves time for teachers and management" ref={rootRef}>
-      <div className="ts-grid">
-        <div>
-          <div className="ts-tabs" role="tablist" aria-label="Teacher tasks">
-            <button className="ts-tab" role="tab" id="ts-tab-0" aria-controls="ts-panel-0" aria-selected="true">
-              <b>1</b>
-              <span className="ic sm mr-1.5">
-                <i className="ph-bold ph-notebook" />
-              </span>
-              Homework
-              <span className="bar"></span>
-            </button>
-            <button className="ts-tab" role="tab" id="ts-tab-1" aria-controls="ts-panel-1" aria-selected="false" tabIndex={-1}>
-              <b>2</b>
-              <span className="ic sm mr-1.5">
-                <i className="ph-bold ph-megaphone" />
-              </span>
-              Parent updates
-              <span className="bar"></span>
-            </button>
-            <button className="ts-tab" role="tab" id="ts-tab-2" aria-controls="ts-panel-2" aria-selected="false" tabIndex={-1}>
-              <b>3</b>
-              <span className="ic sm mr-1.5">
-                <i className="ph-bold ph-user-check" />
-              </span>
-              Attendance
-              <span className="bar"></span>
-            </button>
-            <button className="ts-tab" role="tab" id="ts-tab-3" aria-controls="ts-panel-3" aria-selected="false" tabIndex={-1}>
-              <b>4</b>
-              <span className="ic sm mr-1.5">
-                <i className="ph-bold ph-squares-four" />
-              </span>
-              Dashboard
-              <span className="bar"></span>
-            </button>
-          </div>
-
-          <div className="ts-texts">
+      <div className="ts-container">
+        <div className="ts-grid">
+          <div>
+            <div className="ts-texts">
             <div className="ts-text in" role="tabpanel" id="ts-panel-0" aria-labelledby="ts-tab-0">
               <span className="ts-kicker ts-anim">Daily academic updates</span>
               <h2 className="ts-h ts-anim">Classwork and homework for every subject, <span className="ts-hl">in one daily update</span></h2>
@@ -419,6 +385,33 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
           <p className="ts-cap" id="tsCap" aria-live="polite">Daily update in the EduMojo app (parent view)</p>
         </div>
       </div>
-    </section>
-  );
+
+      {/* Selectors at the bottom of the section */}
+      <div className="ts-tabs-bottom">
+        <div className="ts-tabs" role="tablist" aria-label="Teacher tasks">
+          <button className="ts-tab" role="tab" id="ts-tab-0" aria-controls="ts-panel-0" aria-selected="true">
+            <b>1</b>
+            <span>Homework</span>
+            <span className="bar"></span>
+          </button>
+          <button className="ts-tab" role="tab" id="ts-tab-1" aria-controls="ts-panel-1" aria-selected="false" tabIndex={-1}>
+            <b>2</b>
+            <span>Parent updates</span>
+            <span className="bar"></span>
+          </button>
+          <button className="ts-tab" role="tab" id="ts-tab-2" aria-controls="ts-panel-2" aria-selected="false" tabIndex={-1}>
+            <b>3</b>
+            <span>Attendance</span>
+            <span className="bar"></span>
+          </button>
+          <button className="ts-tab" role="tab" id="ts-tab-3" aria-controls="ts-panel-3" aria-selected="false" tabIndex={-1}>
+            <b>4</b>
+            <span>Dashboard</span>
+            <span className="bar"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 };

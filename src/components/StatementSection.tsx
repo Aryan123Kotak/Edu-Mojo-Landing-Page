@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 export const StatementSection: React.FC = () => {
   const secRef = useRef<HTMLElement>(null);
-  const lineRef = useRef<HTMLParagraphElement>(null);
+  const lineRef = useRef<HTMLHeadingElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -14,56 +14,32 @@ export const StatementSection: React.FC = () => {
     const tools = sec.querySelectorAll<HTMLElement>('.tool');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // wrap each plain word so it can darken one by one
-    let i = 0;
-    Array.prototype.slice.call(line.childNodes).forEach((n: Node) => {
-      if (n.nodeType === 3) {
-        const frag = document.createDocumentFragment();
-        (n.textContent || '').split(/(\s+)/).forEach((part) => {
-          if (!part) return;
-          if (/^\s+$/.test(part)) {
-            frag.appendChild(document.createTextNode(part));
-            return;
+    // Wrap each plain word so it can darken one by one (guard against double-wrapping)
+    if (!line.querySelector('.word')) {
+      let i = 0;
+      Array.prototype.slice.call(line.childNodes).forEach((n: Node) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          (n.textContent || '').split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              frag.appendChild(document.createTextNode(part));
+              return;
+            }
+            const s = document.createElement('span');
+            s.className = 'word';
+            s.style.setProperty('--i', String(i++));
+            s.textContent = part;
+            frag.appendChild(s);
+          });
+          if (n.parentNode) {
+            n.parentNode.replaceChild(frag, n);
           }
-          const s = document.createElement('span');
-          s.className = 'word';
-          s.style.setProperty('--i', String(i++));
-          s.textContent = part;
-          frag.appendChild(s);
-        });
-        if (n.parentNode) {
-          n.parentNode.replaceChild(frag, n);
+        } else if (n instanceof HTMLElement && n.classList.contains('strike')) {
+          n.classList.add('word');
+          n.style.setProperty('--i', String(i++));
         }
-      } else if (n instanceof HTMLElement && n.classList.contains('strike')) {
-        n.classList.add('word');
-        n.style.setProperty('--i', String(i++));
-      }
-    });
-
-    function aim() {
-      if (!box) return;
-      const b = box.getBoundingClientRect();
-      const cx = b.left + b.width / 2;
-      const cy = b.top + b.height / 2;
-      tools.forEach((t) => {
-        t.classList.remove('absorb');
-        const r = t.getBoundingClientRect();
-        t.style.setProperty('--tx', `${cx - (r.left + r.width / 2)}px`);
-        t.style.setProperty('--ty', `${cy - (r.top + r.height / 2)}px`);
       });
-    }
-
-    function play() {
-      if (!sec) return;
-      sec.classList.add('noanim');
-      sec.classList.remove('play');
-      tools.forEach((t) => { t.classList.remove('absorb'); });
-      void sec.offsetWidth;
-      sec.classList.remove('noanim');
-      void sec.offsetWidth;
-      aim();
-      sec.classList.add('play');
-      tools.forEach((t) => { t.classList.add('absorb'); });
     }
 
     if (reduce) {
@@ -71,25 +47,122 @@ export const StatementSection: React.FC = () => {
       return;
     }
 
-    let playTimer: number | null = null;
+    let isVisible = false;
+    let isHovered = false;
+    let loopTimer: number | null = null;
+    let isMounted = true;
+
+    function aim() {
+      if (!box) return;
+      const b = box.getBoundingClientRect();
+      const cx = b.left + b.width / 2;
+      const cy = b.top + b.height / 2;
+      tools.forEach((t) => {
+        const r = t.getBoundingClientRect();
+        t.style.setProperty('--tx', `${cx - (r.left + r.width / 2)}px`);
+        t.style.setProperty('--ty', `${cy - (r.top + r.height / 2)}px`);
+      });
+    }
+
+    function clearTimer() {
+      if (loopTimer) {
+        clearTimeout(loopTimer);
+        loopTimer = null;
+      }
+    }
+
+    function play() {
+      if (!isMounted || !sec || !isVisible) return;
+      clearTimer();
+
+      aim();
+      void sec.offsetWidth; // force reflow
+      sec.classList.add('play');
+      tools.forEach((t) => {
+        t.classList.add('absorb');
+      });
+
+      // Animation takes ~3.5s to complete, hold for 4s of comfortable reading time (7.5s total)
+      loopTimer = window.setTimeout(() => {
+        checkAndReset();
+      }, 7500);
+    }
+
+    function checkAndReset() {
+      if (!isMounted || !sec || !isVisible) return;
+
+      // If user is hovering or reading, wait before resetting
+      if (isHovered) {
+        loopTimer = window.setTimeout(() => {
+          checkAndReset();
+        }, 1500);
+        return;
+      }
+
+      reset();
+    }
+
+    function reset() {
+      if (!isMounted || !sec || !isVisible) return;
+      clearTimer();
+
+      // Smoothly reverse transitions without staggered delays
+      sec.classList.remove('play');
+      tools.forEach((t) => {
+        t.classList.remove('absorb');
+      });
+
+      // 650ms for smooth rewind transition + 350ms resting pause, then play again
+      loopTimer = window.setTimeout(() => {
+        if (!isMounted || !isVisible) return;
+        play();
+      }, 1000);
+    }
+
+    const onMouseEnter = () => {
+      isHovered = true;
+    };
+
+    const onMouseLeave = () => {
+      isHovered = false;
+    };
+
+    sec.addEventListener('mouseenter', onMouseEnter);
+    sec.addEventListener('mouseleave', onMouseLeave);
+
+    const onResize = () => {
+      if (sec.classList.contains('play')) {
+        aim();
+      }
+    };
+    window.addEventListener('resize', onResize);
+
     const io = new IntersectionObserver(
-      (es) => {
-        es.forEach((e) => {
-          if (e.isIntersecting) {
-            playTimer = window.setTimeout(() => {
-              play();
-            }, 300);
-            io.disconnect();
+      (entries) => {
+        entries.forEach((e) => {
+          isVisible = e.isIntersecting;
+          if (isVisible) {
+            play();
+          } else {
+            clearTimer();
+            sec.classList.remove('play');
+            tools.forEach((t) => {
+              t.classList.remove('absorb');
+            });
           }
         });
       },
-      { threshold: 0.65 }
+      { threshold: 0.25 }
     );
 
     io.observe(sec);
 
     return () => {
-      if (playTimer) clearTimeout(playTimer);
+      isMounted = false;
+      clearTimer();
+      sec.removeEventListener('mouseenter', onMouseEnter);
+      sec.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('resize', onResize);
       io.disconnect();
     };
   }, []);
@@ -121,17 +194,19 @@ export const StatementSection: React.FC = () => {
         <span>TC_Certificate_Queue.pdf<small>18 pending manual sign-offs</small></span>
       </div>
 
-      <h2 className="st-line" id="stLine" ref={lineRef as any}>
-        Your teachers became teachers to teach, not to do more <span className="strike">paperwork.<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C 60 4, 120 16, 180 8 S 270 6, 296 10" /></svg></span>
-      </h2>
-      <div className="st-box-wrap">
-        <div className="st-box" id="stBox" ref={boxRef}>
-          <span className="brand">EduMojo</span> handles it.
+      <div className="st-content">
+        <h2 className="st-line" id="stLine" ref={lineRef as any}>
+          Your teachers became teachers to teach, not to do more <span className="strike">paperwork.<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C 60 4, 120 16, 180 8 S 270 6, 296 10" /></svg></span>
+        </h2>
+        <div className="st-box-wrap">
+          <div className="st-box" id="stBox" ref={boxRef}>
+            <span className="brand">EduMojo</span> handles it.
+          </div>
         </div>
+        <p className="st-sub">
+          Registers, spreadsheets, report-card templates and endless parent calls. EduMojo does the routine work, so teachers get their time back for students.
+        </p>
       </div>
-      <p className="st-sub">
-        Registers, spreadsheets, report-card templates and endless parent calls. EduMojo does the routine work, so teachers get their time back for students.
-      </p>
     </section>
   );
 };
