@@ -193,47 +193,62 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
           {/* Stat 1: 40% */}
           <div className="p-2 sm:p-3 bg-transparent dark:bg-transparent border-0 dark:border-0 shadow-none dark:shadow-none transition-all duration-300">
-            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] dark:text-[#22c55e] tracking-tight">
+            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] tracking-tight">
               {stats.teachersWork}%
             </div>
-            <p className="text-xs sm:text-[13.5px] text-[#0b1f14] dark:text-[#f0fdf4] font-bold mt-2 leading-snug max-w-[210px] mx-auto">
+            <p 
+              className="text-xs sm:text-[13.5px] font-bold mt-2 leading-snug max-w-[210px] mx-auto !text-black"
+              style={{ color: '#000000' }}
+            >
               Teachers spend up to 40% less time on routine work
             </p>
           </div>
 
           {/* Stat 2: 20+ Schools */}
           <div className="p-2 sm:p-3 bg-transparent dark:bg-transparent border-0 dark:border-0 shadow-none dark:shadow-none transition-all duration-300">
-            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] dark:text-[#22c55e] tracking-tight">
+            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] tracking-tight">
               {stats.schools}+
             </div>
-            <p className="text-xs sm:text-[13.5px] text-[#0b1f14] dark:text-[#f0fdf4] font-bold mt-2 leading-snug max-w-[210px] mx-auto">
+            <p 
+              className="text-xs sm:text-[13.5px] font-bold mt-2 leading-snug max-w-[210px] mx-auto !text-black"
+              style={{ color: '#000000' }}
+            >
               Schools, Colleges &amp; Institutes Served Internationally
             </p>
           </div>
 
           {/* Stat 3: 20,000+ */}
           <div className="p-2 sm:p-3 bg-transparent dark:bg-transparent border-0 dark:border-0 shadow-none dark:shadow-none transition-all duration-300">
-            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] dark:text-[#22c55e] tracking-tight">
+            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] tracking-tight">
               {stats.impacted.toLocaleString('en-IN')}+
             </div>
-            <p className="text-xs sm:text-[13.5px] text-[#0b1f14] dark:text-[#f0fdf4] font-bold mt-2 leading-snug max-w-[210px] mx-auto">
+            <p 
+              className="text-xs sm:text-[13.5px] font-bold mt-2 leading-snug max-w-[210px] mx-auto !text-black"
+              style={{ color: '#000000' }}
+            >
               Students &amp; teachers impacted
             </p>
           </div>
 
           {/* Stat 4: 24+ */}
           <div className="p-2 sm:p-3 bg-transparent dark:bg-transparent border-0 dark:border-0 shadow-none dark:shadow-none transition-all duration-300">
-            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] dark:text-[#22c55e] tracking-tight">
+            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] tracking-tight">
               {stats.modules}+
             </div>
-            <p className="text-xs sm:text-[13.5px] text-[#0b1f14] dark:text-[#f0fdf4] font-bold mt-2 leading-snug max-w-[210px] mx-auto">
+            <p 
+              className="text-xs sm:text-[13.5px] font-bold mt-2 leading-snug max-w-[210px] mx-auto !text-black"
+              style={{ color: '#000000' }}
+            >
               Modules, one simple app
             </p>
           </div>
         </div>
 
         {/* Footnote under stats row */}
-        <p className="text-center text-xs text-[#0b1f14]/75 dark:text-[#f0fdf4]/75 mt-5 font-semibold">
+        <p 
+          className="text-center text-xs mt-5 font-semibold !text-black"
+          style={{ color: '#000000' }}
+        >
           *Based on routine task time reported across partner schools, 2025–26
         </p>
       </div>
