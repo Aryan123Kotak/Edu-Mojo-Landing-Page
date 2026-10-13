@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { GlowCard } from '../components/GlowCard';
+import { InteractiveGridDotMatrix } from '../components/InteractiveGridDotMatrix';
 import { UniversalFaqSection } from '../components/UniversalFaqSection';
 import { PageRoute } from '../components/Navbar';
 
@@ -222,14 +223,7 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
           1. HERO (short lava gradient, centred)
           ================================================== */}
       <div className="lava text-center">
-        <div className="lava-blobs" aria-hidden="true">
-          <div className="blob b1" />
-          <div className="blob b2" />
-          <div className="blob b3" />
-          <div className="blob b4" />
-          <div className="blob b5" />
-          <div className="blob b6" />
-        </div>
+        <InteractiveGridDotMatrix initialMode="mesh" showHud={false} />
 
         <section className="pt-28 pb-10 sm:pt-32 sm:pb-12">
           <div className="page-container space-y-4">

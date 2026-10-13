@@ -2,6 +2,7 @@ import React from 'react';
 import { Mail, Phone, MapPin, Heart, ArrowUpRight } from 'lucide-react';
 import { EduMojoLogo } from './EduMojoLogo';
 import { PageRoute } from './Navbar';
+import { useTheme } from '../context/ThemeContext';
 
 interface FooterProps {
   onNavigate: (page: PageRoute) => void;
@@ -9,6 +10,9 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   const handleNav = (page: PageRoute, hash?: string) => {
     onNavigate(page);
     if (hash) {
@@ -34,28 +38,28 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
   };
 
   return (
-    <footer className="bg-[#f7faf8] border-t border-[rgba(11,31,20,0.06)] text-[#3f4b45] pt-14 pb-12 font-sans">
+    <footer className="bg-[#f7faf8] dark:bg-[#05110a] border-t border-[rgba(11,31,20,0.06)] dark:border-[#163821] text-[#3f4b45] dark:text-slate-300 pt-14 pb-12 font-sans transition-colors duration-200">
       <div className="page-container">
         {/* Main 4-column footer grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-[rgba(11,31,20,0.06)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-[rgba(11,31,20,0.06)] dark:border-[#163821]">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <EduMojoLogo className="h-9" variant="color" showTagline={false} />
-            <p className="text-sm text-[#3f4b45] max-w-sm leading-relaxed mt-2">
-              <strong className="text-[#0b1f14] font-bold block mb-1">Up to 40% less work for teachers, every day.</strong>
+            <EduMojoLogo className="h-9" variant={isDark ? 'white' : 'color'} showTagline={false} />
+            <p className="text-sm text-[#3f4b45] dark:text-slate-300 max-w-sm leading-relaxed mt-2">
+              <strong className="text-[#0b1f14] dark:text-white font-bold block mb-1">Up to 40% less work for teachers, every day.</strong>
               EduMojo is a simple, affordable school ERP by Webmagiks for schools, colleges and institutes in India and Dubai.
             </p>
           </div>
 
           {/* Col 2: Platform Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0b1f14]">Platform</h4>
-            <ul className="space-y-2 text-sm text-[#3f4b45]">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0b1f14] dark:text-emerald-300">Platform</h4>
+            <ul className="space-y-2 text-sm text-[#3f4b45] dark:text-slate-200">
               <li>
                 <button
                   type="button"
                   onClick={() => handleNav('home')}
-                  className="hover:text-[#16a34a] transition-colors cursor-pointer text-left"
+                  className="hover:text-[#16a34a] dark:hover:text-[#4ade80] transition-colors cursor-pointer text-left"
                 >
                   Home
                 </button>
@@ -64,7 +68,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
                 <button
                   type="button"
                   onClick={() => handleNav('about')}
-                  className="hover:text-[#16a34a] transition-colors cursor-pointer text-left"
+                  className="hover:text-[#16a34a] dark:hover:text-[#4ade80] transition-colors cursor-pointer text-left"
                 >
                   About EduMojo
                 </button>
@@ -73,7 +77,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
                 <button
                   type="button"
                   onClick={() => handleNav('features')}
-                  className="hover:text-[#16a34a] transition-colors cursor-pointer text-left"
+                  className="hover:text-[#16a34a] dark:hover:text-[#4ade80] transition-colors cursor-pointer text-left"
                 >
                   Features
                 </button>
@@ -82,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
                 <button
                   type="button"
                   onClick={() => handleAnchor('#faq')}
-                  className="hover:text-[#16a34a] transition-colors cursor-pointer text-left"
+                  className="hover:text-[#16a34a] dark:hover:text-[#4ade80] transition-colors cursor-pointer text-left"
                 >
                   FAQ
                 </button>
@@ -94,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
                     handleAnchor('#contact');
                     onRequestCallBack();
                   }}
-                  className="text-[#16a34a] font-bold hover:underline transition-colors cursor-pointer text-left flex items-center gap-1"
+                  className="text-[#16a34a] dark:text-[#4ade80] font-bold hover:underline transition-colors cursor-pointer text-left flex items-center gap-1"
                 >
                   <span>Book a demo</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -105,43 +109,43 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
 
           {/* Col 3: Compliance & Trust */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0b1f14]">Compliance &amp; Trust</h4>
-            <ul className="space-y-2 text-sm text-[#3f4b45]">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0b1f14] dark:text-emerald-300">Compliance &amp; Trust</h4>
+            <ul className="space-y-2 text-sm text-[#3f4b45] dark:text-slate-200">
               <li>
-                <span className="text-[#0b1f14] font-medium">Privacy Policy</span>
+                <span className="text-[#0b1f14] dark:text-slate-200 font-medium">Privacy Policy</span>
               </li>
               <li>
-                <span className="text-[#0b1f14] font-medium">Terms of Service</span>
+                <span className="text-[#0b1f14] dark:text-slate-200 font-medium">Terms of Service</span>
               </li>
             </ul>
           </div>
 
           {/* Col 4: Contact info */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0b1f14]">Contact</h4>
-            <ul className="space-y-2.5 text-xs text-[#3f4b45]">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0b1f14] dark:text-emerald-300">Contact</h4>
+            <ul className="space-y-2.5 text-xs text-[#3f4b45] dark:text-slate-200">
               <li className="flex items-start gap-2">
-                <Mail className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5" />
+                <Mail className="w-4 h-4 text-[#16a34a] dark:text-[#4ade80] shrink-0 mt-0.5" />
                 <div>
-                  <a href="mailto:contact@edu-mojo.com" className="text-[#0b1f14] hover:text-[#16a34a] font-mono font-medium">
+                  <a href="mailto:contact@edu-mojo.com" className="text-[#0b1f14] dark:text-slate-100 hover:text-[#16a34a] dark:hover:text-[#4ade80] font-mono font-medium">
                     contact@edu-mojo.com
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Phone className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5" />
+                <Phone className="w-4 h-4 text-[#16a34a] dark:text-[#4ade80] shrink-0 mt-0.5" />
                 <div className="space-y-0.5">
-                  <a href="tel:+919684033959" className="text-[#0b1f14] hover:text-[#16a34a] font-mono font-medium block">
+                  <a href="tel:+919684033959" className="text-[#0b1f14] dark:text-slate-100 hover:text-[#16a34a] dark:hover:text-[#4ade80] font-mono font-medium block">
                     +91 96840 33959
                   </a>
-                  <a href="tel:+917798969669" className="text-[#0b1f14] hover:text-[#16a34a] font-mono font-medium block">
+                  <a href="tel:+917798969669" className="text-[#0b1f14] dark:text-slate-100 hover:text-[#16a34a] dark:hover:text-[#4ade80] font-mono font-medium block">
                     +91 77989 69669
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5" />
-                <span className="text-[#3f4b45]">Pune, Maharashtra, India</span>
+                <MapPin className="w-4 h-4 text-[#16a34a] dark:text-[#4ade80] shrink-0 mt-0.5" />
+                <span className="text-[#3f4b45] dark:text-slate-200">Pune, Maharashtra, India</span>
               </li>
             </ul>
 
@@ -151,7 +155,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
                 href="https://instagram.com/edumojo_"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-white hover:bg-slate-100 flex items-center justify-center text-[#3f4b45] hover:text-[#16a34a] transition-colors border border-slate-200"
+                className="w-8 h-8 rounded-lg bg-white dark:bg-[#0c2014] hover:bg-slate-100 dark:hover:bg-[#153422] flex items-center justify-center text-[#3f4b45] dark:text-slate-300 hover:text-[#16a34a] dark:hover:text-[#4ade80] transition-colors border border-slate-200 dark:border-[#22c55e]/25"
                 aria-label="Instagram"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -162,7 +166,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-white hover:bg-slate-100 flex items-center justify-center text-[#3f4b45] hover:text-[#16a34a] transition-colors border border-slate-200"
+                className="w-8 h-8 rounded-lg bg-white dark:bg-[#0c2014] hover:bg-slate-100 dark:hover:bg-[#153422] flex items-center justify-center text-[#3f4b45] dark:text-slate-300 hover:text-[#16a34a] dark:hover:text-[#4ade80] transition-colors border border-slate-200 dark:border-[#22c55e]/25"
                 aria-label="Facebook"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -173,7 +177,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
                 href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-white hover:bg-slate-100 flex items-center justify-center text-[#3f4b45] hover:text-[#16a34a] transition-colors border border-slate-200"
+                className="w-8 h-8 rounded-lg bg-white dark:bg-[#0c2014] hover:bg-slate-100 dark:hover:bg-[#153422] flex items-center justify-center text-[#3f4b45] dark:text-slate-300 hover:text-[#16a34a] dark:hover:text-[#4ade80] transition-colors border border-slate-200 dark:border-[#22c55e]/25"
                 aria-label="Twitter"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -185,12 +189,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestCallBack })
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6b7a72]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6b7a72] dark:text-slate-400">
           <p>© 2026 EduMojo by Webmagiks. All rights reserved.</p>
-          <p className="flex items-center gap-1 text-[#3f4b45]">
+          <p className="flex items-center gap-1 text-[#3f4b45] dark:text-slate-300">
             <span>Designed with</span>
             <Heart className="w-3.5 h-3.5 text-[#ef4444] fill-[#ef4444]" />
-            <span>by <strong className="text-[#0b1f14] font-bold">Webmagiks</strong>.</span>
+            <span>by <strong className="text-[#0b1f14] dark:text-white font-bold">Webmagiks</strong>.</span>
           </p>
         </div>
       </div>

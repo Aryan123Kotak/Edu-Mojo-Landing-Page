@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage';
 import { AboutUsPage } from './pages/AboutUsPage';
 import { FeaturesPage } from './pages/FeaturesPage';
 import { ContactUsPage } from './pages/ContactUsPage';
+import { ThemeProvider } from './context/ThemeContext';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageRoute>('home');
@@ -48,23 +49,24 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-[#16a34a]/20 selection:text-[#16a34a]">
-      {/* Sticky Navigation */}
-      <Navbar
-        currentPage={currentPage}
-        onNavigate={handleNavigate}
-        onRequestCallBack={() => setCallBackModalOpen(true)}
-        onOpenLogin={() => setLoginModalOpen(true)}
-      />
+    <ThemeProvider>
+      <div className="min-h-screen bg-white dark:bg-[#06150d] text-slate-900 dark:text-slate-100 flex flex-col font-sans selection:bg-[#16a34a]/30 selection:text-[#16a34a] transition-colors duration-200">
+        {/* Sticky Navigation */}
+        <Navbar
+          currentPage={currentPage}
+          onNavigate={handleNavigate}
+          onRequestCallBack={() => setCallBackModalOpen(true)}
+          onOpenLogin={() => setLoginModalOpen(true)}
+        />
 
-      {/* Main Content Area */}
-      <main className="flex-1 w-full bg-white">
-        {currentPage === 'home' && (
-          <HomePage
-            onNavigate={handleNavigate}
-            onRequestCallBack={() => setCallBackModalOpen(true)}
-          />
-        )}
+        {/* Main Content Area */}
+        <main className="flex-1 w-full bg-white dark:bg-[#06150d] transition-colors duration-200">
+          {currentPage === 'home' && (
+            <HomePage
+              onNavigate={handleNavigate}
+              onRequestCallBack={() => setCallBackModalOpen(true)}
+            />
+          )}
         {currentPage === 'about' && (
           <AboutUsPage
             onNavigate={handleNavigate}
@@ -103,5 +105,6 @@ export default function App() {
         onClose={() => setLoginModalOpen(false)}
       />
     </div>
+  </ThemeProvider>
   );
 }

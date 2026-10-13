@@ -13,6 +13,7 @@ import { LogoMarquee } from '../components/LogoMarquee';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { StatementSection } from '../components/StatementSection';
 import { HeroAnnouncementArea } from '../components/HeroAnnouncementArea';
+import { InteractiveDotMatrix } from '../components/InteractiveDotMatrix';
 import { PageRoute } from '../components/Navbar';
 
 interface HomePageProps {
@@ -59,12 +60,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onRequestCallBac
   };
 
   return (
-    <div className="w-full bg-[#ffffff] text-[#0b1f14] font-sans overflow-x-hidden selection:bg-[#2eca8b]/30 selection:text-[#0b1f14]">
+    <div className="w-full bg-[#ffffff] dark:bg-[#06150d] text-[#0b1f14] dark:text-[#f0fdf4] font-sans overflow-x-hidden selection:bg-[#2eca8b]/30 selection:text-[#0b1f14] transition-colors duration-200">
       
       {/* ==================================================
           1. THE LAVA WRAPPER: HERO + PILL STATEMENT TOGETHER
           ================================================== */}
-      <div className="lava">
+      <div className="lava relative">
         <div className="lava-blobs" aria-hidden="true">
           <div className="blob b1" />
           <div className="blob b2" />
@@ -73,6 +74,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onRequestCallBac
           <div className="blob b5" />
           <div className="blob b6" />
         </div>
+
+        {/* Option 2: Interactive Grid Dot-Matrix / Mesh Ripple (Tech & School Data Grid) */}
+        <InteractiveDotMatrix
+          dotSpacing={32}
+          baseDotRadius={1.6}
+          highlightRadius={170}
+          maxRippleDisplacement={13}
+          className="z-0 opacity-80"
+        />
 
         {/* SECTION 1: HOME HERO */}
         <section className="hero min-h-[76vh] flex items-center justify-center pt-24 pb-8 sm:pt-28 sm:pb-10 text-center">

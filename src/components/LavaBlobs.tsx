@@ -1,14 +1,6 @@
 import React from 'react';
+import { InteractiveGridDotMatrix } from './InteractiveGridDotMatrix';
 
 export const LavaBlobs: React.FC = () => {
-  return (
-    <div className="lava-blobs" aria-hidden="true">
-      <div className="blob b1" />
-      <div className="blob b2" />
-      <div className="blob b3" />
-      <div className="blob b4" />
-      <div className="blob b5" />
-      <div className="blob b6" />
-    </div>
-  );
+  return <InteractiveGridDotMatrix initialMode="mesh" showHud={false} />;
 };

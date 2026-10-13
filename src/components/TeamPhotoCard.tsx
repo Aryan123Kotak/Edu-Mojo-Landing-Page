@@ -23,11 +23,7 @@ export const TeamPhotoCard: React.FC = () => {
         {/* Ambient dark gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b1f14]/85 via-transparent to-black/20 pointer-events-none" />
 
-        {/* Floating pill badge top left */}
-        <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-white/50 text-xs font-bold text-[#0b1f14] shadow-sm pointer-events-none">
-          <span className="w-2 h-2 rounded-full bg-[#16a34a] animate-pulse" />
-          <span>Webmagiks Engineering HQ</span>
-        </div>
+
 
         {/* Bottom Caption Overlay */}
         <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">

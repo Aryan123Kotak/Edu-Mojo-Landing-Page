@@ -4,6 +4,7 @@ import { ScrollReveal } from '../components/ScrollReveal';
 import { GlowCard } from '../components/GlowCard';
 import { SelfBuildingTimetable } from '../components/SelfBuildingTimetable';
 import { UniversalFaqSection } from '../components/UniversalFaqSection';
+import { InteractiveGridDotMatrix } from '../components/InteractiveGridDotMatrix';
 import { PageRoute } from '../components/Navbar';
 
 interface FeaturesPageProps {
@@ -209,14 +210,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
           1. HERO (short lava gradient, centred, headline words slide up on load)
           ================================================== */}
       <div className="lava text-center">
-        <div className="lava-blobs" aria-hidden="true">
-          <div className="blob b1" />
-          <div className="blob b2" />
-          <div className="blob b3" />
-          <div className="blob b4" />
-          <div className="blob b5" />
-          <div className="blob b6" />
-        </div>
+        <InteractiveGridDotMatrix initialMode="mesh" showHud={false} />
 
         <section className="pt-28 pb-10 sm:pt-32 sm:pb-12">
           <div className="page-container space-y-4">
@@ -1450,14 +1444,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
           6. CTA BAND (lava gradient block)
           ================================================== */}
       <div className="lava text-center">
-        <div className="lava-blobs" aria-hidden="true">
-          <div className="blob b1" />
-          <div className="blob b2" />
-          <div className="blob b3" />
-          <div className="blob b4" />
-          <div className="blob b5" />
-          <div className="blob b6" />
-        </div>
+        <InteractiveGridDotMatrix initialMode="mesh" showHud={false} />
 
         <section className="py-14 sm:py-16">
           <ScrollReveal>

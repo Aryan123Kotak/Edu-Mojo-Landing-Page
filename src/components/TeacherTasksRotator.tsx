@@ -182,7 +182,6 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
           <div>
             <div className="ts-texts">
             <div className="ts-text in" role="tabpanel" id="ts-panel-0" aria-labelledby="ts-tab-0">
-              <span className="ts-kicker ts-anim">Daily academic updates</span>
               <h2 className="ts-h ts-anim">Classwork and homework for every subject, <span className="ts-hl">in one daily update</span></h2>
               <div className="ts-anim">
                 <div className="ts-rule"></div>
@@ -221,7 +220,6 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
             </div>
 
             <div className="ts-text" role="tabpanel" id="ts-panel-1" aria-labelledby="ts-tab-1" hidden>
-              <span className="ts-kicker ts-anim">Parent communication</span>
               <h2 className="ts-h ts-anim">One announcement reaches <span className="ts-hl">every parent at once</span></h2>
               <div className="ts-anim">
                 <div className="ts-rule"></div>
@@ -260,7 +258,6 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
             </div>
 
             <div className="ts-text" role="tabpanel" id="ts-panel-2" aria-labelledby="ts-tab-2" hidden>
-              <span className="ts-kicker ts-anim">Attendance</span>
               <h2 className="ts-h ts-anim">Attendance marked on the phone, <span className="ts-hl">parents see it the same day</span></h2>
               <div className="ts-anim">
                 <div className="ts-rule"></div>
@@ -299,7 +296,6 @@ export const TeacherTasksRotator: React.FC<TeacherTasksRotatorProps> = ({ onSche
             </div>
 
             <div className="ts-text" role="tabpanel" id="ts-panel-3" aria-labelledby="ts-tab-3" hidden>
-              <span className="ts-kicker ts-anim">Management dashboard</span>
               <h2 className="ts-h ts-anim">The whole school <span className="ts-hl">on one screen</span></h2>
               <div className="ts-anim">
                 <div className="ts-rule"></div>

@@ -181,59 +181,59 @@ export const HeroAnnouncementArea: React.FC<HeroAnnouncementAreaProps> = ({
         <button
           type="button"
           onClick={handleBookDemo}
-          className="w-full sm:w-auto bg-[#0b1f14] hover:bg-[#16a34a] text-white font-semibold text-[15px] px-[28px] py-[14px] rounded-[50px] transition-all duration-200 cursor-pointer shadow-lg hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 group"
+          className="w-auto bg-[#072614] hover:bg-[#0b3d1f] text-white border border-[#22c55e]/40 hover:border-[#4ade80] font-bold text-[15px] px-[36px] py-[15px] rounded-[50px] transition-all duration-200 cursor-pointer shadow-[0_14px_30px_rgba(7,38,20,0.3)] hover:shadow-[0_16px_36px_rgba(34,197,94,0.35)] hover:-translate-y-0.5 inline-flex items-center justify-center gap-2.5 group backdrop-blur-md"
         >
-          <span>Book a demo</span>
-          <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+          <span className="tracking-wide">Book a demo</span>
+          <span className="text-[#4ade80] group-hover:translate-x-1.5 transition-transform duration-200">→</span>
         </button>
       </div>
 
       {/* 6. Four Static Stats that count up once from 0 (1.4s, ease-out) */}
-      <div className="w-full max-w-5xl mx-auto mt-8 sm:mt-12">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center">
-          {/* Card 1: 40% */}
-          <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent">
-            <div className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight">
+      <div className="w-full max-w-5xl mx-auto mt-12 sm:mt-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
+          {/* Stat 1: 40% */}
+          <div className="p-2 sm:p-3 bg-transparent dark:bg-transparent border-0 dark:border-0 shadow-none dark:shadow-none transition-all duration-300">
+            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] dark:text-[#22c55e] tracking-tight">
               {stats.teachersWork}%
             </div>
-            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
+            <p className="text-xs sm:text-[13.5px] text-[#0b1f14] dark:text-[#f0fdf4] font-bold mt-2 leading-snug max-w-[210px] mx-auto">
               Teachers spend up to 40% less time on routine work
             </p>
           </div>
 
-          {/* Card 2: 20+ Schools */}
-          <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent">
-            <div className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight">
+          {/* Stat 2: 20+ Schools */}
+          <div className="p-2 sm:p-3 bg-transparent dark:bg-transparent border-0 dark:border-0 shadow-none dark:shadow-none transition-all duration-300">
+            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] dark:text-[#22c55e] tracking-tight">
               {stats.schools}+
             </div>
-            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
+            <p className="text-xs sm:text-[13.5px] text-[#0b1f14] dark:text-[#f0fdf4] font-bold mt-2 leading-snug max-w-[210px] mx-auto">
               Schools, Colleges &amp; Institutes Served Internationally
             </p>
           </div>
 
-          {/* Card 3: 20,000+ */}
-          <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent">
-            <div className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight">
+          {/* Stat 3: 20,000+ */}
+          <div className="p-2 sm:p-3 bg-transparent dark:bg-transparent border-0 dark:border-0 shadow-none dark:shadow-none transition-all duration-300">
+            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] dark:text-[#22c55e] tracking-tight">
               {stats.impacted.toLocaleString('en-IN')}+
             </div>
-            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
+            <p className="text-xs sm:text-[13.5px] text-[#0b1f14] dark:text-[#f0fdf4] font-bold mt-2 leading-snug max-w-[210px] mx-auto">
               Students &amp; teachers impacted
             </p>
           </div>
 
-          {/* Card 4: 24+ */}
-          <div className="rounded-2xl p-4 sm:p-5 bg-transparent border border-transparent">
-            <div className="text-3xl sm:text-4xl lg:text-[40px] font-black font-sans text-[#15803d] tracking-tight">
+          {/* Stat 4: 24+ */}
+          <div className="p-2 sm:p-3 bg-transparent dark:bg-transparent border-0 dark:border-0 shadow-none dark:shadow-none transition-all duration-300">
+            <div className="text-3xl sm:text-4xl lg:text-[46px] font-black font-sans text-[#15803d] dark:text-[#22c55e] tracking-tight">
               {stats.modules}+
             </div>
-            <p className="text-xs sm:text-[13px] text-[#0b1f14] font-bold mt-2 leading-snug">
+            <p className="text-xs sm:text-[13.5px] text-[#0b1f14] dark:text-[#f0fdf4] font-bold mt-2 leading-snug max-w-[210px] mx-auto">
               Modules, one simple app
             </p>
           </div>
         </div>
 
         {/* Footnote under stats row */}
-        <p className="text-center text-xs text-[#6b7a72] mt-3.5">
+        <p className="text-center text-xs text-[#0b1f14]/75 dark:text-[#f0fdf4]/75 mt-5 font-semibold">
           *Based on routine task time reported across partner schools, 2025–26
         </p>
       </div>
